@@ -2,4 +2,13 @@ body {
     /* background-color: lightblue; */
     background-image: url("back.png");
     background-repeat: no-repeat;
+    background-position: left top;
+    background-color: lightblue;
+}
+
+p {
+    font-family: "Lucida Console";
+    font-size: 20px;
+    color:white;
+
 }
