@@ -12,3 +12,7 @@ body {
 #float{
     float: left;
 }
+
+#download{
+    float: bottom;
+}
