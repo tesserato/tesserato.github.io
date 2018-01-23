@@ -3,12 +3,8 @@ body {
     background-image: url("back.png");
     background-repeat: no-repeat;
     background-position: left top;
-    background-color: lightblue;
-}
+    background-color:#515c6b;
 
-p {
-    font-family: "Lucida Console";
-    font-size: 20px;
+    font-family: "Courier New";
     color:white;
-
 }
