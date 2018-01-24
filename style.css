@@ -1,18 +1,74 @@
-body {
-    /* background-color: lightblue; */
-    background-image: url("back.png");
-    background-repeat: no-repeat;
-    background-position: left top;
-    background-color:#515c6b;
 
+
+@keyframes rotation {
+    0% {transform: rotate(0deg)}
+    100% { transform: rotate(360deg)}
+}
+
+@keyframes delay {
+    0% {opacity: 0}
+    90% {opacity: 0}
+    100% { opacity: 1}
+}
+
+@keyframes backimage {
+    0% {filter: blur(0px) brightness(100%)}
+    90% {filter: blur(0px) brightness(100%)}
+    100% {filter: blur(5px) brightness(50%)}
+}
+
+body {
+    background-color:#515c6b;
     font-family: "Courier New";
     color:white;
 }
 
-#float{
-    float: left;
+.logo{
+    filter: brightness(400%);
 }
 
-#download{
-    float: bottom;
+.back{
+    filter: blur(5px) brightness(50%);
+    position: absolute;
+    width: 50em;
+    z-index: -1;
+    left:5em;
+    top:5em;
+    animation-name: backimage;
+    animation-duration: 33s;  
 }
+
+.white{
+    position: absolute;
+    width: 49em;
+    left:6em;
+    top:6em;
+
+}
+
+.text{
+    animation-name: delay;
+    animation-duration: 33s;  
+}
+
+a{
+    color: #ffffff;
+    padding: 0.5em;
+    text-decoration: none;
+}
+
+
+
+i:hover {
+    /* color:black; */
+    animation-name: rotation;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  }
+
+.float{
+    margin: auto;
+    text-align: center;
+    
+}
+
