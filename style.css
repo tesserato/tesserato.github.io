@@ -17,14 +17,14 @@
     100% {filter: blur(5px) brightness(50%)}
 }
 
-body {
+body {    
     background-color:#515c6b;
     font-family: "Courier New";
     color:white;
 }
 
 .logo{
-    filter: brightness(400%);
+    filter: brightness(400%) drop-shadow(3px 3px 3px black);
 }
 
 .back{
@@ -33,7 +33,7 @@ body {
     width: 50em;
     z-index: -1;
     left:5em;
-    top:5em;
+    top:4em;
     animation-name: backimage;
     animation-duration: 33s;  
 }
@@ -42,7 +42,7 @@ body {
     position: absolute;
     width: 49em;
     left:6em;
-    top:6em;
+    top:5em;
 
 }
 
@@ -58,9 +58,7 @@ a{
 }
 
 
-
 i:hover {
-    /* color:black; */
     animation-name: rotation;
     animation-duration: 1s;
     animation-iteration-count: infinite;
