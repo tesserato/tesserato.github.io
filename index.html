@@ -1,3 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Redes Neurais Aplicadas à Modelagem de Instrumentos Acústicos para Síntese Sonora em Tempo Real</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Redes Neurais Aplicadas à Modelagem de Instrumentos Acústicos para Síntese Sonora em Tempo Real</h1>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#introdução">Introdução</a><ul>
+<li><a href="#problema-simulação-em-tempo-real-de-instrumentos-acústicos-aplicação-bateria">Problema: simulação em tempo real de instrumentos <strong>acústicos</strong> (aplicação: bateria)</a></li>
+<li><a href="#questão-de-pesquisa">Questão de pesquisa</a></li>
+<li><a href="#escopo">Escopo</a></li>
+<li><a href="#estrutura">Estrutura</a></li>
+<li><a href="#relevância">Relevância <!-- socio-econômica --></a></li>
+</ul></li>
+<li><a href="#revisão-bibliográfica">Revisão Bibliográfica</a><ul>
+<li><a href="#redes-neurais-artificiais">Redes Neurais Artificiais</a></li>
+<li><a href="#arquiteturas-proeminentes">Arquiteturas Proeminentes</a><ul>
+<li><a href="#feed-forward">Feed-Forward</a></li>
+<li><a href="#redes-neurais-profundas">Redes Neurais Profundas</a></li>
+<li><a href="#redes-recorrentes">Redes Recorrentes</a></li>
+<li><a href="#redes-convolucionais">Redes Convolucionais</a></li>
+</ul></li>
+<li><a href="#utilização-de-anns-em-áreas-correlatas">Utilização de ANNs em áreas correlatas</a><ul>
+<li><a href="#reconhecimento-e-síntese-de-voz">Reconhecimento e Síntese de Voz</a></li>
+<li><a href="#music">Music</a></li>
+<li><a href="#imagem">Imagem</a></li>
+</ul></li>
+<li><a href="#o-estado-da-arte-da-síntese-sonora-em-tempo-real">O Estado da Arte da Síntese Sonora em Tempo Real</a><ul>
+<li><a href="#método-das-diferenças-finitas-finite-difference">Método das Diferenças Finitas (Finite difference)</a></li>
+<li><a href="#digital-waveguides">Digital Waveguides</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#referencial-teórico">Referencial Teórico</a><ul>
+<li><a href="#acústica-e-psicoacústica">Acústica e Psicoacústica</a></li>
+<li><a href="#ferramentas-e-frameworks">Ferramentas e Frameworks</a></li>
+<li><a href="#transformada-discreta-de-fourier">Transformada Discreta de Fourier</a></li>
+<li><a href="#a-equação-da-onda">A Equação da Onda</a></li>
+<li><a href="#formalização-de-uma-rede-neural---forward-pass">Formalização de uma Rede Neural - Forward Pass</a></li>
+<li><a href="#formalização-de-uma-rede-neural---backpropagation">Formalização de uma Rede Neural - Backpropagation</a></li>
+</ul></li>
+<li><a href="#metodologia">Metodologia</a><ul>
+<li><a href="#samples-utilizados">Samples Utilizados</a></li>
+<li><a href="#redes-densas">Redes Densas</a><ul>
+<li><a href="#algoritmos-de-otimização">Algoritmos de Otimização</a></li>
+<li><a href="#grid-search-para-topologia-e-parâmetros">Grid search para topologia e parâmetros</a></li>
+<li><a href="#análise-dos-resultados">Análise dos resultados</a></li>
+</ul></li>
+<li><a href="#redes-recorrentes-1">Redes Recorrentes</a></li>
+<li><a href="#redes-convolucionais-e-convolucionais-recorrentes">Redes Convolucionais e Convolucionais-Recorrentes</a></li>
+<li><a href="#domínio-da-frequência">Domínio da Frequência</a></li>
+<li><a href="#modelo-misto">Modelo Misto</a><ul>
+<li><a href="#frequências">Frequências</a></li>
+<li><a href="#decaimentos-e-amplitudes">Decaimentos e Amplitudes</a></li>
+<li><a href="#formulação-final">Formulação Final</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#resultados">Resultados</a></li>
+<li><a href="#conclusão">Conclusão</a></li>
+<li><a href="#referências">Referências</a></li>
+</ul>
+</nav>
 <p><strong>Resumo</strong></p>
 <p>Palavras-chave:</p>
 <p><strong>Abstract</strong></p>
@@ -685,10 +763,10 @@ Podemos sanar o problema da falta de informação parcial sobre decay e amplitud
 <p>Ballé, Johannes, Valero Laparra, and Eero P Simoncelli. 2016. “End-to-End Optimized Image Compression.” <em>arXiv Preprint arXiv:1611.01704</em>.</p>
 </div>
 <div id="ref-bensa2005computational">
-<p>Bensa, Julien, Stefan Bilbao, Richard Kronland-Martinet, Julius O Smith, and Thierry Voinier. 2005. “Computational Modeling of Stiff Piano Strings Using Digital Waveguides and Finite Differences.” <em>Acta Acustica United with Acustica</em> 91 (2). S. Hirzel Verlag:289–98.</p>
+<p>Bensa, Julien, Stefan Bilbao, Richard Kronland-Martinet, Julius O Smith, and Thierry Voinier. 2005. “Computational Modeling of Stiff Piano Strings Using Digital Waveguides and Finite Differences.” <em>Acta Acustica United with Acustica</em> 91 (2). S. Hirzel Verlag: 289–98.</p>
 </div>
 <div id="ref-bensa2003simulation">
-<p>Bensa, Julien, Stefan Bilbao, Richard Kronland-Martinet, and Julius O Smith III. 2003. “The Simulation of Piano String Vibration: From Physical Models to Finite Difference Schemes and Digital Waveguides.” <em>The Journal of the Acoustical Society of America</em> 114 (2). ASA:1095–1107.</p>
+<p>Bensa, Julien, Stefan Bilbao, Richard Kronland-Martinet, and Julius O Smith III. 2003. “The Simulation of Piano String Vibration: From Physical Models to Finite Difference Schemes and Digital Waveguides.” <em>The Journal of the Acoustical Society of America</em> 114 (2). ASA: 1095–1107.</p>
 </div>
 <div id="ref-bishop06">
 <p>Bishop, Christopher M. 2006. <em>Pattern Recognition and Machine Learning</em>. springer.</p>
@@ -709,10 +787,10 @@ Podemos sanar o problema da falta de informação parcial sobre decay e amplitud
 <p>Choi, Keunwoo, György Fazekas, Mark Sandler, and Kyunghyun Cho. 2017. “Convolutional Recurrent Neural Networks for Music Classification.” In <em>Acoustics, Speech and Signal Processing (Icassp), 2017 Ieee International Conference on</em>, 2392–6. IEEE.</p>
 </div>
 <div id="ref-costa2017evaluation">
-<p>Costa, Yandre MG, Luiz S Oliveira, and Carlos N Silla. 2017. “An Evaluation of Convolutional Neural Networks for Music Classification Using Spectrograms.” <em>Applied Soft Computing</em> 52. Elsevier:28–38.</p>
+<p>Costa, Yandre MG, Luiz S Oliveira, and Carlos N Silla. 2017. “An Evaluation of Convolutional Neural Networks for Music Classification Using Spectrograms.” <em>Applied Soft Computing</em> 52. Elsevier: 28–38.</p>
 </div>
 <div id="ref-elman1990finding">
-<p>Elman, Jeffrey L. 1990. “Finding Structure in Time.” <em>Cognitive Science</em> 14 (2). Wiley Online Library:179–211.</p>
+<p>Elman, Jeffrey L. 1990. “Finding Structure in Time.” <em>Cognitive Science</em> 14 (2). Wiley Online Library: 179–211.</p>
 </div>
 <div id="ref-engel2017neural">
 <p>Engel, Jesse, Cinjon Resnick, Adam Roberts, Sander Dieleman, Douglas Eck, Karen Simonyan, and Mohammad Norouzi. 2017. “Neural Audio Synthesis of Musical Notes with Wavenet Autoencoders.” <em>arXiv Preprint arXiv:1704.01279</em>.</p>
@@ -724,7 +802,7 @@ Podemos sanar o problema da falta de informação parcial sobre decay e amplitud
 <p>Gatys, Leon A, Alexander S Ecker, and Matthias Bethge. 2016. “Image Style Transfer Using Convolutional Neural Networks.” In <em>Proceedings of the Ieee Conference on Computer Vision and Pattern Recognition</em>, 2414–23.</p>
 </div>
 <div id="ref-goldberg2016primer">
-<p>Goldberg, Yoav. 2016. “A Primer on Neural Network Models for Natural Language Processing.” <em>J. Artif. Intell. Res.(JAIR)</em> 57:345–420.</p>
+<p>Goldberg, Yoav. 2016. “A Primer on Neural Network Models for Natural Language Processing.” <em>J. Artif. Intell. Res.(JAIR)</em> 57: 345–420.</p>
 </div>
 <div id="ref-cnnmoney">
 <p>“Google Ceo Sundar Pichai: Artificial Intelligence More ’Profound Than Electricity or Fire’.” n.d. <em>CNNMoney</em>. Cable News Network. <a href="http://money.cnn.com/2018/01/24/technology/sundar-pichai-google-ai-artificial-intelligence/index.html" class="uri">http://money.cnn.com/2018/01/24/technology/sundar-pichai-google-ai-artificial-intelligence/index.html</a>.</p>
@@ -745,13 +823,13 @@ Podemos sanar o problema da falta de informação parcial sobre decay e amplitud
 <p>He, Lang, Dongmei Jiang, Le Yang, Ercheng Pei, Peng Wu, and Hichem Sahli. 2015. “Multimodal Affective Dimension Prediction Using Deep Bidirectional Long Short-Term Memory Recurrent Neural Networks.” In <em>Proceedings of the 5th International Workshop on Audio/Visual Emotion Challenge</em>, 73–80. ACM.</p>
 </div>
 <div id="ref-hinton2012deep">
-<p>Hinton, Geoffrey, Li Deng, Dong Yu, George E Dahl, Abdel-rahman Mohamed, Navdeep Jaitly, Andrew Senior, et al. 2012. “Deep Neural Networks for Acoustic Modeling in Speech Recognition: The Shared Views of Four Research Groups.” <em>IEEE Signal Processing Magazine</em> 29 (6). IEEE:82–97.</p>
+<p>Hinton, Geoffrey, Li Deng, Dong Yu, George E Dahl, Abdel-rahman Mohamed, Navdeep Jaitly, Andrew Senior, et al. 2012. “Deep Neural Networks for Acoustic Modeling in Speech Recognition: The Shared Views of Four Research Groups.” <em>IEEE Signal Processing Magazine</em> 29 (6). IEEE: 82–97.</p>
 </div>
 <div id="ref-hornik91">
-<p>Hornik, Kurt. 1991. “Approximation Capabilities of Multilayer Feedforward Networks.” <em>Neural Networks</em> 4 (2). Elsevier:251–57.</p>
+<p>Hornik, Kurt. 1991. “Approximation Capabilities of Multilayer Feedforward Networks.” <em>Neural Networks</em> 4 (2). Elsevier: 251–57.</p>
 </div>
 <div id="ref-hornik89">
-<p>Hornik, Kurt, Maxwell Stinchcombe, and Halbert White. 1989. “Multilayer Feedforward Networks Are Universal Approximators.” <em>Neural Networks</em> 2 (5). Elsevier:359–66.</p>
+<p>Hornik, Kurt, Maxwell Stinchcombe, and Halbert White. 1989. “Multilayer Feedforward Networks Are Universal Approximators.” <em>Neural Networks</em> 2 (5). Elsevier: 359–66.</p>
 </div>
 <div id="ref-hutchings2017talking">
 <p>Hutchings, P. 2017. “Talking Drums: Generating Drum Grooves with Neural Networks.” <em>arXiv Preprint arXiv:1706.09558</em>.</p>
@@ -760,19 +838,19 @@ Podemos sanar o problema da falta de informação parcial sobre decay e amplitud
 <p>Hwang, Jeff, and You Zhou. 2016. “Image Colorization with Deep Convolutional Neural Networks.”</p>
 </div>
 <div id="ref-iizuka2016let">
-<p>Iizuka, Satoshi, Edgar Simo-Serra, and Hiroshi Ishikawa. 2016. “Let There Be Color!: Joint End-to-End Learning of Global and Local Image Priors for Automatic Image Colorization with Simultaneous Classification.” <em>ACM Transactions on Graphics (TOG)</em> 35 (4). ACM:110.</p>
+<p>Iizuka, Satoshi, Edgar Simo-Serra, and Hiroshi Ishikawa. 2016. “Let There Be Color!: Joint End-to-End Learning of Global and Local Image Priors for Automatic Image Colorization with Simultaneous Classification.” <em>ACM Transactions on Graphics (TOG)</em> 35 (4). ACM: 110.</p>
 </div>
 <div id="ref-isola2016image">
 <p>Isola, Phillip, Jun-Yan Zhu, Tinghui Zhou, and Alexei A Efros. 2016. “Image-to-Image Translation with Conditional Adversarial Networks.” <em>arXiv Preprint arXiv:1611.07004</em>.</p>
 </div>
 <div id="ref-jiang1999image">
-<p>Jiang, J. 1999. “Image Compression with Neural Networks–a Survey.” <em>Signal Processing: Image Communication</em> 14 (9). Elsevier:737–60.</p>
+<p>Jiang, J. 1999. “Image Compression with Neural Networks–a Survey.” <em>Signal Processing: Image Communication</em> 14 (9). Elsevier: 737–60.</p>
 </div>
 <div id="ref-johnston2017improved">
 <p>Johnston, Nick, Damien Vincent, David Minnen, Michele Covell, Saurabh Singh, Troy Chinen, Sung Jin Hwang, Joel Shor, and George Toderici. 2017. “Improved Lossy Image Compression with Priming and Spatially Adaptive Bit Rates for Recurrent Networks.” <em>arXiv Preprint arXiv:1703.10114</em>.</p>
 </div>
 <div id="ref-karjalainen2004digital">
-<p>Karjalainen, Matti, and Cumhur Erkut. 2004. “Digital Waveguides Versus Finite Difference Structures: Equivalence and Mixed Modeling.” <em>EURASIP Journal on Applied Signal Processing</em> 2004. Hindawi Publishing Corp.:978–89.</p>
+<p>Karjalainen, Matti, and Cumhur Erkut. 2004. “Digital Waveguides Versus Finite Difference Structures: Equivalence and Mixed Modeling.” <em>EURASIP Journal on Applied Signal Processing</em> 2004. Hindawi Publishing Corp.: 978–89.</p>
 </div>
 <div id="ref-karpathy2014large">
 <p>Karpathy, Andrej, George Toderici, Sanketh Shetty, Thomas Leung, Rahul Sukthankar, and Li Fei-Fei. 2014. “Large-Scale Video Classification with Convolutional Neural Networks.” In <em>Proceedings of the Ieee Conference on Computer Vision and Pattern Recognition</em>, 1725–32.</p>
@@ -787,10 +865,10 @@ Podemos sanar o problema da falta de informação parcial sobre decay e amplitud
 <p>Larsson, Gustav, Michael Maire, and Gregory Shakhnarovich. 2016. “Learning Representations for Automatic Colorization.” In <em>European Conference on Computer Vision</em>, 577–93. Springer.</p>
 </div>
 <div id="ref-lecun1998gradient">
-<p>LeCun, Yann, Léon Bottou, Yoshua Bengio, and Patrick Haffner. 1998. “Gradient-Based Learning Applied to Document Recognition.” <em>Proceedings of the IEEE</em> 86 (11). IEEE:2278–2324.</p>
+<p>LeCun, Yann, Léon Bottou, Yoshua Bengio, and Patrick Haffner. 1998. “Gradient-Based Learning Applied to Document Recognition.” <em>Proceedings of the IEEE</em> 86 (11). IEEE: 2278–2324.</p>
 </div>
 <div id="ref-leshno93">
-<p>Leshno, Moshe, Vladimir Ya Lin, Allan Pinkus, and Shimon Schocken. 1993. “Multilayer Feedforward Networks with a Nonpolynomial Activation Function Can Approximate Any Function.” <em>Neural Networks</em> 6 (6). Elsevier:861–67.</p>
+<p>Leshno, Moshe, Vladimir Ya Lin, Allan Pinkus, and Shimon Schocken. 1993. “Multilayer Feedforward Networks with a Nonpolynomial Activation Function Can Approximate Any Function.” <em>Neural Networks</em> 6 (6). Elsevier: 861–67.</p>
 </div>
 <div id="ref-lyons2011understanding">
 <p>Lyons, Richard G. 2011. <em>Understanding Digital Signal Processing, 3/E</em>. Pearson Education India.</p>
@@ -799,7 +877,7 @@ Podemos sanar o problema da falta de informação parcial sobre decay e amplitud
 <p>Maas, Andrew L, Awni Y Hannun, and Andrew Y Ng. 2013. “Rectifier Nonlinearities Improve Neural Network Acoustic Models.” In <em>Proc. ICML</em>. Vol. 30. 1.</p>
 </div>
 <div id="ref-mcculloch1943logical">
-<p>McCulloch, Warren S, and Walter Pitts. 1943. “A Logical Calculus of the Ideas Immanent in Nervous Activity.” <em>The Bulletin of Mathematical Biophysics</em> 5 (4). Springer:115–33.</p>
+<p>McCulloch, Warren S, and Walter Pitts. 1943. “A Logical Calculus of the Ideas Immanent in Nervous Activity.” <em>The Bulletin of Mathematical Biophysics</em> 5 (4). Springer: 115–33.</p>
 </div>
 <div id="ref-minski1969perceptrons">
 <p>Minski, Marvin L, and Seymour A Papert. 1969. “Perceptrons: An Introduction to Computational Geometry.” <em>MA: MIT Press, Cambridge</em>.</p>
@@ -817,22 +895,22 @@ Podemos sanar o problema da falta de informação parcial sobre decay e amplitud
 <p>Parker, David B. 1985. “Learning Logic.”</p>
 </div>
 <div id="ref-rehman2014image">
-<p>Rehman, Mehwish, Muhammad Sharif, and Mudassar Raza. 2014. “Image Compression: A Survey.” <em>Research Journal of Applied Sciences, Engineering and Technology</em> 7 (4). Maxwell Science Publishing:656–72.</p>
+<p>Rehman, Mehwish, Muhammad Sharif, and Mudassar Raza. 2014. “Image Compression: A Survey.” <em>Research Journal of Applied Sciences, Engineering and Technology</em> 7 (4). Maxwell Science Publishing: 656–72.</p>
 </div>
 <div id="ref-rigaud2013parametric">
-<p>Rigaud, François, Bertrand David, and Laurent Daudet. 2013. “A Parametric Model and Estimation Techniques for the Inharmonicity and Tuning of the Piano.” <em>The Journal of the Acoustical Society of America</em> 133 (5). ASA:3107–18.</p>
+<p>Rigaud, François, Bertrand David, and Laurent Daudet. 2013. “A Parametric Model and Estimation Techniques for the Inharmonicity and Tuning of the Piano.” <em>The Journal of the Acoustical Society of America</em> 133 (5). ASA: 3107–18.</p>
 </div>
 <div id="ref-Rosenblatt57">
 <p>Rosenblatt, Frank. 1957. <em>The Perceptron, a Perceiving and Recognizing Automaton Project Para</em>. Cornell Aeronautical Laboratory.</p>
 </div>
 <div id="ref-rosenblatt1958perceptron">
-<p>———. 1958. “The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain.” <em>Psychological Review</em> 65 (6). American Psychological Association:386.</p>
+<p>———. 1958. “The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain.” <em>Psychological Review</em> 65 (6). American Psychological Association: 386.</p>
 </div>
 <div id="ref-rumelhart1985learning">
 <p>Rumelhart, David E, Geoffrey E Hinton, and Ronald J Williams. 1985. “Learning Internal Representations by Error Propagation.” California Univ San Diego La Jolla Inst for Cognitive Science.</p>
 </div>
 <div id="ref-sainath2015deep">
-<p>Sainath, Tara N, Brian Kingsbury, George Saon, Hagen Soltau, Abdel-rahman Mohamed, George Dahl, and Bhuvana Ramabhadran. 2015. “Deep Convolutional Neural Networks for Large-Scale Speech Tasks.” <em>Neural Networks</em> 64. Elsevier:39–48.</p>
+<p>Sainath, Tara N, Brian Kingsbury, George Saon, Hagen Soltau, Abdel-rahman Mohamed, George Dahl, and Bhuvana Ramabhadran. 2015. “Deep Convolutional Neural Networks for Large-Scale Speech Tasks.” <em>Neural Networks</em> 64. Elsevier: 39–48.</p>
 </div>
 <div id="ref-sak2015fast">
 <p>Sak, Haşim, Andrew Senior, Kanishka Rao, and Françoise Beaufays. 2015. “Fast and Accurate Recurrent Neural Network Acoustic Models for Speech Recognition.” <em>arXiv Preprint arXiv:1507.06947</em>.</p>
@@ -850,13 +928,13 @@ Podemos sanar o problema da falta de informação parcial sobre decay e amplitud
 <p>Serra, Xavier. 2007. “State of the Art and Future Directions in Musical Sound Synthesis.” In <em>Multimedia Signal Processing, 2007. MMSP 2007. IEEE 9th Workshop on</em>, 9–12. IEEE.</p>
 </div>
 <div id="ref-sigtia2016end">
-<p>Sigtia, Siddharth, Emmanouil Benetos, and Simon Dixon. 2016. “An End-to-End Neural Network for Polyphonic Piano Music Transcription.” <em>IEEE/ACM Transactions on Audio, Speech and Language Processing (TASLP)</em> 24 (5). IEEE Press:927–39.</p>
+<p>Sigtia, Siddharth, Emmanouil Benetos, and Simon Dixon. 2016. “An End-to-End Neural Network for Polyphonic Piano Music Transcription.” <em>IEEE/ACM Transactions on Audio, Speech and Language Processing (TASLP)</em> 24 (5). IEEE Press: 927–39.</p>
 </div>
 <div id="ref-smith2006basic">
 <p>Smith, JO. 2006. “A Basic Introduction to Digital Waveguide Synthesis (for the Technically Inclined).” <em>Center for Computer Research in Music and Acoustics (CCRMA), Stanford University. Http://Ccrma. Stanford. Edu/~ Jos/Swgt</em>.</p>
 </div>
 <div id="ref-smith1992physical">
-<p>Smith, Julius O. 1992. “Physical Modeling Using Digital Waveguides.” <em>Computer Music Journal</em> 16 (4). JSTOR:74–91.</p>
+<p>Smith, Julius O. 1992. “Physical Modeling Using Digital Waveguides.” <em>Computer Music Journal</em> 16 (4). JSTOR: 74–91.</p>
 </div>
 <div id="ref-socher2014recursive">
 <p>Socher, Richard. 2014. “Recursive Deep Learning for Natural Language Processing and Computer Vision.” Citeseer.</p>
@@ -865,7 +943,7 @@ Podemos sanar o problema da falta de informação parcial sobre decay e amplitud
 <p>Southall, Carl, Ryan Stables, and Jason Hockman. 2016. “Automatic Drum Transcription Using Bi-Directional Recurrent Neural Networks.” In <em>ISMIR</em>, 591–97.</p>
 </div>
 <div id="ref-stanley2007compositional">
-<p>Stanley, Kenneth O. 2007. “Compositional Pattern Producing Networks: A Novel Abstraction of Development.” <em>Genetic Programming and Evolvable Machines</em> 8 (2). Springer:131–62.</p>
+<p>Stanley, Kenneth O. 2007. “Compositional Pattern Producing Networks: A Novel Abstraction of Development.” <em>Genetic Programming and Evolvable Machines</em> 8 (2). Springer: 131–62.</p>
 </div>
 <div id="ref-staudt2016development">
 <p>Staudt, Pascal. 2016. “Development of a Digital Musical Instrument with Embedded Sound Synthesis.”</p>
@@ -889,13 +967,13 @@ Podemos sanar o problema da falta de informação parcial sobre decay e amplitud
 <p>Veit, Andreas, Michael J Wilber, and Serge Belongie. 2016. “Residual Networks Behave Like Ensembles of Relatively Shallow Networks.” In <em>Advances in Neural Information Processing Systems</em>, 550–58.</p>
 </div>
 <div id="ref-wang2015image">
-<p>Wang, Bo, and Yubin Gao. 2015. “An Image Compression Scheme Based on Fuzzy Neural Network.” <em>TELKOMNIKA (Telecommunication Computing Electronics and Control)</em> 13 (1):137–45.</p>
+<p>Wang, Bo, and Yubin Gao. 2015. “An Image Compression Scheme Based on Fuzzy Neural Network.” <em>TELKOMNIKA (Telecommunication Computing Electronics and Control)</em> 13 (1): 137–45.</p>
 </div>
 <div id="ref-widrow1960adaptive">
 <p>Widrow, Bernard, and Marcian E Hoff. 1960. “Adaptive Switching Circuits.” STANFORD UNIV CA STANFORD ELECTRONICS LABS.</p>
 </div>
 <div id="ref-widrow199030">
-<p>Widrow, Bernard, and Michael A Lehr. 1990. “30 Years of Adaptive Neural Networks: Perceptron, Madaline, and Backpropagation.” <em>Proceedings of the IEEE</em> 78 (9). IEEE:1415–42.</p>
+<p>Widrow, Bernard, and Michael A Lehr. 1990. “30 Years of Adaptive Neural Networks: Perceptron, Madaline, and Backpropagation.” <em>Proceedings of the IEEE</em> 78 (9). IEEE: 1415–42.</p>
 </div>
 <div id="ref-wu2016investigating">
 <p>Wu, Zhizheng, and Simon King. 2016. “Investigating Gated Recurrent Networks for Speech Synthesis.” In <em>Acoustics, Speech and Signal Processing (Icassp), 2016 Ieee International Conference on</em>, 5140–4. IEEE.</p>
@@ -928,3 +1006,5 @@ Podemos sanar o problema da falta de informação parcial sobre decay e amplitud
 <p>Zweig, Geoffrey, Chengzhu Yu, Jasha Droppo, and Andreas Stolcke. 2017. “Advances in All-Neural Speech Recognition.” In <em>Acoustics, Speech and Signal Processing (Icassp), 2017 Ieee International Conference on</em>, 4805–9. IEEE.</p>
 </div>
 </div>
+</body>
+</html>
