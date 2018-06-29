@@ -23,35 +23,49 @@ Lista de Siglas
 Sumário
 
 # Introdução
-O presente trabalho investiga, sob diferentes perspectivas, o potencial de aplicação dos recentes desenvolvimentos teóricos na área de redes neurais à modelagem de instrumentos acústicos, com vistas à síntese sonora em tempo real. Ênfase é dada a instrumentos de caráter percussivo, no sentido de instrumentos em que o som é gerado por uma excitação inicial, aproximadamente impulsiva do ponto de vista físico, e a subsequente vibração livre do(s) componentes pertinentes do instrumento. Esse é o caso, por exemplo, das peças de um kit de bateria excitadas por uma baqueta, dos (conjuntos de) cordas de um piano acionadas pelo martelo alavancado pelo pressionar das teclas e, com um maior grau de aproximação, a excitação causada pelos dedos ou palheta em instrumentos de corda.
+O presente trabalho investiga, sob diferentes perspectivas, o potencial de aplicação dos recentes desenvolvimentos teóricos na área de redes neurais à modelagem de instrumentos acústicos, com vistas à síntese sonora em tempo real. Ênfase é dada a instrumentos de caráter percussivo, no sentido de sistemas em que o som é gerado por uma excitação inicial, aproximadamente impulsiva do ponto de vista físico, e a subsequente vibração livre do(s) componentes pertinentes do instrumento. Esse é o caso, por exemplo, das peças de um *kit* de bateria excitadas por uma baqueta, das cordas ou conjuntos de cordas de um piano acionadas pelo martelo ao ser alavancado pelo pressionar das teclas e, com um maior grau de aproximação, a excitação causada pelos dedos ou palheta em instrumentos de corda.
 
 A grande área denominada Inteligência artificial é um dos campos da ciência mais explorados na atualidade, sendo utilizada em uma gama crescente de aplicações que cobrem desde o entretenimento à saúde, passando por campos como segurança e políticas públicas. Sundar Pichai, atual CEO do Google, afirmou recentemente em um discurso no Fórum Econômico Mundial que a "inteligência artificial é provavelmente a coisa mais importante na qual a humanidade já trabalhou", equiparando sua importância à eletricidade e ao fogo e declarando ainda que esta tecnologia é o coração do Google[@cnnmoney]
 
-O comentário ilustra, excluídos superlativos midiáticos, a centralidade do tema no modelo de negócios de uma das maiores empresas do mundo, tendência acompanhada por  outros gigantes da tecnologia, como Apple e Microsoft. Na contramão desse movimento, no entanto, observa-se uma escassa utilização dessa tecnologia por empresas do ramo de instrumentos virtuais, talvez motivada pelo baixo volume de pesquisas ne área; Um levantamento bibliográfico revela que trabalhos relacionados à utilização de redes neurais para a simulação de instrumentos musicais ainda são bastante escassos, a despeito do sucesso desta ferramenta em áreas afins.
+O comentário ilustra, excluídos superlativos midiáticos, a centralidade do tema no modelo de negócios de uma das maiores empresas do mundo, tendência acompanhada por outros gigantes da tecnologia, como Apple e Microsoft. Na contramão desse movimento, no entanto, observa-se uma escassa penetração dessa tecnologia na área de instrumentos virtuais, talvez motivada pelo baixo volume de pesquisas ne área; Um levantamento bibliográfico revela que trabalhos relacionados à utilização de redes neurais para a simulação de instrumentos musicais ainda são bastante escassos, a despeito do sucesso desta ferramenta em áreas afins.
 
-O potencial de inovação desse campo é comprovado pelo papel central (muitas vezes representando o estado da arte) que as redes neurais artificiais vem desempenhando em áreas diretamente correlatas, com o campo de síntese de voz (*text-to-speech*), ou ainda em campos menos obviamente relacionados, à exemplo dos grandes avanços na área de *computer vision*, como a geração de imagens e vídeos, transferência de estilos (e até rostos) entre essas mídias, colorização automática ou semi-automática de imagens em preto e branco e a constante investigação e refinamento de novas arquiteturas e métodos aplicados à essas finalidades.
+O potencial de inovação desse campo é comprovado pelo papel central (muitas vezes representando o estado da arte) que as redes neurais artificiais vem desempenhando em áreas diretamente correlatas, com o campo de síntese de voz (*text-to-speech*), ou ainda em campos menos obviamente relacionados, à exemplo dos grandes avanços na área de *computer vision*, como a geração de imagens e vídeos, transferência de estilos, e mais recentemente rostos, entre essas mídias, colorização automática ou semi-automática de imagens em preto e branco e a constante investigação e refinamento de novas arquiteturas e métodos aplicados à essas finalidades.
 
-Esses resultados estimulam a transposição de algumas dessas técnicas e _insights_ para o caso da síntese sonora, principalmente quando percebemos que o tratamento da representação do som em forma digital, comumente representado na forma de um vetor unidimensional representando posições da onda sonora original, contínua, em relação ao tempo, é um caso específico da representação de imagens por vetores bi ou tridimensionais.
+Esses resultados estimulam a transposição de algumas dessas técnicas e *insights* para o caso da síntese sonora, principalmente quando percebemos que o tratamento da representação do som em forma digital, comumente representado na forma de um vetor unidimensional representando posições da onda sonora original, contínua, em relação ao tempo, é um caso específico da representação de imagens por vetores bi ou tridimensionais.
 
 Do ponto de vista da indústria, embora o interesse por instrumentos musicais digitais (DMIs) tenha crescido bastante na última década[@staudt2016development], os instrumentos virtuais considerados *industry standard* ainda baseiam-se prioritariamente em extensas coleções de *samples*, demandando uma alta quantidade de memória e poder de processamento do *hardware* utilizado.
 
 
-
-## Problema: simulação em tempo real de instrumentos **acústicos** (aplicação: bateria)
-
-
-
-
-
-
 ## Questão de pesquisa
-Busca-se, desta forma, identificar metodologias que deem suporte à modelagem de instrumentos musicais acústicos, com a aplicação do estado da arte das redes neurais, dando origem a simulações mais realistas, principalmente do ponto de vista da percepção humana, e mais eficientes do ponto de vista computacional.
-
-A proposta inclui a identificação da arquitetura mais apropriada, assim como seus parâmetros, incluindo o número de camadas, neurônios, a mais apropriada forma de atualização dos pesos e eventuais formas de tratamento dos dados utilizados no treinamento.
+Busca-se, desta forma, identificar técnicas baseadas no estado da arte das redes neurais artificiais que, em conjunto com abordagens tradicionais, deem suporte à modelagem de instrumentos musicais acústicos, dando origem a simulações mais realistas, principalmente do ponto de vista da percepção humana, e sobretudo mais computacionalmente eficientes.
 
 ## Escopo
-## Estrutura
-## Relevância <!-- socio-econômica -->
+Limitar o trabalho à investigação de instrumentos que possam ser aproximados por um modelo de excitação impulsivo, como é o caso, possibilita excluir da observação uma subárea significativa do processamento de sinais que lida com a evolução das frequências de uma onda sonora no domínio do tempo, trazendo o volume de pesquisa a níveis razoáveis, sem uma perda substancial em termos conceituais.
+
+Uma outra vantagem é de cunho técnico, já que essa escolha reduz a duração média das ondas investigadas, o que é uma escolha sensível quando alguns dos algoritmos utilizados, como a Transformada Discreta de Fourier, possuem complexidade $O(n \log(n)$
+
+Os algoritmos e técnicas convencionais, ainda que de forma muitas vezes ineficiente, prestam-se de maneira razoável à simulação *off-line* de instrumentos acústicos, razão pela qual o foco deste trabalho é a síntese em tempo real, econômica do ponto de vista computacional. Desenvolvimentos nesse sentido podem, por exemplo, motivar implementações em plataformas mais compactas, como teclados, pianos e baterias eletrônicas, além de encontrarem aplicação em áreas em ascensão, como realidade virtual e aumentada.
+
+Em relação ao tratamento das redes neurais, prioridade foi dada às arquiteturas consolidadas na literatura, o que excluiu, por exemplo, uma investigação da promissora arquitetura Capsnet(**XXX**).
+A escolha é necessária devido à limitações de tempo, frente ao grande volume de pesquisas envolvendo novas arquiteturas que pode-se observar.
+
+## Estrutura do Trabalho e Síntese das Etapas de Pesquisa
+
+Durante a revisão bibliográfica, após um breve resumo da evolução das redes neurais do ponto de vista histórico, o trabalho apresenta as arquiteturas mais relevantes. O objetivo é introduzir o tema, inicialmente de maneira ampla, lançando as bases para as seções seguintes, que exploram o estado da arte das aplicações dessas arquiteturas à 3 áreas de interesse: Música, discurso (*speech*) e imagens. Enquanto o interesse nas duas primeiras áreas é mais evidente, uma investigação dos desenvolvimentos em *computer vision* oferece insights importantes; além de ser uma das áreas de *machine learning* mais ativamente pesquisadas, alguns esforços de transposição dos desenvolvimentos nessa área para o campo da modelagem acústica tem alcançado resultados interessantes(**XXX**). 
+
+A seguir, alguns *frameworks* disponíveis são discutidos e comparados; novamente, por limitações de tempo, ênfase foi dada aos com maior penetração tanto na indústria quanto na área acadêmica, e a escolha da plataforma utilizada nesse trabalho obedeceu mais à critérios de documentação, adoção na comunidade e flexibilidade, do que critérios relacionados diretamente à performance.
+
+A seção seguinte investiga a modelagem acústica convencional, com ênfase no estado da arte da síntese sonora em tempo real. Por tratar-se de uma área mais hermética, sobretudo quando comparada ao campo do machine learning e sua filosofia código aberto, alguns temas relevantes são apresentados com uma maior profundidade conceitual. Por esse mesmo motivo, implementações didáticas dos dois algoritmos mais utilizados são apresentadas. 
+
+Em seguida é apresentado um referencial teórico, onde são formalizadas algumas das bases conceituais do trabalho, como a equação da onda e o funcionamento, do ponto de vista matemático, de uma rede neural; ademais, uma interpretação geométrica para a simetria da transformada discreta de Fourier, quando aplicada a sinais no domínio dos números reais, é introduzida.
+
+A seguir, no capítulo dedicado à metodologia, são apresentadas as etapas executadas, desde o processo de obtenção dos samples utilizados para o treinamento, passando pelas investigações no domínio do tempo e da frequência, até a apresentação em mais detalhes do modelo final proposto, que tem seus resultados comentados na seção seguinte. Na conclusão alguns encaminhamentos futuros são apresentados.
+
+
+
+## Relevância socio-econômica
+
+
 
 
 
@@ -79,20 +93,19 @@ O modelo de Rosenblat, tendo tido sua primeira implementação na forma de uma s
 
 Enquanto uma arquitetura baseada em uma única camada de Perceptrons apresenta severas limitações, o agrupamento sucessivo dessas camadas dá origem a uma topologia, conhecida como Multilayer Perceptron, capaz de atuar como um aproximador universal [@hornik91]. Desde que utilize uma função de ativação não-linear[@leshno93], e dado um número suficiente de neurons na camada oculta, essa topologia é capaz de mapear qualquer conjunto de números finitos a qualquer outro com precisão arbitrária[@hornik89].
 
-Um outro impedimento práticos do trabalhos de Rosenblatt e Widrow foi a ausência de uma metodologia eficiente para a atualização dos pesos da rede, sobretudo envolvendo múltiplas camadas de neurônios - caso não coberto pelos algortimos iniciais tanto de Rosenblat quanto de Widrow; tal metodologia veio a ser proposta originalmente por Werbos em 1974 **XXX**. Contudo, essa técnica permaneceu pouco conhecida na comunidade até ser redescoberta por Parker[@parker1985learning] e, pouco tempo depois, Rumelhart[@rumelhart1985learning] na segunda metade da década de 1980 [@mizutani2000derivation] [@widrow199030]. O algoritmo, que é conhecido como _backpropagation_, foi um dos responsáveis por reaquecer o interesse no campo[@hagan1996neural] na época, inaugurando sua fase atual, com o surgimento dos principais congressos sobre o assunto, como o _IEEE International Conference on Neural Networks_ e periódicos, a exemplo do _INNS Neural Networks_, ao fim da década de 1980[@yadav2015introduction].
+Um outro impedimento práticos do trabalhos de Rosenblatt e Widrow foi a ausência de uma metodologia eficiente para a atualização dos pesos da rede, sobretudo envolvendo múltiplas camadas de neurônios - caso não coberto pelos algoritmos iniciais tanto de Rosenblat quanto de Widrow; tal metodologia veio a ser proposta originalmente por Werbos em 1974 **XXX**. Contudo, essa técnica permaneceu pouco conhecida na comunidade até ser redescoberta por Parker[@parker1985learning] e, pouco tempo depois, Rumelhart[@rumelhart1985learning] na segunda metade da década de 1980 [@mizutani2000derivation] [@widrow199030]. O algoritmo, que é conhecido como _backpropagation_, foi um dos responsáveis por reaquecer o interesse no campo[@hagan1996neural] na época, inaugurando sua fase atual, com o surgimento dos principais congressos sobre o assunto, como o _IEEE International Conference on Neural Networks_ e periódicos, a exemplo do _INNS Neural Networks_, ao fim da década de 1980[@yadav2015introduction].
 
 Nos anos seguintes, observou-se uma profusão de novas arquiteturas, que foram aprofundando-se na media em que a utilização de mais camadas ocultas fora possibilitadas pelos avanços no _hardware_ computacional. Outras formas de organizar camadas sucessivas foram também introduzidas, além de vários avanços incrementais nos algoritmos de treinamento.
 
-## Arquiteturas Proeminentes
-
+## Redes Neurais - Principais Arquiteturas
 
 ### Feed-Forward
-A arquitetura básica no campo das redes neurais artificiais é a chamada Feed-Forward, que consiste de várias camadas sucessivas, que são totalmente ligadas entre si por meio de pesos. Os impulsos recebidos pelas camadas mais baixas fluem sucessivamente para as camadas posteriores, como sugere a nomenclatura desta arquitetura. São uma generalização do Multilayer Perceptron na medida em que utilizam em geral uma gama mais vasta de funções de ativação, muitas delas de forma sigmoidal, como a função logística $y = \frac{1}{1 + e ^ {-x}}$   and the hyperbolic tangent $\tanh(x) = \frac{e^x − e^{-x}}{e^x + e^{-x}}$ [@goldberg2016primer]
+A arquitetura básica no campo das redes neurais artificiais é a chamada Feed-Forward, que consiste de várias camadas sucessivas, que são totalmente ligadas entre si por meio de pesos. Os impulsos recebidos pelas camadas mais baixas fluem sucessivamente para as camadas posteriores, como sugere a nomenclatura desta arquitetura. São uma generalização do Multilayer Perceptron na medida em que utilizam em geral uma gama mais vasta de funções de ativação, muitas delas de forma sigmoidal, como a função logística $y = \frac{1}{1 + e ^ {-x}}$ e a tangente hiberbólica $\tanh(x) = \frac{e^x − e^{-x}}{e^x + e^{-x}}$ [@goldberg2016primer]
 
 ### Redes Neurais Profundas
-Com a melhoria do hardware, a topologia Feed-Forward foi ganhando um acréscimo de camadas, gerando as redes profundas (Deep Neural Networks). O aspecto mais importante dessa movimentação foi que as redes ganharam a habilidade de gerar representações sucessivas, abstraindo diferentes aspectos dos dados em cada uma de suas camadas.
+Com a melhoria do hardware, a topologia Feed-Forward foi recebendo um acréscimo de camadas, gerando as redes profundas (Deep Neural Networks). O aspecto mais importante dessa movimentação foi que as redes ganharam a habilidade de gerar representações sucessivas, abstraindo diferentes aspectos dos dados em cada uma de suas camadas.
 
-A grande vantagem desta topologia foi sua capacidade automática de extração de 'features', um trabalho que ficava a cargo dos pesquisadores anteriormente[@socher2014recursive]. Em contrapartida, já forma como os dados são interpretados pela rede pode não ser facilmente inferida pelo pesquisador, e as redes podem assumir uma forte característica de caixa-preta.
+A grande vantagem desta topologia foi sua capacidade automática de extração de dos componentes descritivos dos dados, um trabalho que ficava a cargo dos pesquisadores anteriormente[@socher2014recursive]. Em contrapartida, a forma como os dados são interpretados pela rede pode não ser facilmente inferida pelo pesquisador, e as redes podem assumir uma forte característica de caixa-preta.
 
 ### Redes Recorrentes
 Em redes recorrentes os neurons são parcialmente alimentados com seus próprios estados anteriores, emulando um efeito similar à utilização de ligações entre neurons de uma camada abaixo com neurons de uma camada acima não adjacente [@veit2016residual].
@@ -101,41 +114,43 @@ Essa arquitetura foi proposta por Elman [@elman1990finding] em 1990 com o propó
 informações codificadas no encadeamento temporal os dados, e é bastante poderosa em várias aplicações, como modelos de previsão e classificação de informações[@xu2015ccg], por exemplo.
 
 ### Redes Convolucionais
-Trata-se de um tipo de arquitetura profunda, que é amplamente utilizado em problemas relacionados a imagens, atingindo resultados de ponta em várias áreas de visão de computadores (computer vision), como reconhecimento de objetos e rostos em imagens [@pang2017convolution].
+Trata-se de um tipo de arquitetura, geralmente profunda, que é amplamente utilizado em problemas relacionados a imagens, atingindo resultados de ponta em várias áreas relacionadas à visão de computadores (*computer vision*), como reconhecimento de objetos e rostos em imagens [@pang2017convolution].
 
 Esse tipo de arquitetura lida com o problema da alta dimensão de uma imagem substituindo camadas totalmente conectadas por camadas convolucionais, que varrem a imagem, movimentando-se em uma de suas dimensões um passo por vez cada vez [@lecun1998gradient], e atualizando os pesos de acordo.
 
 Esse procedimento permite a geração, nas camadas convolucionais da rede, de uma só representação para padrões que aparecem em diferentes pontos da imagem; tais representações são geralmente interpretadas nas camadas finais da rede, totalmente conectadas, de forma a gerar o resultado final.
 
-## Utilização de ANNs em áreas correlatas
-Poucos trabalhos investigam a utilização de redes neurais para a síntese sonora direta. Não obstantes, algumas das áreas correlatas são bastante exploradas, e podem oferecer insights interessantes.
+## Redes Neurais Aplicadas à Musica
+A maioria dos trabalhos que investigam a aplicação de redes neurais à música, sobretudo envolvendo sua síntese, ocorrem em um nível de abstração mais alto do que a geração direta dos sons. Geralmente tomam como base a manipulação de representações musicais como partituras, por exemplo, ou representações sonoras compactas, como os espectrogramas.
 
-### Reconhecimento e Síntese de Voz
-
-[@hinton2012deep] present an overview of the use of neural networks based approach in the field, while in this same year, [@graves2013speech] produces state of the art results in the TIMIT phoneme recognition benchmark using a deep recurrent neural network, while [@maas2013rectifier] points the superiority of rectifier nonlinearities over sigmodal activation functions in the task of continuous speech recognition.
-
-With a hybrid architecture, combining a recurrent phonetic model and a deep neural network acoustic classifier, [@boulanger2014phone]  applies phone sequencing strategies to set new benchmarks in the TIMIT dataset, a technique that is proved by [@sak2015fast] to be superior to architectures like deep long short-Term memory recurrent neural networks and the widely used hidden Markov models.
-
-[@sainath2015deep] investigates the optimization of convolutional nets hyperparameters, pooling and training strategies to applications in speech recognition tasks. [@zweig2017advances] and [@zhang2017towards]  investigates end-to-end systems, with the latter combining hierarchical convolutional nets with Connectionist Temporal Classification. In his work, [@zhang2017very] also explores end-to-end systems, via a very deep recurrent convolutional network employing NIN principles.
-
-Speech synthesis state of the art, as seen in text-to-speech applications, for instance, is not yet achieved via end-to-end neural network approaches. Nonetheless, this area is being actively researched, and approaching production quality rapidly. [@zen2015unidirectional] tackles this task using unidirectional long short-term memory recurrent neural networks with a recurrent output layer, while [@wu2016investigating] further investigates this architecture, trying to discover the reasons for its effectiveness, and pinpoint wich factor are more relevant to que quality of the task, with the goal of offering a simplified topology.
-
-### Music
-Em geral os trabalhos relacionados à música ocorrem em um nível de abstração mais alto do que a geração direta dos sons, envolvendo a manipulação de representações musicais como partituras, por exemplo.
-Many language processing techniques are used in the music field; similarly, many image tasks can be translated to music, given a suitable representation for the input data, like spectrograms.
-
-#### Classification
+Classification
 This task involves assigning tags, generally genre-related or emotion related, to musical pieces. [@costa2017evaluation] and [@choi2016automatic] tackles this task with a fully convolutional neural network fed, in the latter case, with music represented by a mel-spectrogram, while in [@choi2017convolutional] a recurrent architecture is also explored, to exploit the temporal correlation of the inputs.
 
-#### Transcription
+Transcription
 the common task in this field is to translate music parts, generally specific instruments, into a symbolic representation, like tablatures or music scores, for example. One of the first contributions to this field is seen in [@tuohy2006evolved] via the coupling of a network and a local heuristic hill-climber applied over the results, to generate tablatures from music.
 
 With the use of a recurrent net, [@boulanger2013high] transcribes spectrograms of general musical parts into piano roll midi commands, while [@bock2012polyphonic] offers a similar approach, restricted to polyphonic piano sound, as in the case of [@sigtia2016end]. The last work, however, uses different architectures for the acoustic, a simple network and the language, a recurrent network model. With the use of a bidirectional recurrent net fed with spectral representations, [@southall2016automatic], creates drum representations.
 
-#### Generation
+Generation
 Here the aim is the inverse of that in the music transcription: given a representation, audio output is generated. One of the first works in the field is seen in[@stanley2007compositional], consisting of a compositional pattern producing network generating music on the fly based on user input.  [@hutchings2017talking] generates full drum parts based on a kick drum pattern, with a recurrent net, and investigates the quality of the results via an online survey.
 
-#### Image Compression
+## Redes Neurais Aplicadas ao Discurso Falado
+Poucos trabalhos investigam a utilização de redes neurais para a síntese sonora direta. Não obstante, algumas das áreas correlatas são bastante exploradas, e podem oferecer insights interessantes.
+
+[@hinton2012deep] apresenta uma revisão da literatura sobre o uso de modelagem acústica em abordagens baseadas em redes neurais na área de reconhecimento de voz. No mesmo ano [@graves2013speech] alcança resultados no *TIMIT phoneme recognition benchmark*, com a aplicação de redes recorrentes profundas, que estabelem o novo estado da arte,enquanto [@maas2013rectifier] aponta a superioridade da função de ativação relu (*rectifier nonlinearities*) sobre ativações de caráter sigmoidal em tarefas relacionadas ao reconhecimento contínuo da fala.
+
+A partir de uma arquitetura hibrica, combinando um modelo fonético recorrente com um classificador acústico baseado em uma rede neural profunda, [@boulanger2014phone] aplica estratégias de sequenciamento telefonico para estabelecer um novo benchmark no *TIMIT dataset*, uma técnica que foi comprovada por  [@sak2015fast] como superior ao uso de arquiteturas como *deep long short-Term memory recurrent neural networks* e as abordagens mais utilizadas à época baseadas no modelo oculto de Markov.
+
+Com relação à utilização de redes convolucionais, [@sainath2015deep] investiga a otimização dos hyperparametros dessas redes, além de estratégias de *pooling* e treinamento para aplicações em reconhecimento de fala, enquanto [@zweig2017advances] e [@zhang2017towards] exploram o desempenho de sistemas baseados somente em redes neurais (*end-to-end*), com o último combinando redes convolucionais   hierárquicas com classificação temporal coneccionista. Nessa mesma linha, o trabalho de [@zhang2017very]também investiga sistemas *end-to-end* a partir de uma arquitetura combinando redes neurais convolucionais profundas com recorrência e princípios baseados no aninhamento de redes neurais (NIN, network in a network). Alguns desses princípios, notadamente a justaposição de convolução e recorrência, inspiraram a implementação apresentada no capítulo **XXX**
+
+O estado da arte da síntese sonora ainda não foi estabelecido por abordagens totalmente baseadas em redes neurais, embora pesquisas nesse sentido sejam abundantes, e estejam rapidamente aproximando-se da qualidade necessária para a implementação em produtos finais. O trabalho de [@zen2015unidirectional] aborda a tarefa a partir de uma rede recorrente com camadas LSTM (long short-term memory), enquanto [@wu2016investigating] investiga a influência de aspectos específicos dessa topologia em sua eficiência na tarefa de síntese da voz falada.
+
+
+## Redes Neurais Aplicadas à Imagem (*Computer Vision*)
+Recentemente tem-se visto esforços para adaptar métodos utilizados com sucesso na área de *computer vision* ao campo da modelagem acústica. O trabalho de [@engel2017neural], por exemplo, busca inspiração na área de geração de imagens para elaborar uma arquitetura apropriada a síntese sonora.
+Ainda em paralelo com a área de relacionada à imagens, o autor propõe um base de dados sonora, Nsynth, à luz de *datasets* clássicos de imagens, como o MNIST, como uma forma de alavancar pesquisas nessa direção.
+
+Image Compression
 Despite beeing an important field in face of the communication era demands[@rehman2014image], the last review about the use of neural networks in image compression was made in 1999[@jiang1999image], while the last general review about the area dates from 2014[@rehman2014image].
 
 [@balle2016end] proposes the use of stages of linear convolutional filters and non-linear activation functions, improving the Multiscale Structural Similarity for Image Quality Assessment(MS-SSIM) measure in all bitrates.
@@ -147,11 +162,7 @@ With a modified loss function, [@theis2017lossy] shows that autoencoders can ach
 
 Using a fuzzy neural network, [@wang2015image] achieves superior speed, robustness and quality in lossy image processing tasks. [@toderici2015variable] presents a progressive method, focused on reducing mobile phone data transfer, that allows arbitrary image quality depending on the quantity bits sent to the device. [@santurkar2017generative] investigates the resilience of neural networks based compression, via a generative model capable of offering graceful degradation on the compressed images. Conceptual compressing is investigated by [@gregor2016towards], a technique that allows images to be retrieved from symbols. All the literature investigate deals with lossy compression.
 
-### Imagem
-Recentemente tem-se visto esforços para adaptar métodos utilizados com sucesso na área de computer vision ao campo sonoro. O trabalho de [@engel2017neural], por exemplo, busca inspiração na área de geração de imagens para elaborar uma arquitetura apropriada a síntese sonora.
-Ainda em paralelo com a área de relacionada à imagens, o autor propõe um base de dados sonora, Nsynth, à luz de datasets clássicos de imagens, como o MNIST.
-
-#### Síntese
+Síntese
 [@isola2016image] presents a method to translate images via an adversarial network, generating images from outlines, for example, or providing automatic image colorization [@hwangimage], [@zhang2016colorful], [@larsson2016learning]  and  [@iizuka2016let], the last focusing on automatic image colorization via a convolutional network, based on the extraction of local and global features, learned in the supervised training process.
 
 Also using adversarial nets, [@frans2017outline] introduces control to the process of generating coloured images from sketches, with the use of colour maps fed into the , a concept that is further explored in [@sangkloy2016scribbler], where user interaction and a feed-forward architecture enables real-time colorization of images via the input of colour clues via scribbles in arbitrary areas of the image.
@@ -164,10 +175,16 @@ Also using adversarial nets, [@frans2017outline] introduces control to the proce
 
 [@theis2015generative] investigates a recurrent architecture composed of multi-dimensional long short term memory units in the context of modelling image distributions.
 
-#### Video
+Video
 Problems in this area can be understood as a general case of aforementioned image-related tasks, with the added complexity of taking advantage of temporal correlations and a much higher data dimensionality.  Motivated by this, [@karpathy2014large] investigates approaches capable of extending convolutional neural networks in order to enable them to take advantage of temporal information in the inputted data. In a similar attempt, extending facial expression recognition to videos, [@khorrami2016deep] merges convolutional and recurrent networks, measuring the relative relevance of each one in the final results. Tackling the curse of dimensionality, [@Yang2017] presents the tensor-train concept, enabling the transfer of improvements of other architectures to high dimensional sequential data. [@he2015multimodal] uses a deep bidirectional long short-term memory recurrent neural net to set benchmarks in the recognition of emotions, via audio and video processing.
 
-## O Estado da Arte da Síntese Sonora em Tempo Real
+## Redes Neurais - Ferramentas e Frameworks
+
+A área de machine learning encontra-se muito ativa atualmente, tanto no âmbito da pesquisa quanto no empresarial, com várias grandes empresas de tecnologia incorporando essa tecnologia em suas competências essenciais. Dessa forma, assistimos à uma proliferação de ferramentas e frameworks focados em diferentes aspectos da área, muitos deles desenvolvidos ou endossados por essas empresas, como Microsoft, Google e Amazon. Somando-se a isso o fato de que, em maior ou menor grau, todos eles apresentam uma curva de aprendizado significativa, fica evidente que uma comparação direta de todos, ou mesmo da maioria das ferramentas disponíveis, torna-se impraticável em um horizonte de tempo razoável.
+
+A literatura disponível sobre o tema é bastante escassa, talvez pela volatilidade do tema.
+
+## Síntese Sonora em Tempo Real
 
 A área de síntese sonora propriamente pode ser dividida em duas escolas, na medida em que ocupa-se em modelar os processos físicos que dão origem aos som (physical modelling) ou diretamente as características das ondas sonoras (spectral modelling)[@serra2007state].
 
@@ -227,17 +244,13 @@ $c = 2fL$
 
 onde $D$ é a duração desejada, em segundos; $L$ é o comprimento da corda, em metros e FPS é o *framerate* pretendido.
 
-# Referencial Teórico
+
 
 ## Acústica e Psicoacústica
 
-## Ferramentas e Frameworks
 
-A área de machine learning encontra-se muito ativa atualmente, tanto no âmbito da pesquisa quanto no empresarial, com várias grandes empresas de tecnologia incorporando essa tecnologia em suas competências essenciais. Dessa forma, assistimos à uma proliferação de ferramentas e frameworks focados em diferentes aspectos da área, muitos deles desenvolvidos ou endossados por essas empresas, como Microsoft, Google e Amazon. Somando-se a isso o fato de que, em maior ou menor grau, todos eles apresentam uma curva de aprendizado significativa, fica evidente que uma comparação direta de todos, ou mesmo da maioria das ferramentas disponíveis, torna-se impraticável em um horizonte de tempo razoável.
 
-A literatura disponível sobre o tema é bastante escassa, talvez pela volatilidade do tema.
-
-<!-- ## Algoritmos de Otimização -->
+# Referencial Teórico
 
 ## Transformada Discreta de Fourier
 
