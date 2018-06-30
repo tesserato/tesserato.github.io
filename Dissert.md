@@ -37,17 +37,20 @@ Do ponto de vista da indústria, embora o interesse por instrumentos musicais di
 
 
 ## Questão de pesquisa
+O objetivo deste trabalho é desenvolver um modelo de simulação, em tempo real, de instrumentos acústicos baseado na utilização de redes neurais artificias.
 Busca-se, desta forma, identificar técnicas baseadas no estado da arte das redes neurais artificiais que, em conjunto com abordagens tradicionais, deem suporte à modelagem de instrumentos musicais acústicos, dando origem a simulações mais realistas, principalmente do ponto de vista da percepção humana, e sobretudo mais computacionalmente eficientes.
 
 ## Escopo
-Limitar o trabalho à investigação de instrumentos que possam ser aproximados por um modelo de excitação impulsivo, como é o caso, possibilita excluir da observação uma subárea significativa do processamento de sinais que lida com a evolução das frequências de uma onda sonora no domínio do tempo, trazendo o volume de pesquisa a níveis razoáveis, sem uma perda substancial em termos conceituais.
+O trabalho limita-se à emulação de instrumentos musicais acústicos convencionais, e não aborda a área mais subjetiva, do desenho de novos instrumentos senão tangencialmente, através de um exemplo em que um instrumento híbrido é apresentado; um tratamento razoavelmente completo do tema, pela infinidade de possibilidades que oferece (@dalgleish2014blurring), está muito além do objetivo deste trabalho.
 
-Uma outra vantagem é de cunho técnico, já que essa escolha reduz a duração média das ondas investigadas, o que é uma escolha sensível quando alguns dos algoritmos utilizados, como a Transformada Discreta de Fourier, possuem complexidade $O(n \log(n)$
+Adicionalmente, limitar o escopo do trabalho à investigação de instrumentos que possam ser aproximados por um modelo de excitação impulsivo, como aqui é feito, possibilita excluir da observação uma subárea significativa do processamento de sinais que lida com a evolução das frequências de uma onda sonora no domínio do tempo, trazendo o volume de pesquisa a níveis razoáveis, sem uma perda substancial em termos conceituais.
 
-Os algoritmos e técnicas convencionais, ainda que de forma muitas vezes ineficiente, prestam-se de maneira razoável à simulação *off-line* de instrumentos acústicos, razão pela qual o foco deste trabalho é a síntese em tempo real, econômica do ponto de vista computacional. Desenvolvimentos nesse sentido podem, por exemplo, motivar implementações em plataformas mais compactas, como teclados, pianos e baterias eletrônicas, além de encontrarem aplicação em áreas em ascensão, como realidade virtual e aumentada.
+Uma outra vantagem desse recorte é de cunho técnico, já que essa escolha reduz a duração média das ondas investigadas, o que é uma escolha sensível quando alguns dos algoritmos utilizados, como a Transformada Discreta de Fourier, possuem complexidade $O(n \log(n))$
 
-Em relação ao tratamento das redes neurais, prioridade foi dada às arquiteturas consolidadas na literatura, o que excluiu, por exemplo, uma investigação da promissora arquitetura Capsnet(**XXX**).
-A escolha é necessária devido à limitações de tempo, frente ao grande volume de pesquisas envolvendo novas arquiteturas que pode-se observar.
+Os algoritmos e técnicas convencionais, ainda que de forma muitas vezes ineficiente, prestam-se de maneira razoável à simulação *off-line* de instrumentos acústicos, razão pela qual o foco deste trabalho é a síntese em tempo real. Desenvolvimentos nesse sentido podem, por exemplo, motivar implementações em plataformas mais compactas, como teclados, pianos e baterias eletrônicas, além de encontrarem aplicação em áreas em ascensão, como realidade virtual e aumentada.
+
+Em relação ao tratamento das redes neurais, prioridade foi dada às arquiteturas já consolidadas na literatura, o que excluiu, por exemplo, uma investigação da promissora arquitetura Capsnet(**XXX**).
+A escolha é necessária devido à limitações de tempo em contraste com o grande volume de pesquisas envolvendo novas arquiteturas.
 
 ## Estrutura do Trabalho e Síntese das Etapas de Pesquisa
 
@@ -61,9 +64,14 @@ Em seguida é apresentado um referencial teórico, onde são formalizadas alguma
 
 A seguir, no capítulo dedicado à metodologia, são apresentadas as etapas executadas, desde o processo de obtenção dos samples utilizados para o treinamento, passando pelas investigações no domínio do tempo e da frequência, até a apresentação em mais detalhes do modelo final proposto, que tem seus resultados comentados na seção seguinte. Na conclusão alguns encaminhamentos futuros são apresentados.
 
-
-
 ## Relevância socio-econômica
+Os computadores introduziram a produção musical em uma nova era, permitindo, por um lado, experimentações com novos timbres e formas de interação homem máquina para a criação musical e, por outro, a emulação de instrumentos tradicionais, através de técnicas promissoras, como a modelagem acústica(@bovermann2016musical).
+
+Avançar essas pesquisas significa, na medida em que, por exemplo, diminui custos de software e hardware dedicados, levando em conta ainda a crescente disponibilidade de dispositivos portáteis, como tablets e telefones celulares, oferecer a um maior número de pessoas a oportunidade de uma educação musical, e por conseguinte uma formação intelectual, mais rica.
+
+Algumas vantagens do acesso precoce à educação musical são delineadas no estudo de @forgeard2008practicing, que sugere uma maior habilidade verbal e uma maior capacidade de raciocínio não verbal em crianças que praticaram instrumentos em sua infância, na mesma linha, o trabalho de @vaughn2000music aponta para uma relação entre o estudo voluntário de música e uma melhoria do desempenho matemático, a partir de uma meta análise de 20 estudos.
+
+Uma outra motivação importante é estimular a descentralização do capital intelectual relacionado ao campo de instrumentos virtuais, desde a década de 70 fortemente concentrado em algumas empresas japonesas, situadas em sua maioria na cidade de Hamamatsu como Yamaha e Roland (@reiffenstein2006codification). Que detém, exclusivamente ou parcialmente, as patentes para alguns importantes algoritmos de síntese sonora, como os *waveguides* digitais.
 
 
 
@@ -121,25 +129,29 @@ Esse tipo de arquitetura lida com o problema da alta dimensão de uma imagem sub
 Esse procedimento permite a geração, nas camadas convolucionais da rede, de uma só representação para padrões que aparecem em diferentes pontos da imagem; tais representações são geralmente interpretadas nas camadas finais da rede, totalmente conectadas, de forma a gerar o resultado final.
 
 ## Redes Neurais Aplicadas à Musica
-A maioria dos trabalhos que investigam a aplicação de redes neurais à música, sobretudo envolvendo sua síntese, ocorrem em um nível de abstração mais alto do que a geração direta dos sons. Geralmente tomam como base a manipulação de representações musicais como partituras, por exemplo, ou representações sonoras compactas, como os espectrogramas.
+A maioria dos trabalhos que investigam a aplicação de redes neurais à música, sobretudo envolvendo sua síntese, ocorrem em um nível de abstração mais alto do que a geração direta dos sons: Geralmente tomam como base a manipulação de representações musicais como partituras, por exemplo, ou representações sonoras compactas, como espectrogramas. Os motivos passam pela alta dimensionalidade dos outputs: no caso de um framerate de 441 00 samples por segundo, a qualidade encontrada em cds, por exemplo, a síntese de 10 segundos de áudio envolve a criação de mais de 4 milhões de samples.
 
-Classification
-This task involves assigning tags, generally genre-related or emotion related, to musical pieces. [@costa2017evaluation] and [@choi2016automatic] tackles this task with a fully convolutional neural network fed, in the latter case, with music represented by a mel-spectrogram, while in [@choi2017convolutional] a recurrent architecture is also explored, to exploit the temporal correlation of the inputs.
+O trabalho desenvolvido em conjunto pelas equipes do Google Brain team e do DeepMind é um exemplo de esforço nesse sentido[@engel2017neural]. Nele, uma arquitetura desenvolvida a partir da Wavenet (aprofundada no tópico sobre discurso falado) é utilizada para a geração de ondas sonoras a partir do treinamento direto com samples de vários instrumentos musicais. Os resultados mostram que a arquitetura encoder-decoder utilizada é capaz de aprender representações no domínio da frequência para vários tipos de instrumentos diferentes e uma extensão do trabalho denominada Magenta, consistindo em um player em tempo real para os sons da rede corroboram sua aplicabilidade em tempo real.
 
-Transcription
-the common task in this field is to translate music parts, generally specific instruments, into a symbolic representation, like tablatures or music scores, for example. One of the first contributions to this field is seen in [@tuohy2006evolved] via the coupling of a network and a local heuristic hill-climber applied over the results, to generate tablatures from music.
+Equanto as camadas das arquiteturas anteriores são predominantemente convolucionais, @pfalz2018generating apresenta um trabalho bastante abrangente sobre o uso de redes neurais recorrentes puras para essa finalidade. Um dos primeiros trabalhos na área é, talvez, o desenvolvido por [@stanley2007compositional], consistindo na investigação da capacidade de uma rede em prever sons, em analogia direta com séries temporais. Os resultados são bastante tímidos, e a uma rede capaz de prever apenas uma onda sonora, oriunda de uma nota de saxofone, é apresentada. De maneira semelhante, @sarroff2014musical investiga a aplicação direta de redes neurais, de arquitetura densa, na geração direta de multiplos samples de audio.
 
-With the use of a recurrent net, [@boulanger2013high] transcribes spectrograms of general musical parts into piano roll midi commands, while [@bock2012polyphonic] offers a similar approach, restricted to polyphonic piano sound, as in the case of [@sigtia2016end]. The last work, however, uses different architectures for the acoustic, a simple network and the language, a recurrent network model. With the use of a bidirectional recurrent net fed with spectral representations, [@southall2016automatic], creates drum representations.
+A geração de música em níveis mais altos de abstração é, para o trabalho aqui desenvolvido, apenas marginalmente interessante, na medida em que pode oferecer insights sobre representações compactas dos sons. O trabalho de [@hutchings2017talking], por exemplo, utiliza tablaturas para a previsão de partes completas de bateria tomando como base o ritmo de uma de suas peças.
 
-Generation
-Here the aim is the inverse of that in the music transcription: given a representation, audio output is generated. One of the first works in the field is seen in[@stanley2007compositional], consisting of a compositional pattern producing network generating music on the fly based on user input.  [@hutchings2017talking] generates full drum parts based on a kick drum pattern, with a recurrent net, and investigates the quality of the results via an online survey.
+Tomando emprestados os desenvolvimentos obtidos na área de computer vision, os trabalhos de @grinstein2017audio e @mital2017time buscam transpor os avanços alcançados no campo da transferência de estilo entre imagens para o domínio do som. O primeiro, de cunho exploratório, investiga as arquiteturas mais promissoras para a tarefa, chamando a atenção para o desempenho de arquiteturas rasas, enquanto o segundo investiga, a partir da Wavenet, representações apropriadas.
+
+Os esforços de classificação costumam introduzir inovações interessantes nas representações utilizadas:[@costa2017evaluation] e [@choi2016automatic] abordam a tarefa a partir de redes convolucionais; no primeiro trabalho as redes são alimentadas com música representada por um mel-spectrogram e no segundo arquiteturas convolucionais profundas são investigadas, assim como [@choi2017convolutional] que acrescenta recorrencia às arquiteturas convolucionais, no intuito de explorar as interrelações temporais dos samples utilizados.
+
+Representações não canonicas também possuem importante papel nas tarefas relacionadas à transcrição musical com o uso e redes neurais onde busca-se traduzir a música em representações de nível mais alto, simbólicas, como tablaturas e partituras, por exemplo. Uma das primeiras contribuições nesse sentido pode ser vista em [@tuohy2006evolved] por meio de um modelo que combina redes neurais e uma heurística hill-climber.
+
+Com o uso de uma rede recorrente, [@boulanger2013high] transcreve, a partir de espectrogramas, diferentes partes musicais em comandos midi. Na mesma linha [@bock2012polyphonic] e[@sigtia2016end] introduzem trabalhos focados na transcrição de sons polifônicos produzidos por pianos. Em relação á transcrição de partes de um kit de bateria, [@southall2016automatic] aborda a tarefa a partir de uma arquitetura recorrente alimentada com representações espectrais.
 
 ## Redes Neurais Aplicadas ao Discurso Falado
-Poucos trabalhos investigam a utilização de redes neurais para a síntese sonora direta. Não obstante, algumas das áreas correlatas são bastante exploradas, e podem oferecer insights interessantes.
+
+Um dos trabalho mais notáveis, desenvolvido pela equipe de machine learning do Google, é a chamada (Wavenet)[https://deepmind.com/blog/wavenet-generative-model-raw-audio/] [@van2016wavenet], uma arquitetura baseada em camadas convolucionais, para a geração end-to-end de discurso. A geração dá-se sample a sample, levando em conta um grande número de inputs passados; os resultados introduzem um novo estado da arte para a tarefa. 
 
 [@hinton2012deep] apresenta uma revisão da literatura sobre o uso de modelagem acústica em abordagens baseadas em redes neurais na área de reconhecimento de voz. No mesmo ano [@graves2013speech] alcança resultados no *TIMIT phoneme recognition benchmark*, com a aplicação de redes recorrentes profundas, que estabelem o novo estado da arte,enquanto [@maas2013rectifier] aponta a superioridade da função de ativação relu (*rectifier nonlinearities*) sobre ativações de caráter sigmoidal em tarefas relacionadas ao reconhecimento contínuo da fala.
 
-A partir de uma arquitetura hibrica, combinando um modelo fonético recorrente com um classificador acústico baseado em uma rede neural profunda, [@boulanger2014phone] aplica estratégias de sequenciamento telefonico para estabelecer um novo benchmark no *TIMIT dataset*, uma técnica que foi comprovada por  [@sak2015fast] como superior ao uso de arquiteturas como *deep long short-Term memory recurrent neural networks* e as abordagens mais utilizadas à época baseadas no modelo oculto de Markov.
+A partir de uma arquitetura hibrida, combinando um modelo fonético recorrente com um classificador acústico baseado em uma rede neural profunda, [@boulanger2014phone] aplica estratégias de sequenciamento telefonico para estabelecer um novo benchmark no *TIMIT dataset*, uma técnica que foi comprovada por  [@sak2015fast] como superior ao uso de arquiteturas como *deep long short-Term memory recurrent neural networks* e as abordagens mais utilizadas à época baseadas no modelo oculto de Markov.
 
 Com relação à utilização de redes convolucionais, [@sainath2015deep] investiga a otimização dos hyperparametros dessas redes, além de estratégias de *pooling* e treinamento para aplicações em reconhecimento de fala, enquanto [@zweig2017advances] e [@zhang2017towards] exploram o desempenho de sistemas baseados somente em redes neurais (*end-to-end*), com o último combinando redes convolucionais   hierárquicas com classificação temporal coneccionista. Nessa mesma linha, o trabalho de [@zhang2017very]também investiga sistemas *end-to-end* a partir de uma arquitetura combinando redes neurais convolucionais profundas com recorrência e princípios baseados no aninhamento de redes neurais (NIN, network in a network). Alguns desses princípios, notadamente a justaposição de convolução e recorrência, inspiraram a implementação apresentada no capítulo **XXX**
 
@@ -147,7 +159,7 @@ O estado da arte da síntese sonora ainda não foi estabelecido por abordagens t
 
 
 ## Redes Neurais Aplicadas à Imagem (*Computer Vision*)
-Recentemente tem-se visto esforços para adaptar métodos utilizados com sucesso na área de *computer vision* ao campo da modelagem acústica. O trabalho de [@engel2017neural], por exemplo, busca inspiração na área de geração de imagens para elaborar uma arquitetura apropriada a síntese sonora.
+Recentemente tem-se visto esforços para adaptar métodos utilizados com sucesso na área de *computer vision* ao campo da modelagem acústica. O trabalho de [@engel2017neural], citado acima, por exemplo, busca inspiração na área de geração de imagens para elaborar uma arquitetura apropriada a síntese sonora.
 Ainda em paralelo com a área de relacionada à imagens, o autor propõe um base de dados sonora, Nsynth, à luz de *datasets* clássicos de imagens, como o MNIST, como uma forma de alavancar pesquisas nessa direção.
 
 Image Compression
