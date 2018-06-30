@@ -159,36 +159,41 @@ O estado da arte da síntese sonora ainda não foi estabelecido por abordagens t
 
 
 ## Redes Neurais Aplicadas à Imagem (*Computer Vision*)
-Recentemente tem-se visto esforços para adaptar métodos utilizados com sucesso na área de *computer vision* ao campo da modelagem acústica. O trabalho de [@engel2017neural], citado acima, por exemplo, busca inspiração na área de geração de imagens para elaborar uma arquitetura apropriada a síntese sonora.
+Recentemente tem-se visto esforços para adaptar métodos utilizados com sucesso na área de *computer vision* ao campo da modelagem acústica. O trabalho de [@engel2017neural], citado acima, batizado de Nsynth, busca inspiração na área de geração de imagens para elaborar uma arquitetura apropriada a síntese sonora.
 Ainda em paralelo com a área de relacionada à imagens, o autor propõe um base de dados sonora, Nsynth, à luz de *datasets* clássicos de imagens, como o MNIST, como uma forma de alavancar pesquisas nessa direção.
 
-Image Compression
-Despite beeing an important field in face of the communication era demands[@rehman2014image], the last review about the use of neural networks in image compression was made in 1999[@jiang1999image], while the last general review about the area dates from 2014[@rehman2014image].
+Da mesma forma a Wavenet, antecessora do Nsynth, é uma adaptação das arquiteturas PixelRNN[@oord2016pixel] e PixelCNN[@van2016conditional], desenvolvidas para a geração de imagens. 
+É interessante investigar, diante disso, algumas aplicações na área de computer vision: aplicações relacionadas à compressão de imagens nos oferecem insights sobre o potencial de geração de representações simplificadas, e são de especial interesse. 
 
-[@balle2016end] proposes the use of stages of linear convolutional filters and non-linear activation functions, improving the Multiscale Structural Similarity for Image Quality Assessment(MS-SSIM) measure in all bitrates.
+Apesar da importancia do tema[@rehman2014image], sobretudo frente ao crescente fluxo de imagens na internet, a última revisão bibliográfica sobre a aplicação de redes neurais à compressão de imagens pode ser vista em [@jiang1999image] e já data de quase duas décadas.
 
-Superior measurements, with the same metrics, to standard compression methods such as JPEG and WebP, were obtained by [@johnston2017improved], using a recurrent architecture with SSIM loss function and adaptive bit allocation algorithm.
-With a modified loss function, [@theis2017lossy] shows that autoencoders can achieve compressing results comparable with JPEG 2000 format.
+A despeito disso, alguns trabalhos vem sendo desenvolvidos, como é o caso de [@balle2016end], que propõe um arquitetura alternando filtros convolucionais com ativações não lineares, que alcança, para todos os bitrates, uma melhora na métrica MS-SSIM (Multiscale Structural Similarity for Image Quality Assessment).
 
-[@toderici2016full] also produces results better than standard codecs via different architectures based on recurrent neural networks, a binarizer, and a neural network for entropy coding.
+Usando uma rede neural fuzzy, [@wang2015image] alcança melhorias na velocidade, robustez e qualidade na tarefa de compressão de imagem com perdas.
+[@toderici2015variable] desenvolve um método progressivo, com foco na redução de tráfego em dispositivos móveis, que permite qualidade arbitrária dependendo da quantidade de bits transferidos
+[@toderici2016full] alcança resultados superiores a codecs, utilizando diferentes arquiteturas baseadas em redes recorrentes, um binarizador e uma rede neural para codificar a entropia dos dados.
 
-Using a fuzzy neural network, [@wang2015image] achieves superior speed, robustness and quality in lossy image processing tasks. [@toderici2015variable] presents a progressive method, focused on reducing mobile phone data transfer, that allows arbitrary image quality depending on the quantity bits sent to the device. [@santurkar2017generative] investigates the resilience of neural networks based compression, via a generative model capable of offering graceful degradation on the compressed images. Conceptual compressing is investigated by [@gregor2016towards], a technique that allows images to be retrieved from symbols. All the literature investigate deals with lossy compression.
+Mais recentemente, utilizando a métrica SSIM como a própria função de perda de uma arquitetura baseada em redes recorrentes e um algoritimo de alocação adaptativa de bits,[@johnston2017improved] supera métodos *industry standard*, como JPEG e WebP. Similarmente, com uma função de perda modificada, [@theis2017lossy] demonstra que arquiteturas baseadas em autoencoders alcançam resultados comparáveis ao formato JPEG 2000.
 
-Síntese
-[@isola2016image] presents a method to translate images via an adversarial network, generating images from outlines, for example, or providing automatic image colorization [@hwangimage], [@zhang2016colorful], [@larsson2016learning]  and  [@iizuka2016let], the last focusing on automatic image colorization via a convolutional network, based on the extraction of local and global features, learned in the supervised training process.
+O trabalho de [@santurkar2017generative] investiga a resiliência da compressão baseada em redes neurais, através de um modelo generativo capaz de oferecer *graceful degradation* às imagens comprimidas.
+[@gregor2016towards] investiga o conceito de compressão conceitual, uma técnica que permite que imagens sejam recuperadas de símbolos.
 
-Also using adversarial nets, [@frans2017outline] introduces control to the process of generating coloured images from sketches, with the use of colour maps fed into the , a concept that is further explored in [@sangkloy2016scribbler], where user interaction and a feed-forward architecture enables real-time colorization of images via the input of colour clues via scribbles in arbitrary areas of the image.
+Os trabalhos que tem como foco a síntese de imagens a partir de representações geralmente envolvem as chamadas GANs - Generative Adversarial Networks: trata-se de uma abordagem onde uma rede é treinada para gerar imagens, enquanto outra as classifica em artificiais ou não. O objetivo da primeira rede é enganar a segunda, dando origem a imagens mais realistas, do ponto de vista da percepção humana.
 
-[@gatys2016image] tackles the problem of style transfer: extracting features of an image and applying to another one, without changing the semantics of the latter, with the application of a convolutional network.
+[@isola2016image], por exemplo, utiliza essa técnica para gerar imagens a partir de representações de seus contornos, enquanto [@hwangimage], [@zhang2016colorful], [@larsson2016learning] e [@iizuka2016let]
+abordam a tarefa de colorização automática de imagens.
 
-[@kulkarni2015deep], on the other hand, proposes a method that enables a convolutional-deconvolutional network to disentangle the features extracted from images, allowing the manual generation of images in different positions and lighting conditions via the tweak of variables fed to the network. Also investigating image manipulation, by means of adversarial nets, [@zhu2016generative] attempts to learn features directly from raw data.
+Ainda usando redes adversariais [@frans2017outline] introduz controle ao processo de colorização, com a utilização de mapas de cores, que são usados como entradas para as redes, um conceito que é explorado também por [@sangkloy2016scribbler], onde a interação do usuario e uma rede densa permitem a colorização de imagens em tempo real, através de linhas desenhadas em áreas da imagem que possuam as cores pretendidas.
 
-[@oord2016pixel] proposes a deep recurrent topology, with improved residual connections, capable of reconstructing occluded images, that could be also used in image compression tasks.
+[@gatys2016image] propõe uma técnica de transferência de estilo, utilizando uma rede convolucional capaz de aprender características do estilo de uma imagem e transferir para outra, sem alterar o seu conteúdo semantico. Nessa linha, [@kulkarni2015deep] utiliza uma arquitetura de convolução-desconvolução para separar características de posicionamento de uma imagem, permitindo sua reconstrução posterior em outras posições e situações de iluminação, a partir de mudanças manuais nas variáveis de entrada da rede.
+Ainda investigando a manipulação de imagens a partir de redes adversariais o trabalho de [@zhu2016generative] tem como objetivo aprender características das imagens de maneira direta.
 
-[@theis2015generative] investigates a recurrent architecture composed of multi-dimensional long short term memory units in the context of modelling image distributions.
+O trabalho de [@oord2016pixel], que veio a inpirar a Wavenet, propõe um topologia recorrente profunda com conexões residuais melhoradas capaz de reconstruir imagens parcialmente obstruídas, enquanto [@theis2015generative] investiga arquiteturas LSTM multi dimensionais no contexto da modelagem da distribuição de imagens.
 
-Video
-Problems in this area can be understood as a general case of aforementioned image-related tasks, with the added complexity of taking advantage of temporal correlations and a much higher data dimensionality.  Motivated by this, [@karpathy2014large] investigates approaches capable of extending convolutional neural networks in order to enable them to take advantage of temporal information in the inputted data. In a similar attempt, extending facial expression recognition to videos, [@khorrami2016deep] merges convolutional and recurrent networks, measuring the relative relevance of each one in the final results. Tackling the curse of dimensionality, [@Yang2017] presents the tensor-train concept, enabling the transfer of improvements of other architectures to high dimensional sequential data. [@he2015multimodal] uses a deep bidirectional long short-term memory recurrent neural net to set benchmarks in the recognition of emotions, via audio and video processing.
+Na área de video, que pode ser entendida como um caso geral da manipulação de imagens, com complexidades adicionais relacionadas à alta dimensionalidade dos dados e ao encadeamento temporal [@karpathy2014large]
+investiga abordagens capazes de extender as redes convolucionais de forma a permitir que tirem proveito das características temporais dos dado. De forma semelhante, portando desenvolvimentos na área de reconhecimento de expressões faciais obtidos em imagens para videos, [@khorrami2016deep] combina redes recorrentes e convolucionais, medindo a importancia relativa de cada uma nos resultados finais.
+
+Buscando combater a alta dimensionalidade, [@Yang2017] apresenta o conceito de tensor-train, permitindo a transferência de conhecimento de outras arquiteturas para a utilização em dados sequenciais com alta dimensionalidade. O trablho de [@he2015multimodal] introduz novos benchmarks à tarefa de reconhecimento de emoções em vídeos, utilizando uma arquitetura profunda baseada em camadas LSTM bidirecionais no processamento de vídeos, incluindo seu áudio.
 
 ## Redes Neurais - Ferramentas e Frameworks
 
