@@ -46,6 +46,7 @@ tgt = tgt[nonzero_idxs[0], :]
 M = np.max(tgt)
 m = np.min(tgt)
 tgt = (tgt - m) / (M - m)
+np.savetxt(path + '/amplitudes/' + 'm_M.csv', np.array([m,M]), delimiter=',')
 
 # preparing complete inputs
 complete_ipt = []
