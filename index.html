@@ -260,10 +260,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>É conveniente colocar a formulação em termos físicos: se considerarmos, por exemplo, um framerate típico de 44100 frames por segundo podemos evitar desperdício computacional fazendo com que a simulação coincida com o intervalos 1/44100 entre os <em>samples</em>. De modo geral, levando em conta que <span class="math inline">\(C &lt;= 1\)</span>, podemos parametrizar a simulação em termos dos componentes físicos e o <em>sampling rate</em> desejado da seguinte forma:</p>
 <p><span class="math inline">\(dt = \frac{1}{FPS} = \frac{D}{N}\)</span> <span class="math inline">\(N = D ~ FPS\)</span> <span class="math inline">\(dx = \frac{L}{M}\)</span> <span class="math inline">\(M &lt;= \frac{FPS}{2f}\)</span> <span class="math inline">\(c = 2fL\)</span></p>
 <p>onde <span class="math inline">\(D\)</span> é a duração desejada, em segundos; <span class="math inline">\(L\)</span> é o comprimento da corda, em metros e FPS é o <em>framerate</em> pretendido.</p>
-<p>O fragmento de implementação abaixo ajuda a entender o funcionamento do algoritmo (o código que segue é ilustrativo; uma implementação funcional pode ser encontrada no repositório dedicado ao trabalho, no arquivo <a href="https://github.com/tesserato/Dissertacao/blob/master/Finite_Difference.py">Finite_Difference.py</a>):</p>
+<p>O fragmento de implementação abaixo, na linguagem Python, ajuda a entender o funcionamento do algoritmo (o código que segue é ilustrativo; uma implementação funcional pode ser encontrada no repositório dedicado ao trabalho, no arquivo <a href="https://github.com/tesserato/Dissertacao/blob/master/Finite_Difference.py">Finite_Difference.py</a>):</p>
 <p>
-<video width="400" controls>
-<source src="FiniteDifference.webm" type="video/webm">
+<video width="1000" controls>
+<source src="resources\Demo Finite Difference\FiniteDifference.webm" type="video/webm">
 </video>
 </p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1">amplitude <span class="op">=</span> <span class="fl">0.005</span> <span class="co"># meters</span></a>
@@ -314,8 +314,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-46" data-line-number="46">  y_1[:] <span class="op">=</span> y</a>
 <a class="sourceLine" id="cb1-47" data-line-number="47">  ctr <span class="op">+=</span> <span class="dv">1</span></a>
 <a class="sourceLine" id="cb1-48" data-line-number="48">w <span class="op">=</span> np.array(w) <span class="op">*</span> <span class="dv">4000000</span></a></code></pre></div>
+<p>Uma animação de uma onda de 440 hz criada pela implementação acima pode ser encontrado no repositório da dissertação, na pasta <a href=""></a>, junto com áudios de diversas ondas, com local de excitação e captação variados. É interessante observar o efeito da variação desses parametros no timbre da onda sonora gerada.</p>
 <h3 id="digital-waveguides">Digital Waveguides</h3>
-<p>Apresentam uma abordagem simplificada da modelagem física, na medida em que concentram em alguns pontos discretos os cálculos necessários à simulação, aumentando bastante a eficiência computacional do modelo. Conceitualmente, podem ser vistos como uma caso especial do método das diferenças finitas, e a maioria de suas implementações consistem na utilização de <em>delay lines</em> e filtros digitais para a modelagem da propagação da onda<span class="citation" data-cites="smith2006basic">(Smith 2006)</span>.</p>
+<p>Apresentam uma abordagem simplificada da modelagem física, na medida em que concentram em alguns pontos discretos os cálculos necessários à simulação, aumentando bastante a eficiência computacional do modelo. Conceitualmente, podem ser vistos como uma caso especial do método das diferenças finitas apresentado anteriormente, e a maioria de suas implementações consistem na utilização de <em>delay lines</em> e filtros digitais para a modelagem da propagação da onda<span class="citation" data-cites="smith2006basic">(Smith 2006)</span>. A discretização segue a linha descrita no contexto do método das diferenças finitas, e</p>
 <h2 id="acústica-e-psicoacústica">Acústica e Psicoacústica</h2>
 <h1 id="referencial-teórico">Referencial Teórico</h1>
 <h2 id="transformada-discreta-de-fourier">Transformada Discreta de Fourier</h2>
@@ -348,62 +349,60 @@ x[n] \sin\left(m ~ \frac{2 \pi}{N} ~ n \right) ~ i
 </figure>
 <p>Trata-se de uma transformada de uma onda composta por 8 samples, que pode ser vista no retangulo inferior da imagens. Os outros retangulos ilustram os respectivos passos e a simetria entre passos equidistantes de n/2. O motivo da simetria, causado pela perda de informação ao tomar apenas alguns pontos, torna-se explícito quando observado do ponto de vista geométrico: os 8 pontos equidistantes tomados como amostra, por exemplo, de uma senoide com frequência igual a 2 coincidem com os retirados de uma senois com frequência igual a 6, já que partes do ciclo são ignorados.</p>
 <p>O código em Python a seguir, utilizado para gerar os frames da imagem acima, serve para elucidar numericamente o exposto. É interessante notar que a interpretação geométrica da simetria da transformada discreta de Fourier em ondas puramente reais, até onde alcança o conhecimento do autor, é apresentada pela primeira vez neste trabalho. Cabe observar que implementações mais eficientes, como o algoritmo Fast Fourier Transform (FFT), que os são utilizadas na prática, se utilizam da simetria da transformada para economizar operações <strong>xxx</strong>.</p>
-<pre><code>import numpy as np
-import matplotlib.pyplot as plt
-from scipy.fftpack import fft
-
-# Discrete Fourier Transform | Transformada Discreta de Fourier
-def DFT(x):
-  N = x.shape[0]
-  # cria um vetor de N entradas complexas, preenchido com zeros
-  X = np.zeros(N, dtype=&#39;complex64&#39;)
-  n = np.array([p for p in range(N)]) # n = {0,1,2,...,N-1}
-  # Versão de &quot;alta resolução&quot; de n, usada para o gráfico apenas
-  Hn = np.linspace(0, N-1, 100*N) # Hn ={0,...,1,...,2,...,N-1}
-  for m in range(N): # m E {0,1,2,...,N-1}
-    C_Si = np.exp(-2 * np.pi * m * n / N * 1j) # C(m) - S(m) i
-    # Versão de &quot;alta resolução&quot; de C_Si, usada para o gráfico apenas
-    HC_Si = np.exp(-2 * np.pi * m * Hn / N * 1j)
-    X[m] = sum(np.multiply(x, C_Si)) # multiplicação termo a termo
-    # plotando:
-    plt.figure(1)
-    plt.suptitle(&#39;M =&#39; + str(m), fontsize=16)
-    plt.subplot(211)
-    plt.plot(n,x[n].real, &#39;k:.&#39;, label=&#39;x[n]&#39;)
-    plt.plot(n,C_Si.real, &#39;k--o&#39;, label=&#39;C[n]&#39;)
-    plt.plot(Hn,HC_Si.real, &#39;k-&#39;,label=&#39;C[n] ideal&#39;)
-    plt.ylabel(&#39;Real&#39;, fontsize=14, color=&#39;k&#39;)    
-    plt.subplot(212)
-    plt.plot(n,x[n].imag, &#39;k:.&#39;, label=&#39;x[n]&#39;)
-    plt.plot(n,C_Si.imag, &#39;k--o&#39;, label=&#39;C[n]&#39;)
-    plt.plot(Hn,HC_Si.imag, &#39;k-&#39;,label=&#39;C[n] ideal&#39;)
-    plt.ylabel(&#39;Imaginário&#39;, fontsize=14, color=&#39;k&#39;)
-    plt.legend()
-    plt.savefig(&#39;0&#39; + str(m) + &#39;.png&#39;, dpi=150)
-    plt.close(&#39;all&#39;)
-  #calcula o erro em relação ao algoritmo da biblioteca Scipy
-  error = sum((X-fft(x))**2)
-  print(round(error,5))
-  # retorna a parte não redundante da transformada
-  return X[0 : int(N/2+1)] if (N % 2 == 0) else X[0 : int((N+1)/2)]
-
-def s(t):
-  return np.cos(2 * np.pi * t)
-
-t = np.linspace(0, 1, 8) # 8 pontos entre 0 e 1
-x = s(t) # aplica a função ponto a ponto
-X = DFT(x)
-
-# plotando:
-plt.figure(1)
-plt.subplot(211)
-plt.ylabel(&#39;Real&#39;, fontsize=14, color=&#39;k&#39;)
-plt.stem(X.real,linefmt=&#39;k--&#39;,markerfmt=&#39;ko&#39;, basefmt=&#39;k--&#39;)
-plt.subplot(212)
-plt.stem(X.imag,linefmt=&#39;k--&#39;,markerfmt=&#39;ks&#39;, basefmt=&#39;k--&#39;)
-plt.ylabel(&#39;Imaginário&#39;, fontsize=14, color=&#39;k&#39;)
-plt.savefig(&#39;transform.png&#39;, dpi=150)
-plt.close(&#39;all&#39;)</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="im">import</span> numpy <span class="im">as</span> np</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="im">from</span> scipy.fftpack <span class="im">import</span> fft</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># Discrete Fourier Transform | Transformada Discreta de Fourier</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">def</span> DFT(x):</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  N <span class="op">=</span> x.shape[<span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="co"># cria um vetor de N entradas complexas, preenchido com zeros</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">  X <span class="op">=</span> np.zeros(N, dtype<span class="op">=</span><span class="st">&#39;complex64&#39;</span>)</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">  n <span class="op">=</span> np.array([p <span class="cf">for</span> p <span class="kw">in</span> <span class="bu">range</span>(N)]) <span class="co"># n = {0,1,2,...,N-1}</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">  <span class="co"># Versão de &quot;alta resolução&quot; de n, usada para o gráfico apenas</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">  Hn <span class="op">=</span> np.linspace(<span class="dv">0</span>, N<span class="dv">-1</span>, <span class="dv">100</span><span class="op">*</span>N) <span class="co"># Hn ={0,...,1,...,2,...,N-1}</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">  <span class="cf">for</span> m <span class="kw">in</span> <span class="bu">range</span>(N): <span class="co"># m E {0,1,2,...,N-1}</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">    C_Si <span class="op">=</span> np.exp(<span class="op">-</span><span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> m <span class="op">*</span> n <span class="op">/</span> N <span class="op">*</span> 1j) <span class="co"># C(m) - S(m) i</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">    <span class="co"># Versão de &quot;alta resolução&quot; de C_Si, usada para o gráfico apenas</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">    HC_Si <span class="op">=</span> np.exp(<span class="op">-</span><span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> m <span class="op">*</span> Hn <span class="op">/</span> N <span class="op">*</span> 1j)</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">    X[m] <span class="op">=</span> <span class="bu">sum</span>(np.multiply(x, C_Si)) <span class="co"># multiplicação termo a termo</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">    <span class="co"># plotando:</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">    plt.figure(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">    plt.suptitle(<span class="st">&#39;M =&#39;</span> <span class="op">+</span> <span class="bu">str</span>(m), fontsize<span class="op">=</span><span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb2-20" data-line-number="20">    plt.subplot(<span class="dv">211</span>)</a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">    plt.plot(n,x[n].real, <span class="st">&#39;k:.&#39;</span>, label<span class="op">=</span><span class="st">&#39;x[n]&#39;</span>)</a>
+<a class="sourceLine" id="cb2-22" data-line-number="22">    plt.plot(n,C_Si.real, <span class="st">&#39;k--o&#39;</span>, label<span class="op">=</span><span class="st">&#39;C[n]&#39;</span>)</a>
+<a class="sourceLine" id="cb2-23" data-line-number="23">    plt.plot(Hn,HC_Si.real, <span class="st">&#39;k-&#39;</span>,label<span class="op">=</span><span class="st">&#39;C[n] ideal&#39;</span>)</a>
+<a class="sourceLine" id="cb2-24" data-line-number="24">    plt.ylabel(<span class="st">&#39;Real&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)    </a>
+<a class="sourceLine" id="cb2-25" data-line-number="25">    plt.subplot(<span class="dv">212</span>)</a>
+<a class="sourceLine" id="cb2-26" data-line-number="26">    plt.plot(n,x[n].imag, <span class="st">&#39;k:.&#39;</span>, label<span class="op">=</span><span class="st">&#39;x[n]&#39;</span>)</a>
+<a class="sourceLine" id="cb2-27" data-line-number="27">    plt.plot(n,C_Si.imag, <span class="st">&#39;k--o&#39;</span>, label<span class="op">=</span><span class="st">&#39;C[n]&#39;</span>)</a>
+<a class="sourceLine" id="cb2-28" data-line-number="28">    plt.plot(Hn,HC_Si.imag, <span class="st">&#39;k-&#39;</span>,label<span class="op">=</span><span class="st">&#39;C[n] ideal&#39;</span>)</a>
+<a class="sourceLine" id="cb2-29" data-line-number="29">    plt.ylabel(<span class="st">&#39;Imaginário&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)</a>
+<a class="sourceLine" id="cb2-30" data-line-number="30">    plt.legend()</a>
+<a class="sourceLine" id="cb2-31" data-line-number="31">    plt.savefig(<span class="st">&#39;0&#39;</span> <span class="op">+</span> <span class="bu">str</span>(m) <span class="op">+</span> <span class="st">&#39;.png&#39;</span>, dpi<span class="op">=</span><span class="dv">150</span>)</a>
+<a class="sourceLine" id="cb2-32" data-line-number="32">    plt.close(<span class="st">&#39;all&#39;</span>)</a>
+<a class="sourceLine" id="cb2-33" data-line-number="33">  <span class="co">#calcula o erro em relação ao algoritmo da biblioteca Scipy</span></a>
+<a class="sourceLine" id="cb2-34" data-line-number="34">  error <span class="op">=</span> <span class="bu">sum</span>((X<span class="op">-</span>fft(x))<span class="op">**</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb2-35" data-line-number="35">  <span class="bu">print</span>(<span class="bu">round</span>(error,<span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb2-36" data-line-number="36">  <span class="co"># retorna a parte não redundante da transformada</span></a>
+<a class="sourceLine" id="cb2-37" data-line-number="37">  <span class="cf">return</span> X[<span class="dv">0</span> : <span class="bu">int</span>(N<span class="op">/</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>)] <span class="cf">if</span> (N <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>) <span class="cf">else</span> X[<span class="dv">0</span> : <span class="bu">int</span>((N<span class="op">+</span><span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span>)]</a>
+<a class="sourceLine" id="cb2-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb2-39" data-line-number="39"><span class="kw">def</span> s(t):</a>
+<a class="sourceLine" id="cb2-40" data-line-number="40">  <span class="cf">return</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> t)</a>
+<a class="sourceLine" id="cb2-41" data-line-number="41"></a>
+<a class="sourceLine" id="cb2-42" data-line-number="42">t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">8</span>) <span class="co"># 8 pontos entre 0 e 1</span></a>
+<a class="sourceLine" id="cb2-43" data-line-number="43">x <span class="op">=</span> s(t) <span class="co"># aplica a função ponto a ponto</span></a>
+<a class="sourceLine" id="cb2-44" data-line-number="44">X <span class="op">=</span> DFT(x)</a>
+<a class="sourceLine" id="cb2-45" data-line-number="45"><span class="co"># plotando:</span></a>
+<a class="sourceLine" id="cb2-46" data-line-number="46">plt.figure(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-47" data-line-number="47">plt.subplot(<span class="dv">211</span>)</a>
+<a class="sourceLine" id="cb2-48" data-line-number="48">plt.ylabel(<span class="st">&#39;Real&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)</a>
+<a class="sourceLine" id="cb2-49" data-line-number="49">plt.stem(X.real,linefmt<span class="op">=</span><span class="st">&#39;k--&#39;</span>,markerfmt<span class="op">=</span><span class="st">&#39;ko&#39;</span>, basefmt<span class="op">=</span><span class="st">&#39;k--&#39;</span>)</a>
+<a class="sourceLine" id="cb2-50" data-line-number="50">plt.subplot(<span class="dv">212</span>)</a>
+<a class="sourceLine" id="cb2-51" data-line-number="51">plt.stem(X.imag,linefmt<span class="op">=</span><span class="st">&#39;k--&#39;</span>,markerfmt<span class="op">=</span><span class="st">&#39;ks&#39;</span>, basefmt<span class="op">=</span><span class="st">&#39;k--&#39;</span>)</a>
+<a class="sourceLine" id="cb2-52" data-line-number="52">plt.ylabel(<span class="st">&#39;Imaginário&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)</a>
+<a class="sourceLine" id="cb2-53" data-line-number="53">plt.savefig(<span class="st">&#39;transform.png&#39;</span>, dpi<span class="op">=</span><span class="dv">150</span>)</a>
+<a class="sourceLine" id="cb2-54" data-line-number="54">plt.close(<span class="st">&#39;all&#39;</span>)</a></code></pre></div>
 <h2 id="a-equação-da-onda">A Equação da Onda</h2>
 <p>A equação diferencial que descreve o movimento de uma onda em duas dimensões pode ser derivada a partir das leis de Newton, assumindo algumas simplificações. Considerando a imagem abaixo, e as variáveis que a seguem.</p>
 <figure>
@@ -413,7 +412,7 @@ plt.close(&#39;all&#39;)</code></pre>
 <p><span class="math inline">\(\theta(x,t)\)</span> o angulo entre a tangente da corda na posição <span class="math inline">\(x\)</span> e no momento <span class="math inline">\(t\)</span> e a direção horizontal;</p>
 <p><span class="math inline">\(\vec{T}(x,t)\)</span> o vetor representando a tensão na corda, no ponto <span class="math inline">\(x\)</span> e no momento <span class="math inline">\(t\)</span>;</p>
 <p>Assumindo ainda que qualquer ponto da corda move-se somente na posição vertical temos que a resultante das forças é também vertical, e pode ser descrita como:</p>
-<p><span class="math display">\[F(x,t) = T(x + dx,t)\sin(\theta + d\theta) - T(x,t)\sin(\theta) = \\
+<p><span class="math display">\[F(x,t) = T(x + dx,t)\sin(\theta + d\theta) - T(x,t)\sin(\theta) = 
 T(x + dx,t)\cos(\theta + d\theta) \tan(\theta + d\theta) - T(x,t)\cos(\theta)\tan(\theta)\]</span></p>
 <p>assumindo pequenos deslocamentos verticais da corda em relação à sua posição de equilíbrio, temos que <span class="math inline">\(\theta \ll 1\)</span> e, portanto <span class="math inline">\(\cos(\theta + d\theta) \approx \cos(\theta) \approx 1\)</span>.</p>
 <p>Além disso, lembrando que as tangentes podem ser escritas como a derivada parcial da função de deslocamento em relação à posição, temos:</p>

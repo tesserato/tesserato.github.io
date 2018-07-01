@@ -316,9 +316,12 @@ for j in range(1, N):
 w = np.array(w) * 4000000
 ~~~
 
+Uma animação de uma onda de 440 hz criada pela implementação acima pode ser encontrado no repositório da dissertação, na pasta [](), junto com áudios de diversas ondas, com local de excitação e captação variados. É interessante observar o efeito da variação desses parametros no timbre da onda sonora gerada.
+
+
 ### Digital Waveguides
 
-Apresentam uma abordagem simplificada da modelagem física, na medida em que concentram em alguns pontos discretos os cálculos necessários à simulação, aumentando bastante a eficiência computacional do modelo. Conceitualmente, podem ser vistos como uma caso especial do método das diferenças finitas, e a maioria de suas implementações consistem na utilização de *delay lines* e filtros digitais para a modelagem da propagação da onda[@smith2006basic].
+Apresentam uma abordagem simplificada da modelagem física, na medida em que concentram em alguns pontos discretos os cálculos necessários à simulação, aumentando bastante a eficiência computacional do modelo. Conceitualmente, podem ser vistos como uma caso especial do método das diferenças finitas apresentado anteriormente, e a maioria de suas implementações consistem na utilização de *delay lines* e filtros digitais para a modelagem da propagação da onda[@smith2006basic]. A discretização segue a linha descrita no contexto do método das diferenças finitas, e 
 
 
 
@@ -375,11 +378,10 @@ Trata-se de uma transformada de uma onda composta por 8 samples, que pode ser vi
 
 O código em Python a seguir, utilizado para gerar os frames da imagem acima, serve para elucidar numericamente o exposto. É interessante notar que a interpretação geométrica da simetria da transformada discreta de Fourier em ondas puramente reais, até onde alcança o conhecimento do autor, é apresentada pela primeira vez neste trabalho. Cabe observar que implementações mais eficientes, como o algoritmo Fast Fourier Transform (FFT), que os são utilizadas na prática, se utilizam da simetria da transformada para economizar operações **xxx**.
 
-~~~~
+~~~~ python
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.fftpack import fft
-
 # Discrete Fourier Transform | Transformada Discreta de Fourier
 def DFT(x):
   N = x.shape[0]
@@ -421,7 +423,6 @@ def s(t):
 t = np.linspace(0, 1, 8) # 8 pontos entre 0 e 1
 x = s(t) # aplica a função ponto a ponto
 X = DFT(x)
-
 # plotando:
 plt.figure(1)
 plt.subplot(211)
@@ -447,7 +448,7 @@ $\vec{T}(x,t)$ o vetor representando a tensão na corda, no ponto $x$ e no momen
 
 Assumindo ainda que qualquer ponto da corda move-se somente na posição vertical temos que a resultante das forças é também vertical, e pode ser descrita como:
 
-$$F(x,t) = T(x + dx,t)\sin(\theta + d\theta) - T(x,t)\sin(\theta) = \\
+$$F(x,t) = T(x + dx,t)\sin(\theta + d\theta) - T(x,t)\sin(\theta) = 
 T(x + dx,t)\cos(\theta + d\theta) \tan(\theta + d\theta) - T(x,t)\cos(\theta)\tan(\theta)$$
 
 assumindo pequenos deslocamentos verticais da corda em relação à sua posição de equilíbrio, temos que $\theta \ll 1$ e, portanto $\cos(\theta + d\theta) \approx \cos(\theta) \approx 1$. 
