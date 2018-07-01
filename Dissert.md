@@ -243,15 +243,11 @@ o que implica:
 
 $$ y[i,1] = y[i,-1] ~ \forall ~ i \in \{0,1,...,M\} $$
 
-Assim, para o primeiro momento da simulação em $j=1$ podemos substituir $y[i,-1]$ por $y[i,1]$:
+Assim, para o primeiro momento da simulação em $j=1$ podemos substituir $y[i,-1]$ por $y[i,1]$, obtendo a equação para quando $j=0$:
 
-$$ y[i,j+1] = y[i, j] + \frac{1}{2} C^2 (y[i+1, j] - 2 y[i, j] + y[i-1, j])$$
+$$ y[i, 1] = y[i, 0] + \frac{1}{2} C^2 (y[i+1, 0] - 2 y[i, 0] + y[i-1, 0])$$
 
-### Digital Waveguides
-
-Apresentam uma abordagem simplificada da modelagem física, na medida em que concentram em alguns pontos discretos os calculos necessários à simulação, aumentando bastante a eficiência computacional do modelo. Conceitualmente, podem ser vistos como uma caso especial do método das diferenças finitas, e a maioria de suas implementações consistem na utilização de *delay lines* e filtros digitais para a modelagem da propagação da onda[@smith2006basic].
-
-Se considerarmos, por exemplo, um framerate típico de 44100 frames por segundo podemos evitar desperdício computacional fazendo com que a simulação conincida com o intervalos 1/44100 entre os *samples*. De modo geral, levando em conta que $C <= 1$, podemos parametrizar a simulação em termos dos componentes físicos e o *sampling rate* desejado da seguinte forma:
+É conveniente colocar a formulação em termos físicos: se considerarmos, por exemplo, um framerate típico de 44100 frames por segundo podemos evitar desperdício computacional fazendo com que a simulação coincida com o intervalos 1/44100 entre os *samples*. De modo geral, levando em conta que $C <= 1$, podemos parametrizar a simulação em termos dos componentes físicos e o *sampling rate* desejado da seguinte forma:
 
 $dt = \frac{1}{FPS} = \frac{D}{N}$
 $N = D ~ FPS$
@@ -260,6 +256,71 @@ $M <= \frac{FPS}{2f}$
 $c = 2fL$
 
 onde $D$ é a duração desejada, em segundos; $L$ é o comprimento da corda, em metros e FPS é o *framerate* pretendido.
+
+O fragmento de implementação abaixo, na linguagem Python, ajuda a entender o funcionamento do algoritmo (o código que segue é ilustrativo; uma implementação funcional pode ser encontrada no repositório dedicado ao trabalho, no arquivo [Finite_Difference.py](https://github.com/tesserato/Dissertacao/blob/master/Finite_Difference.py)):
+
+<p>
+<video width="1000" controls>
+  <source src="resources\Demo Finite Difference\FiniteDifference.webm" type="video/webm">
+</video>
+</p>
+
+~~~ python
+amplitude = 0.005 # meters
+pluck_position = .5 # fraction of L
+pickup_position = .5 # fraction of L
+fps = 44100 # samples / second
+frequency = 440 #hz
+duration = 1 # seconds
+L = 0.6 # meters
+sustain = .9998
+
+N = int(duration * fps) # number of time points
+dt = 1 / fps # spacing beetwen discrete time points
+M = int(fps / (2 * frequency)) # number of position points
+dx = L / M # spacing beetwen discrete position points
+c = frequency * 2 * L # meters / second
+C = c * dt / dx # Courant number
+x = np.arange(0, M + 1, 1) * dx
+t = np.arange(0, N + 1, 1) * dt
+pickup = int(round(M * pickup_position))
+asc = int(round(M * pluck_position))
+dsc = M + 2 - asc
+X_asc = np.linspace(0, 1, asc)
+X_dsc = np.linspace(0, 1, dsc)[::-1][1: ]
+y = np.zeros(M + 1)
+y_1 = np.hstack([X_asc,X_dsc]) * amplitude * np.random.normal(1, .01, M + 1) # initial displacement shape
+y_2 = np.zeros(M + 1)
+
+ctr=0
+w = []
+for i in range(1, M):
+  y[i] = y_1[i] + 0.5 * C**2 *(y_1[i+1] - 2*y_1[i] + y_1[i-1])
+y[0] = 0
+y[M] = 0
+w.append(y[pickup])
+y_2[:] = y_1
+y_1[:] = y
+ctr += 1
+for j in range(1, N):
+  print('step ', ctr,' of ', N)
+  for i in range(1, M):
+    y[i] = 2 * y_1[i] - y_2[i] + C**2 * (y_1[i+1] - 2*y_1[i] + y_1[i-1])
+  y[0] = y[0] * 0.5
+  y[M] = y[M] * 0.5
+  y = y * sustain
+  w.append(y[pickup])
+  y_2[:] = y_1 
+  y_1[:] = y
+  ctr += 1
+w = np.array(w) * 4000000
+~~~
+
+### Digital Waveguides
+
+Apresentam uma abordagem simplificada da modelagem física, na medida em que concentram em alguns pontos discretos os cálculos necessários à simulação, aumentando bastante a eficiência computacional do modelo. Conceitualmente, podem ser vistos como uma caso especial do método das diferenças finitas, e a maioria de suas implementações consistem na utilização de *delay lines* e filtros digitais para a modelagem da propagação da onda[@smith2006basic].
+
+
 
 
 
