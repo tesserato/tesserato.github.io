@@ -257,13 +257,7 @@ $c = 2fL$
 
 onde $D$ é a duração desejada, em segundos; $L$ é o comprimento da corda, em metros e FPS é o *framerate* pretendido.
 
-O fragmento de implementação abaixo, na linguagem Python, ajuda a entender o funcionamento do algoritmo (o código que segue é ilustrativo; uma implementação funcional pode ser encontrada no repositório dedicado ao trabalho, no arquivo [Finite_Difference.py](https://github.com/tesserato/Dissertacao/blob/master/Finite_Difference.py)):
-
-<p>
-<video width="1000" controls>
-  <source src="resources\Demo Finite Difference\FiniteDifference.webm" type="video/webm">
-</video>
-</p>
+O fragmento de implementação abaixo, na linguagem Python, ajuda a entender o funcionamento do algoritmo (o código que segue é ilustrativo; uma implementação funcional pode ser encontrada no repositório dedicado ao trabalho, no arquivo [resources/Finite_Difference.py](https://github.com/tesserato/Dissertacao/blob/master/Finite_Difference.py)):
 
 ~~~ python
 amplitude = 0.005 # meters
@@ -316,16 +310,160 @@ for j in range(1, N):
 w = np.array(w) * 4000000
 ~~~
 
-Uma animação de uma onda de 440 hz criada pela implementação acima pode ser encontrado no repositório da dissertação, na pasta [](), junto com áudios de diversas ondas, com local de excitação e captação variados. É interessante observar o efeito da variação desses parametros no timbre da onda sonora gerada.
+Uma animação de uma onda de 440 hz criada pela implementação acima pode ser encontrado no repositório da dissertação, na pasta [resources/Demo Finite Difference](https://github.com/tesserato/tesserato.github.io/tree/master/resources/Demo%20Finite%20Difference), junto com áudios de diversas ondas, com local de excitação e captação variados. É interessante observar o efeito da variação desses parametros no timbre da onda sonora gerada. Cabe notar que a velocidade e a escala da animação estão bastante distorcidas.
+
+<div>
+<video width="1000" controls>
+  <source src="resources\Demo Finite Difference\FiniteDifference.webm" type="video/webm">
+</video>
+</div>
+
+<div>
+<audio controls preload> 
+    <source src="resources\Demo Finite Difference\FD_440_Pluck_0-1_Pick_0-1.wav"></source>
+</audio>
+</div>
+
+![Excitação: 0.1 - Captação: 0.1](im/FD_440_Pluck_0-1_Pick_0-1.png)
+
+<div>
+<audio controls preload> 
+    <source src="resources\Demo Finite Difference\FD_440_Pluck_0-1_Pick_0-5.wav"></source>
+</audio>
+</div>
+
+![Excitação: 0.1 - Captação: 0.5](im/FD_440_Pluck_0-1_Pick_0-5.png)
+
+<div>
+<audio controls preload> 
+    <source src="resources\Demo Finite Difference\FD_440_Pluck_0-3_Pick_0-7.wav"></source>
+</audio>
+</div>
+
+![Excitação: 0.3 - Captação: 0.7](im/FD_440_Pluck_0-3_Pick_0-7.png)
+
+<div>
+<audio controls preload> 
+    <source src="resources\Demo Finite Difference\FD_440_Pluck_0-5_Pick_0-1.wav"></source>
+</audio>
+</div>
+
+![Excitação: 0.5 - Captação: 0.1](im/FD_440_Pluck_0-5_Pick_0-1.png)
+
+<div>
+<audio controls preload> 
+    <source src="resources\Demo Finite Difference\FD_440_Pluck_0-5_Pick_0-5.wav"></source>
+</audio>
+</div>
+
+![Excitação: 0.5 - Captação: 0.5](im/FD_440_Pluck_0-5_Pick_0-5.png)
 
 
 ### Digital Waveguides
 
-Apresentam uma abordagem simplificada da modelagem física, na medida em que concentram em alguns pontos discretos os cálculos necessários à simulação, aumentando bastante a eficiência computacional do modelo. Conceitualmente, podem ser vistos como uma caso especial do método das diferenças finitas apresentado anteriormente, e a maioria de suas implementações consistem na utilização de *delay lines* e filtros digitais para a modelagem da propagação da onda[@smith2006basic]. A discretização segue a linha descrita no contexto do método das diferenças finitas, e 
+Apresentam uma abordagem simplificada da modelagem física, na medida em que concentram em alguns pontos discretos os cálculos necessários à simulação, aumentando bastante a eficiência computacional do modelo. Conceitualmente, podem ser vistos como uma caso especial do método das diferenças finitas apresentado anteriormente, e a maioria de suas implementações consistem na utilização de *delay lines* e filtros digitais para a modelagem da propagação da onda[@smith2006basic]. O modelo também parte da equação da onda, discretizada da forma apresentada no contexto do método das diferenças finitas. O framework puramente analítico, no entanto, é abandonado, em favor de uma interpretação visual baseada na teoria de sinais digitais. A imagem abaixo apresenta a intuição dor trás do método, também para o caso de uma corda fixa em suas extremidades.
 
+![Digital Waveguides](im/DigitalWaveguides.png)
 
+As duas linhas quadriculadas são as chamadas linhas de atraso (delay lines), por onde a onda circula, em uma direção. Ao passar de uma linha pra outra, a onda é espelhada e invertida e todos os cálculos são concatenados (lumped) nesses pontos ou, dependendo da simulação, em apenas um desses pontos, como é o caso da implementação apresentada a seguir. No modelo mais básico, somente um termo de perda é calculado, enquanto implementações mais sofisticadas fazem uso de filtros para emular a rigidez das cordas, entre muitas outras adições possíveis. O modelo pode ser extendido também para emulações bidimensionais e tridimensionais, e presta-se à implementações bastante eficientes, geralmente envolvendo uma estrutura de dados de nominada circular buffer, para a implementação das delay lines.
 
+A seguir, é apresentada uma implementação em Python. Observa-se que a implementação é mais simples do que a do método das diferenças finitas, e mais eficiente, como a tabela a seguir demonstra. Como antes, a versão funcional do código pode ser acessada em [resources/Digital_waveguide.py](https://github.com/tesserato/tesserato.github.io/blob/master/resources/Digital_waveguide.py), e uma animação ilustrando a mesma onda anterior, além dos áudios, podem ser acessados em [resources\Demo Digital Waveguide](https://github.com/tesserato/tesserato.github.io/tree/master/resources/Demo%20Digital%20Waveguide)
 
+~~~python
+path = 'Demo Digital Waveguide/'
+n = 44100
+fps = 44100
+frequency = 440
+amplitude = 20000
+pluck_position = .1
+pickup_position = .1
+sustain = .99
+smoothing = 3
+plot = True
+
+L = int(round(fps / (2 * frequency)))
+pickup = int(round(L * pickup_position))
+asc = int(round(L * pluck_position))
+dsc = L - asc
+X_asc = np.linspace(0, 1, asc)
+X_dsc = np.linspace(0, 1, dsc + 1)[::-1][1: ]
+delay_r = np.hstack([X_asc,X_dsc])
+delay_l = np.zeros(L)
+
+w = np.zeros(n)
+zeros = np.zeros(L)
+for i in range(n):
+  print('step ', i + 1,' of ', n)
+  w[i] = delay_r[pickup] + delay_l[pickup]
+  to_l = -1 * np.average(delay_r[-smoothing:]) * sustain # to add in delay_l[L-1] AFTER rolling
+  delay_r = np.roll(delay_r, 1)
+  delay_r[0] = -1 * delay_l[0]
+  delay_l = np.roll(delay_l, -1)
+  delay_l[L-1] = to_l
+~~~
+
+<div>
+<video width="1000" controls>
+  <source src="resources\Demo Digital Waveguide\DigitalWaveguide.webm" type="video/webm">
+</video>
+</div>
+
+<div>
+<audio controls preload> 
+    <source src="resources\Demo Digital Waveguide\DW_440_Pluck_0-1_Pick_0-1.wav"></source>
+</audio>
+</div>
+
+![Excitação: 0.1 - Captação: 0.1](im/DW_440_Pluck_0-1_Pick_0-1.png)
+
+<div>
+<audio controls preload> 
+    <source src="resources\Demo Digital Waveguide\DW_440_Pluck_0-1_Pick_0-5.wav"></source>
+</audio>
+</div>
+
+![Excitação: 0.1 - Captação: 0.5](im/DW_440_Pluck_0-1_Pick_0-5.png)
+
+<div>
+<audio controls preload> 
+    <source src="resources\Demo Digital Waveguide\DW_440_Pluck_0-3_Pick_0-7.wav"></source>
+</audio>
+</div>
+
+![Excitação: 0.3 - Captação: 0.7](im/DW_440_Pluck_0-3_Pick_0-7.png)
+
+<div>
+<audio controls preload> 
+    <source src="resources\Demo Digital Waveguide\DW_440_Pluck_0-5_Pick_0-1.wav"></source>
+</audio>
+</div>
+
+![Excitação: 0.5 - Captação: 0.1](im/DW_440_Pluck_0-5_Pick_0-1.png)
+
+<div>
+<audio controls preload> 
+    <source src="resources\Demo Digital Waveguide\DW_440_Pluck_0-5_Pick_0-5.wav"></source>
+</audio>
+</div>
+
+![Excitação: 0.5 - Captação: 0.5](im/DW_440_Pluck_0-5_Pick_0-5.png)
+
+### Digital Waveguides X Diferenças Finitas
+
+Alguns exemplos de ondas equivalentes foram fornecidos, a fim de basear um julgamento subjetivo. A figura abaixo compara o primeiro frame e último das simulações da corda para os dois métodos.
+
+![Animação da Corda - Diferenças Finital x Digital Waveguide](im/DigitalWaveguidesXFiniteDifferences.png)
+
+A simulação baseada no método das diferenças finitas tem um caráter mais natural, enquanto é, também, mais propensa a desvios da condição de estabilidade, enquanto a simulação a partir de digital waveguides é mais robusta, porém menos rica. Em relação à eficiências, abaixo são elencados os tempos que foram necessários para a geração dos sons apresentados nos capítulos anteriores. Todos os samples tem framerate igual a 44100 FPS e duração de 1 segundo. Os tempos são apresentados em segundos
+
+Excitação | Captação | Digital Waveguides | Diferenças Finitas
+:----:|:----:|:----:|:----:
+0.1 | 0.1 | 13.811148881912231 |16.9521381855011
+0.1 | 0.5 | 13.020658254623413 |19.620429277420044
+0.3 | 0.7 | 11.332738161087036 |24.256462335586548
+0.5 | 0.1 | 12.350087404251099 |17.89053726196289
+0.5 | 0.5 | 12.122233390808105 |18.002467393875122
+:Latência em segundos para uma onda com 44100 *samples*
 
 ## Acústica e Psicoacústica
 

@@ -30,10 +30,10 @@ for fn in filenames:
 
   plt.axis([0, n * 1.01,-1.01, 1.01 ]) 
   
-  plt.plot(s / np.max(np.abs(s)), 'k',  linewidth=1)
+  plt.plot(s / np.max(np.abs(s)), 'k', linewidth=1)
   plt.axis('off')
   plt.savefig(
-    'plots/' + fn.replace('.wav','.png'),
+    'wav_plots/' + fn.replace('.wav','.png'),
     frameon=False,
     transparent=True,
     bbox_inches="tight",

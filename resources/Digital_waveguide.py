@@ -9,11 +9,11 @@ n = 44100
 fps = 44100
 frequency = 440
 amplitude = 20000
-pluck_position = .1
-pickup_position = .1
+pluck_position = .5
+pickup_position = .5
 sustain = .99
 smoothing = 3
-plot = True
+plot = False
 
 os.makedirs(path, exist_ok=True)
 os.makedirs(path + 'plots', exist_ok=True)
@@ -56,9 +56,9 @@ for i in range(n):
   delay_l[L-1] = to_l
 print('time =', time.time() - initial_time)
 save_wav(
-  w,
-  path + str(frequency) + 
-  '_Pluck=' + str(pluck_position) + 
+  w * amplitude,
+  path + str(frequency) +
+  '_Pluck=' + str(pluck_position) +
   '_Pick=' + str(pickup_position) + '.wav'
   )
 

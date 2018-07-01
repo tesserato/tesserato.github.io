@@ -108,6 +108,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#síntese-sonora-em-tempo-real">Síntese Sonora em Tempo Real</a><ul>
 <li><a href="#método-das-diferenças-finitas-finite-difference">Método das Diferenças Finitas (Finite difference)</a></li>
 <li><a href="#digital-waveguides">Digital Waveguides</a></li>
+<li><a href="#digital-waveguides-x-diferenças-finitas">Digital Waveguides X Diferenças Finitas</a></li>
 </ul></li>
 <li><a href="#acústica-e-psicoacústica">Acústica e Psicoacústica</a></li>
 </ul></li>
@@ -260,12 +261,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>É conveniente colocar a formulação em termos físicos: se considerarmos, por exemplo, um framerate típico de 44100 frames por segundo podemos evitar desperdício computacional fazendo com que a simulação coincida com o intervalos 1/44100 entre os <em>samples</em>. De modo geral, levando em conta que <span class="math inline">\(C &lt;= 1\)</span>, podemos parametrizar a simulação em termos dos componentes físicos e o <em>sampling rate</em> desejado da seguinte forma:</p>
 <p><span class="math inline">\(dt = \frac{1}{FPS} = \frac{D}{N}\)</span> <span class="math inline">\(N = D ~ FPS\)</span> <span class="math inline">\(dx = \frac{L}{M}\)</span> <span class="math inline">\(M &lt;= \frac{FPS}{2f}\)</span> <span class="math inline">\(c = 2fL\)</span></p>
 <p>onde <span class="math inline">\(D\)</span> é a duração desejada, em segundos; <span class="math inline">\(L\)</span> é o comprimento da corda, em metros e FPS é o <em>framerate</em> pretendido.</p>
-<p>O fragmento de implementação abaixo, na linguagem Python, ajuda a entender o funcionamento do algoritmo (o código que segue é ilustrativo; uma implementação funcional pode ser encontrada no repositório dedicado ao trabalho, no arquivo <a href="https://github.com/tesserato/Dissertacao/blob/master/Finite_Difference.py">Finite_Difference.py</a>):</p>
-<p>
-<video width="1000" controls>
-<source src="resources\Demo Finite Difference\FiniteDifference.webm" type="video/webm">
-</video>
-</p>
+<p>O fragmento de implementação abaixo, na linguagem Python, ajuda a entender o funcionamento do algoritmo (o código que segue é ilustrativo; uma implementação funcional pode ser encontrada no repositório dedicado ao trabalho, no arquivo <a href="https://github.com/tesserato/Dissertacao/blob/master/Finite_Difference.py">resources/Finite_Difference.py</a>):</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1">amplitude <span class="op">=</span> <span class="fl">0.005</span> <span class="co"># meters</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">pluck_position <span class="op">=</span> <span class="fl">.5</span> <span class="co"># fraction of L</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">pickup_position <span class="op">=</span> <span class="fl">.5</span> <span class="co"># fraction of L</span></a>
@@ -314,9 +310,193 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-46" data-line-number="46">  y_1[:] <span class="op">=</span> y</a>
 <a class="sourceLine" id="cb1-47" data-line-number="47">  ctr <span class="op">+=</span> <span class="dv">1</span></a>
 <a class="sourceLine" id="cb1-48" data-line-number="48">w <span class="op">=</span> np.array(w) <span class="op">*</span> <span class="dv">4000000</span></a></code></pre></div>
-<p>Uma animação de uma onda de 440 hz criada pela implementação acima pode ser encontrado no repositório da dissertação, na pasta <a href=""></a>, junto com áudios de diversas ondas, com local de excitação e captação variados. É interessante observar o efeito da variação desses parametros no timbre da onda sonora gerada.</p>
+<p>Uma animação de uma onda de 440 hz criada pela implementação acima pode ser encontrado no repositório da dissertação, na pasta <a href="https://github.com/tesserato/tesserato.github.io/tree/master/resources/Demo%20Finite%20Difference">resources/Demo Finite Difference</a>, junto com áudios de diversas ondas, com local de excitação e captação variados. É interessante observar o efeito da variação desses parametros no timbre da onda sonora gerada. Cabe notar que a velocidade e a escala da animação estão bastante distorcidas.</p>
+<div>
+<video width="1000" controls>
+<source src="resources\Demo Finite Difference\FiniteDifference.webm" type="video/webm">
+</video>
+</div>
+<div>
+<audio controls preload>
+<source src="resources\Demo Finite Difference\FD_440_Pluck_0-1_Pick_0-1.wav">
+</source>
+</audio>
+</div>
+<figure>
+<img src="im/FD_440_Pluck_0-1_Pick_0-1.png" alt="Excitação: 0.1 - Captação: 0.1" /><figcaption>Excitação: 0.1 - Captação: 0.1</figcaption>
+</figure>
+<div>
+<audio controls preload>
+<source src="resources\Demo Finite Difference\FD_440_Pluck_0-1_Pick_0-5.wav">
+</source>
+</audio>
+</div>
+<figure>
+<img src="im/FD_440_Pluck_0-1_Pick_0-5.png" alt="Excitação: 0.1 - Captação: 0.5" /><figcaption>Excitação: 0.1 - Captação: 0.5</figcaption>
+</figure>
+<div>
+<audio controls preload>
+<source src="resources\Demo Finite Difference\FD_440_Pluck_0-3_Pick_0-7.wav">
+</source>
+</audio>
+</div>
+<figure>
+<img src="im/FD_440_Pluck_0-3_Pick_0-7.png" alt="Excitação: 0.3 - Captação: 0.7" /><figcaption>Excitação: 0.3 - Captação: 0.7</figcaption>
+</figure>
+<div>
+<audio controls preload>
+<source src="resources\Demo Finite Difference\FD_440_Pluck_0-5_Pick_0-1.wav">
+</source>
+</audio>
+</div>
+<figure>
+<img src="im/FD_440_Pluck_0-5_Pick_0-1.png" alt="Excitação: 0.5 - Captação: 0.1" /><figcaption>Excitação: 0.5 - Captação: 0.1</figcaption>
+</figure>
+<div>
+<audio controls preload>
+<source src="resources\Demo Finite Difference\FD_440_Pluck_0-5_Pick_0-5.wav">
+</source>
+</audio>
+</div>
+<figure>
+<img src="im/FD_440_Pluck_0-5_Pick_0-5.png" alt="Excitação: 0.5 - Captação: 0.5" /><figcaption>Excitação: 0.5 - Captação: 0.5</figcaption>
+</figure>
 <h3 id="digital-waveguides">Digital Waveguides</h3>
-<p>Apresentam uma abordagem simplificada da modelagem física, na medida em que concentram em alguns pontos discretos os cálculos necessários à simulação, aumentando bastante a eficiência computacional do modelo. Conceitualmente, podem ser vistos como uma caso especial do método das diferenças finitas apresentado anteriormente, e a maioria de suas implementações consistem na utilização de <em>delay lines</em> e filtros digitais para a modelagem da propagação da onda<span class="citation" data-cites="smith2006basic">(Smith 2006)</span>. A discretização segue a linha descrita no contexto do método das diferenças finitas, e</p>
+<p>Apresentam uma abordagem simplificada da modelagem física, na medida em que concentram em alguns pontos discretos os cálculos necessários à simulação, aumentando bastante a eficiência computacional do modelo. Conceitualmente, podem ser vistos como uma caso especial do método das diferenças finitas apresentado anteriormente, e a maioria de suas implementações consistem na utilização de <em>delay lines</em> e filtros digitais para a modelagem da propagação da onda<span class="citation" data-cites="smith2006basic">(Smith 2006)</span>. O modelo também parte da equação da onda, discretizada da forma apresentada no contexto do método das diferenças finitas. O framework puramente analítico, no entanto, é abandonado, em favor de uma interpretação visual baseada na teoria de sinais digitais. A imagem abaixo apresenta a intuição dor trás do método, também para o caso de uma corda fixa em suas extremidades.</p>
+<figure>
+<img src="im/DigitalWaveguides.png" alt="Digital Waveguides" /><figcaption>Digital Waveguides</figcaption>
+</figure>
+<p>As duas linhas quadriculadas são as chamadas linhas de atraso (delay lines), por onde a onda circula, em uma direção. Ao passar de uma linha pra outra, a onda é espelhada e invertida e todos os cálculos são concatenados (lumped) nesses pontos ou, dependendo da simulação, em apenas um desses pontos, como é o caso da implementação apresentada a seguir. No modelo mais básico, somente um termo de perda é calculado, enquanto implementações mais sofisticadas fazem uso de filtros para emular a rigidez das cordas, entre muitas outras adições possíveis. O modelo pode ser extendido também para emulações bidimensionais e tridimensionais, e presta-se à implementações bastante eficientes, geralmente envolvendo uma estrutura de dados de nominada circular buffer, para a implementação das delay lines.</p>
+<p>A seguir, é apresentada uma implementação em Python. Observa-se que a implementação é mais simples do que a do método das diferenças finitas, e mais eficiente, como a tabela a seguir demonstra. Como antes, a versão funcional do código pode ser acessada em <a href="https://github.com/tesserato/tesserato.github.io/blob/master/resources/Digital_waveguide.py">resources/Digital_waveguide.py</a>, e uma animação ilustrando a mesma onda anterior, além dos áudios, podem ser acessados em <a href="https://github.com/tesserato/tesserato.github.io/tree/master/resources/Demo%20Digital%20Waveguide">resourcesDigital Waveguide</a></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1">path <span class="op">=</span> <span class="st">&#39;Demo Digital Waveguide/&#39;</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">n <span class="op">=</span> <span class="dv">44100</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">fps <span class="op">=</span> <span class="dv">44100</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">frequency <span class="op">=</span> <span class="dv">440</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">amplitude <span class="op">=</span> <span class="dv">20000</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">pluck_position <span class="op">=</span> <span class="fl">.1</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">pickup_position <span class="op">=</span> <span class="fl">.1</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">sustain <span class="op">=</span> <span class="fl">.99</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">smoothing <span class="op">=</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">plot <span class="op">=</span> <span class="va">True</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">L <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(fps <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> frequency)))</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">pickup <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(L <span class="op">*</span> pickup_position))</a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">asc <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(L <span class="op">*</span> pluck_position))</a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">dsc <span class="op">=</span> L <span class="op">-</span> asc</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">X_asc <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, asc)</a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">X_dsc <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, dsc <span class="op">+</span> <span class="dv">1</span>)[::<span class="op">-</span><span class="dv">1</span>][<span class="dv">1</span>: ]</a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">delay_r <span class="op">=</span> np.hstack([X_asc,X_dsc])</a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">delay_l <span class="op">=</span> np.zeros(L)</a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">w <span class="op">=</span> np.zeros(n)</a>
+<a class="sourceLine" id="cb2-22" data-line-number="22">zeros <span class="op">=</span> np.zeros(L)</a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</a>
+<a class="sourceLine" id="cb2-24" data-line-number="24">  <span class="bu">print</span>(<span class="st">&#39;step &#39;</span>, i <span class="op">+</span> <span class="dv">1</span>,<span class="st">&#39; of &#39;</span>, n)</a>
+<a class="sourceLine" id="cb2-25" data-line-number="25">  w[i] <span class="op">=</span> delay_r[pickup] <span class="op">+</span> delay_l[pickup]</a>
+<a class="sourceLine" id="cb2-26" data-line-number="26">  to_l <span class="op">=</span> <span class="dv">-1</span> <span class="op">*</span> np.average(delay_r[<span class="op">-</span>smoothing:]) <span class="op">*</span> sustain <span class="co"># to add in delay_l[L-1] AFTER rolling</span></a>
+<a class="sourceLine" id="cb2-27" data-line-number="27">  delay_r <span class="op">=</span> np.roll(delay_r, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-28" data-line-number="28">  delay_r[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">-1</span> <span class="op">*</span> delay_l[<span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb2-29" data-line-number="29">  delay_l <span class="op">=</span> np.roll(delay_l, <span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb2-30" data-line-number="30">  delay_l[L<span class="dv">-1</span>] <span class="op">=</span> to_l</a></code></pre></div>
+<div>
+<video width="1000" controls>
+<source src="resources\Demo Digital Waveguide\DigitalWaveguide.webm" type="video/webm">
+</video>
+</div>
+<div>
+<audio controls preload>
+<source src="resources\Demo Digital Waveguide\DW_440_Pluck_0-1_Pick_0-1.wav">
+</source>
+</audio>
+</div>
+<figure>
+<img src="im/DW_440_Pluck_0-1_Pick_0-1.png" alt="Excitação: 0.1 - Captação: 0.1" /><figcaption>Excitação: 0.1 - Captação: 0.1</figcaption>
+</figure>
+<div>
+<audio controls preload>
+<source src="resources\Demo Digital Waveguide\DW_440_Pluck_0-1_Pick_0-5.wav">
+</source>
+</audio>
+</div>
+<figure>
+<img src="im/DW_440_Pluck_0-1_Pick_0-5.png" alt="Excitação: 0.1 - Captação: 0.5" /><figcaption>Excitação: 0.1 - Captação: 0.5</figcaption>
+</figure>
+<div>
+<audio controls preload>
+<source src="resources\Demo Digital Waveguide\DW_440_Pluck_0-3_Pick_0-7.wav">
+</source>
+</audio>
+</div>
+<figure>
+<img src="im/DW_440_Pluck_0-3_Pick_0-7.png" alt="Excitação: 0.3 - Captação: 0.7" /><figcaption>Excitação: 0.3 - Captação: 0.7</figcaption>
+</figure>
+<div>
+<audio controls preload>
+<source src="resources\Demo Digital Waveguide\DW_440_Pluck_0-5_Pick_0-1.wav">
+</source>
+</audio>
+</div>
+<figure>
+<img src="im/DW_440_Pluck_0-5_Pick_0-1.png" alt="Excitação: 0.5 - Captação: 0.1" /><figcaption>Excitação: 0.5 - Captação: 0.1</figcaption>
+</figure>
+<div>
+<audio controls preload>
+<source src="resources\Demo Digital Waveguide\DW_440_Pluck_0-5_Pick_0-5.wav">
+</source>
+</audio>
+</div>
+<figure>
+<img src="im/DW_440_Pluck_0-5_Pick_0-5.png" alt="Excitação: 0.5 - Captação: 0.5" /><figcaption>Excitação: 0.5 - Captação: 0.5</figcaption>
+</figure>
+<h3 id="digital-waveguides-x-diferenças-finitas">Digital Waveguides X Diferenças Finitas</h3>
+<p>Alguns exemplos de ondas equivalentes foram fornecidos, a fim de basear um julgamento subjetivo. A figura abaixo compara o primeiro frame e último das simulações da corda para os dois métodos.</p>
+<figure>
+<img src="im/DigitalWaveguidesXFiniteDifferences.png" alt="Animação da Corda - Diferenças Finital x Digital Waveguide" /><figcaption>Animação da Corda - Diferenças Finital x Digital Waveguide</figcaption>
+</figure>
+<p>A simulação baseada no método das diferenças finitas tem um caráter mais natural, enquanto é, também, mais propensa a desvios da condição de estabilidade, enquanto a simulação a partir de digital waveguides é mais robusta, porém menos rica. Em relação à eficiências, abaixo são elencados os tempos que foram necessários para a geração dos sons apresentados nos capítulos anteriores. Todos os samples tem framerate igual a 44100 FPS e duração de 1 segundo. Os tempos são apresentados em segundos</p>
+<table>
+<caption>Latência em segundos para uma onda com 44100 <em>samples</em></caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Excitação</th>
+<th style="text-align: center;">Captação</th>
+<th style="text-align: center;">Digital Waveguides</th>
+<th style="text-align: center;">Diferenças Finitas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">13.811148881912231</td>
+<td style="text-align: center;">16.9521381855011</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">13.020658254623413</td>
+<td style="text-align: center;">19.620429277420044</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0.3</td>
+<td style="text-align: center;">0.7</td>
+<td style="text-align: center;">11.332738161087036</td>
+<td style="text-align: center;">24.256462335586548</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">12.350087404251099</td>
+<td style="text-align: center;">17.89053726196289</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">12.122233390808105</td>
+<td style="text-align: center;">18.002467393875122</td>
+</tr>
+</tbody>
+</table>
 <h2 id="acústica-e-psicoacústica">Acústica e Psicoacústica</h2>
 <h1 id="referencial-teórico">Referencial Teórico</h1>
 <h2 id="transformada-discreta-de-fourier">Transformada Discreta de Fourier</h2>
@@ -349,60 +529,60 @@ x[n] \sin\left(m ~ \frac{2 \pi}{N} ~ n \right) ~ i
 </figure>
 <p>Trata-se de uma transformada de uma onda composta por 8 samples, que pode ser vista no retangulo inferior da imagens. Os outros retangulos ilustram os respectivos passos e a simetria entre passos equidistantes de n/2. O motivo da simetria, causado pela perda de informação ao tomar apenas alguns pontos, torna-se explícito quando observado do ponto de vista geométrico: os 8 pontos equidistantes tomados como amostra, por exemplo, de uma senoide com frequência igual a 2 coincidem com os retirados de uma senois com frequência igual a 6, já que partes do ciclo são ignorados.</p>
 <p>O código em Python a seguir, utilizado para gerar os frames da imagem acima, serve para elucidar numericamente o exposto. É interessante notar que a interpretação geométrica da simetria da transformada discreta de Fourier em ondas puramente reais, até onde alcança o conhecimento do autor, é apresentada pela primeira vez neste trabalho. Cabe observar que implementações mais eficientes, como o algoritmo Fast Fourier Transform (FFT), que os são utilizadas na prática, se utilizam da simetria da transformada para economizar operações <strong>xxx</strong>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="im">import</span> numpy <span class="im">as</span> np</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="im">from</span> scipy.fftpack <span class="im">import</span> fft</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># Discrete Fourier Transform | Transformada Discreta de Fourier</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">def</span> DFT(x):</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">  N <span class="op">=</span> x.shape[<span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="co"># cria um vetor de N entradas complexas, preenchido com zeros</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">  X <span class="op">=</span> np.zeros(N, dtype<span class="op">=</span><span class="st">&#39;complex64&#39;</span>)</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">  n <span class="op">=</span> np.array([p <span class="cf">for</span> p <span class="kw">in</span> <span class="bu">range</span>(N)]) <span class="co"># n = {0,1,2,...,N-1}</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">  <span class="co"># Versão de &quot;alta resolução&quot; de n, usada para o gráfico apenas</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">  Hn <span class="op">=</span> np.linspace(<span class="dv">0</span>, N<span class="dv">-1</span>, <span class="dv">100</span><span class="op">*</span>N) <span class="co"># Hn ={0,...,1,...,2,...,N-1}</span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">  <span class="cf">for</span> m <span class="kw">in</span> <span class="bu">range</span>(N): <span class="co"># m E {0,1,2,...,N-1}</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">    C_Si <span class="op">=</span> np.exp(<span class="op">-</span><span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> m <span class="op">*</span> n <span class="op">/</span> N <span class="op">*</span> 1j) <span class="co"># C(m) - S(m) i</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14">    <span class="co"># Versão de &quot;alta resolução&quot; de C_Si, usada para o gráfico apenas</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15">    HC_Si <span class="op">=</span> np.exp(<span class="op">-</span><span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> m <span class="op">*</span> Hn <span class="op">/</span> N <span class="op">*</span> 1j)</a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">    X[m] <span class="op">=</span> <span class="bu">sum</span>(np.multiply(x, C_Si)) <span class="co"># multiplicação termo a termo</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17">    <span class="co"># plotando:</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18">    plt.figure(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb2-19" data-line-number="19">    plt.suptitle(<span class="st">&#39;M =&#39;</span> <span class="op">+</span> <span class="bu">str</span>(m), fontsize<span class="op">=</span><span class="dv">16</span>)</a>
-<a class="sourceLine" id="cb2-20" data-line-number="20">    plt.subplot(<span class="dv">211</span>)</a>
-<a class="sourceLine" id="cb2-21" data-line-number="21">    plt.plot(n,x[n].real, <span class="st">&#39;k:.&#39;</span>, label<span class="op">=</span><span class="st">&#39;x[n]&#39;</span>)</a>
-<a class="sourceLine" id="cb2-22" data-line-number="22">    plt.plot(n,C_Si.real, <span class="st">&#39;k--o&#39;</span>, label<span class="op">=</span><span class="st">&#39;C[n]&#39;</span>)</a>
-<a class="sourceLine" id="cb2-23" data-line-number="23">    plt.plot(Hn,HC_Si.real, <span class="st">&#39;k-&#39;</span>,label<span class="op">=</span><span class="st">&#39;C[n] ideal&#39;</span>)</a>
-<a class="sourceLine" id="cb2-24" data-line-number="24">    plt.ylabel(<span class="st">&#39;Real&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)    </a>
-<a class="sourceLine" id="cb2-25" data-line-number="25">    plt.subplot(<span class="dv">212</span>)</a>
-<a class="sourceLine" id="cb2-26" data-line-number="26">    plt.plot(n,x[n].imag, <span class="st">&#39;k:.&#39;</span>, label<span class="op">=</span><span class="st">&#39;x[n]&#39;</span>)</a>
-<a class="sourceLine" id="cb2-27" data-line-number="27">    plt.plot(n,C_Si.imag, <span class="st">&#39;k--o&#39;</span>, label<span class="op">=</span><span class="st">&#39;C[n]&#39;</span>)</a>
-<a class="sourceLine" id="cb2-28" data-line-number="28">    plt.plot(Hn,HC_Si.imag, <span class="st">&#39;k-&#39;</span>,label<span class="op">=</span><span class="st">&#39;C[n] ideal&#39;</span>)</a>
-<a class="sourceLine" id="cb2-29" data-line-number="29">    plt.ylabel(<span class="st">&#39;Imaginário&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)</a>
-<a class="sourceLine" id="cb2-30" data-line-number="30">    plt.legend()</a>
-<a class="sourceLine" id="cb2-31" data-line-number="31">    plt.savefig(<span class="st">&#39;0&#39;</span> <span class="op">+</span> <span class="bu">str</span>(m) <span class="op">+</span> <span class="st">&#39;.png&#39;</span>, dpi<span class="op">=</span><span class="dv">150</span>)</a>
-<a class="sourceLine" id="cb2-32" data-line-number="32">    plt.close(<span class="st">&#39;all&#39;</span>)</a>
-<a class="sourceLine" id="cb2-33" data-line-number="33">  <span class="co">#calcula o erro em relação ao algoritmo da biblioteca Scipy</span></a>
-<a class="sourceLine" id="cb2-34" data-line-number="34">  error <span class="op">=</span> <span class="bu">sum</span>((X<span class="op">-</span>fft(x))<span class="op">**</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb2-35" data-line-number="35">  <span class="bu">print</span>(<span class="bu">round</span>(error,<span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb2-36" data-line-number="36">  <span class="co"># retorna a parte não redundante da transformada</span></a>
-<a class="sourceLine" id="cb2-37" data-line-number="37">  <span class="cf">return</span> X[<span class="dv">0</span> : <span class="bu">int</span>(N<span class="op">/</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>)] <span class="cf">if</span> (N <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>) <span class="cf">else</span> X[<span class="dv">0</span> : <span class="bu">int</span>((N<span class="op">+</span><span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span>)]</a>
-<a class="sourceLine" id="cb2-38" data-line-number="38"></a>
-<a class="sourceLine" id="cb2-39" data-line-number="39"><span class="kw">def</span> s(t):</a>
-<a class="sourceLine" id="cb2-40" data-line-number="40">  <span class="cf">return</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> t)</a>
-<a class="sourceLine" id="cb2-41" data-line-number="41"></a>
-<a class="sourceLine" id="cb2-42" data-line-number="42">t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">8</span>) <span class="co"># 8 pontos entre 0 e 1</span></a>
-<a class="sourceLine" id="cb2-43" data-line-number="43">x <span class="op">=</span> s(t) <span class="co"># aplica a função ponto a ponto</span></a>
-<a class="sourceLine" id="cb2-44" data-line-number="44">X <span class="op">=</span> DFT(x)</a>
-<a class="sourceLine" id="cb2-45" data-line-number="45"><span class="co"># plotando:</span></a>
-<a class="sourceLine" id="cb2-46" data-line-number="46">plt.figure(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb2-47" data-line-number="47">plt.subplot(<span class="dv">211</span>)</a>
-<a class="sourceLine" id="cb2-48" data-line-number="48">plt.ylabel(<span class="st">&#39;Real&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)</a>
-<a class="sourceLine" id="cb2-49" data-line-number="49">plt.stem(X.real,linefmt<span class="op">=</span><span class="st">&#39;k--&#39;</span>,markerfmt<span class="op">=</span><span class="st">&#39;ko&#39;</span>, basefmt<span class="op">=</span><span class="st">&#39;k--&#39;</span>)</a>
-<a class="sourceLine" id="cb2-50" data-line-number="50">plt.subplot(<span class="dv">212</span>)</a>
-<a class="sourceLine" id="cb2-51" data-line-number="51">plt.stem(X.imag,linefmt<span class="op">=</span><span class="st">&#39;k--&#39;</span>,markerfmt<span class="op">=</span><span class="st">&#39;ks&#39;</span>, basefmt<span class="op">=</span><span class="st">&#39;k--&#39;</span>)</a>
-<a class="sourceLine" id="cb2-52" data-line-number="52">plt.ylabel(<span class="st">&#39;Imaginário&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)</a>
-<a class="sourceLine" id="cb2-53" data-line-number="53">plt.savefig(<span class="st">&#39;transform.png&#39;</span>, dpi<span class="op">=</span><span class="dv">150</span>)</a>
-<a class="sourceLine" id="cb2-54" data-line-number="54">plt.close(<span class="st">&#39;all&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="im">import</span> numpy <span class="im">as</span> np</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="im">from</span> scipy.fftpack <span class="im">import</span> fft</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co"># Discrete Fourier Transform | Transformada Discreta de Fourier</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw">def</span> DFT(x):</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">  N <span class="op">=</span> x.shape[<span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  <span class="co"># cria um vetor de N entradas complexas, preenchido com zeros</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  X <span class="op">=</span> np.zeros(N, dtype<span class="op">=</span><span class="st">&#39;complex64&#39;</span>)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">  n <span class="op">=</span> np.array([p <span class="cf">for</span> p <span class="kw">in</span> <span class="bu">range</span>(N)]) <span class="co"># n = {0,1,2,...,N-1}</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">  <span class="co"># Versão de &quot;alta resolução&quot; de n, usada para o gráfico apenas</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">  Hn <span class="op">=</span> np.linspace(<span class="dv">0</span>, N<span class="dv">-1</span>, <span class="dv">100</span><span class="op">*</span>N) <span class="co"># Hn ={0,...,1,...,2,...,N-1}</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">  <span class="cf">for</span> m <span class="kw">in</span> <span class="bu">range</span>(N): <span class="co"># m E {0,1,2,...,N-1}</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">    C_Si <span class="op">=</span> np.exp(<span class="op">-</span><span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> m <span class="op">*</span> n <span class="op">/</span> N <span class="op">*</span> 1j) <span class="co"># C(m) - S(m) i</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">    <span class="co"># Versão de &quot;alta resolução&quot; de C_Si, usada para o gráfico apenas</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">    HC_Si <span class="op">=</span> np.exp(<span class="op">-</span><span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> m <span class="op">*</span> Hn <span class="op">/</span> N <span class="op">*</span> 1j)</a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">    X[m] <span class="op">=</span> <span class="bu">sum</span>(np.multiply(x, C_Si)) <span class="co"># multiplicação termo a termo</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">    <span class="co"># plotando:</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18">    plt.figure(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb3-19" data-line-number="19">    plt.suptitle(<span class="st">&#39;M =&#39;</span> <span class="op">+</span> <span class="bu">str</span>(m), fontsize<span class="op">=</span><span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb3-20" data-line-number="20">    plt.subplot(<span class="dv">211</span>)</a>
+<a class="sourceLine" id="cb3-21" data-line-number="21">    plt.plot(n,x[n].real, <span class="st">&#39;k:.&#39;</span>, label<span class="op">=</span><span class="st">&#39;x[n]&#39;</span>)</a>
+<a class="sourceLine" id="cb3-22" data-line-number="22">    plt.plot(n,C_Si.real, <span class="st">&#39;k--o&#39;</span>, label<span class="op">=</span><span class="st">&#39;C[n]&#39;</span>)</a>
+<a class="sourceLine" id="cb3-23" data-line-number="23">    plt.plot(Hn,HC_Si.real, <span class="st">&#39;k-&#39;</span>,label<span class="op">=</span><span class="st">&#39;C[n] ideal&#39;</span>)</a>
+<a class="sourceLine" id="cb3-24" data-line-number="24">    plt.ylabel(<span class="st">&#39;Real&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)    </a>
+<a class="sourceLine" id="cb3-25" data-line-number="25">    plt.subplot(<span class="dv">212</span>)</a>
+<a class="sourceLine" id="cb3-26" data-line-number="26">    plt.plot(n,x[n].imag, <span class="st">&#39;k:.&#39;</span>, label<span class="op">=</span><span class="st">&#39;x[n]&#39;</span>)</a>
+<a class="sourceLine" id="cb3-27" data-line-number="27">    plt.plot(n,C_Si.imag, <span class="st">&#39;k--o&#39;</span>, label<span class="op">=</span><span class="st">&#39;C[n]&#39;</span>)</a>
+<a class="sourceLine" id="cb3-28" data-line-number="28">    plt.plot(Hn,HC_Si.imag, <span class="st">&#39;k-&#39;</span>,label<span class="op">=</span><span class="st">&#39;C[n] ideal&#39;</span>)</a>
+<a class="sourceLine" id="cb3-29" data-line-number="29">    plt.ylabel(<span class="st">&#39;Imaginário&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)</a>
+<a class="sourceLine" id="cb3-30" data-line-number="30">    plt.legend()</a>
+<a class="sourceLine" id="cb3-31" data-line-number="31">    plt.savefig(<span class="st">&#39;0&#39;</span> <span class="op">+</span> <span class="bu">str</span>(m) <span class="op">+</span> <span class="st">&#39;.png&#39;</span>, dpi<span class="op">=</span><span class="dv">150</span>)</a>
+<a class="sourceLine" id="cb3-32" data-line-number="32">    plt.close(<span class="st">&#39;all&#39;</span>)</a>
+<a class="sourceLine" id="cb3-33" data-line-number="33">  <span class="co">#calcula o erro em relação ao algoritmo da biblioteca Scipy</span></a>
+<a class="sourceLine" id="cb3-34" data-line-number="34">  error <span class="op">=</span> <span class="bu">sum</span>((X<span class="op">-</span>fft(x))<span class="op">**</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb3-35" data-line-number="35">  <span class="bu">print</span>(<span class="bu">round</span>(error,<span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb3-36" data-line-number="36">  <span class="co"># retorna a parte não redundante da transformada</span></a>
+<a class="sourceLine" id="cb3-37" data-line-number="37">  <span class="cf">return</span> X[<span class="dv">0</span> : <span class="bu">int</span>(N<span class="op">/</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>)] <span class="cf">if</span> (N <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>) <span class="cf">else</span> X[<span class="dv">0</span> : <span class="bu">int</span>((N<span class="op">+</span><span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span>)]</a>
+<a class="sourceLine" id="cb3-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb3-39" data-line-number="39"><span class="kw">def</span> s(t):</a>
+<a class="sourceLine" id="cb3-40" data-line-number="40">  <span class="cf">return</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> t)</a>
+<a class="sourceLine" id="cb3-41" data-line-number="41"></a>
+<a class="sourceLine" id="cb3-42" data-line-number="42">t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">8</span>) <span class="co"># 8 pontos entre 0 e 1</span></a>
+<a class="sourceLine" id="cb3-43" data-line-number="43">x <span class="op">=</span> s(t) <span class="co"># aplica a função ponto a ponto</span></a>
+<a class="sourceLine" id="cb3-44" data-line-number="44">X <span class="op">=</span> DFT(x)</a>
+<a class="sourceLine" id="cb3-45" data-line-number="45"><span class="co"># plotando:</span></a>
+<a class="sourceLine" id="cb3-46" data-line-number="46">plt.figure(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb3-47" data-line-number="47">plt.subplot(<span class="dv">211</span>)</a>
+<a class="sourceLine" id="cb3-48" data-line-number="48">plt.ylabel(<span class="st">&#39;Real&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)</a>
+<a class="sourceLine" id="cb3-49" data-line-number="49">plt.stem(X.real,linefmt<span class="op">=</span><span class="st">&#39;k--&#39;</span>,markerfmt<span class="op">=</span><span class="st">&#39;ko&#39;</span>, basefmt<span class="op">=</span><span class="st">&#39;k--&#39;</span>)</a>
+<a class="sourceLine" id="cb3-50" data-line-number="50">plt.subplot(<span class="dv">212</span>)</a>
+<a class="sourceLine" id="cb3-51" data-line-number="51">plt.stem(X.imag,linefmt<span class="op">=</span><span class="st">&#39;k--&#39;</span>,markerfmt<span class="op">=</span><span class="st">&#39;ks&#39;</span>, basefmt<span class="op">=</span><span class="st">&#39;k--&#39;</span>)</a>
+<a class="sourceLine" id="cb3-52" data-line-number="52">plt.ylabel(<span class="st">&#39;Imaginário&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)</a>
+<a class="sourceLine" id="cb3-53" data-line-number="53">plt.savefig(<span class="st">&#39;transform.png&#39;</span>, dpi<span class="op">=</span><span class="dv">150</span>)</a>
+<a class="sourceLine" id="cb3-54" data-line-number="54">plt.close(<span class="st">&#39;all&#39;</span>)</a></code></pre></div>
 <h2 id="a-equação-da-onda">A Equação da Onda</h2>
 <p>A equação diferencial que descreve o movimento de uma onda em duas dimensões pode ser derivada a partir das leis de Newton, assumindo algumas simplificações. Considerando a imagem abaixo, e as variáveis que a seguem.</p>
 <figure>
