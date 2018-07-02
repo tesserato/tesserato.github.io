@@ -1021,8 +1021,73 @@ Para a previsão de cada uma das 3 quantidades explicitadas, uma rede densa, com
 
 ![Previsões - Modelo Misto](im/finalnet.png)
 
+Podemos, assim, definir uma nova metodologia voltada à modelagem sonora de instrumentos harmonicos, batizada de Neuro-spectral Synthesis, resumida de maneira esquemática na figura a seguir.
+
 # Resultados
 
+O modelo final apresenta resultados mais realistas do que as implementações baseadas no modelo de Digital Waveguides e no método das diferenças finitas, e é ao menos uma ordem de grandeza mais eficiente, nas implementações aqui apresentadas. Para efeito de comparação, levando em conta a geração de 5 ondas de 1 segundo, a 44100 FPS, o método proposto foi, em média, 17 vezes mais rápido que o método bateado em Digital Waveguides e 26 vezes mais rápido do que o método das diferenças finitas.
+A tabela abaixo apresenta os resultados.
+
+|               | Finite Differences | Digital Waveguides | Neuro-Spectral Synthesis |
+|---------------|:--------------------:|:--------------------:|:--------------------------:|
+| 1             | 16.95213819        | 13.81114888        | 0.5896253586             |
+| 2             | 19.62042928        | 13.02065825        | 0.8354649544             |
+| 3             | 24.25646234        | 11.33273816        | 0.7555158138             |
+| 4             | 17.89053726        | 12.3500874         | 0.7475204468             |
+| 5             | 18.00246739        | 12.12223339        | 0.7735056877             |
+| **Média**         | **19.34440689**        | **12.52737322**        | **0.7403264523**             |
+| **Desvio Padrão** | **2.908692366**        | **0.937300851**        | **0.09102950916**            |
+:Comparação Tempo de Geração(s)
+
+Treinadas as redes, uma implementação final do modelo é bastante simples, e é apresentada abaixo.
+
+~~~python
+key = 66
+partials = 100
+n = 44100
+fps = 44100
+
+P = np.arange(1, partials + 1, 1)
+
+[ma, Ma] = np.genfromtxt('a_m_M.csv', delimiter=',')
+[md, Md] = np.genfromtxt('d_m_M.csv', delimiter=',')
+[mf, Mf] = np.genfromtxt('f_m_M.csv', delimiter=',')
+
+a_net = K.models.load_model('a_model.H5', {'scaled_tanh': scaled_tanh})
+d_net = K.models.load_model('d_model.H5', {'scaled_tanh': scaled_tanh})
+f_net = K.models.load_model('f_model.H5', {'scaled_tanh': scaled_tanh})
+
+f0 = np.power(2, (key - 49) / 12) * 440
+norm_key = (key - 1) / 87
+ipt = np.array([[norm_key, p] for p in np.linspace(0, 1, partials)])
+
+A = np.ndarray.flatten(a_net.predict(ipt)) * ((Ma - ma) + ma) * 5000
+D = np.ndarray.flatten(d_net.predict(ipt)) * ((Md - md) + md) * 0.000113026536390889 #average decay
+F = (np.ndarray.flatten(f_net.predict(ipt)) * (Mf - mf) + mf) * P * f0
+
+w = np.zeros(n)
+for i in range(partials):
+  print('partial:', i)
+  ph = np.random.uniform(0, 2 * np.pi)
+  w += create_signal(n, fps, F[i], ph, A[i], D[i])
+~~~
+
+Uma implementação como essa, funcional, mais os arquivos de definição da arquitetura das redes e seus respectivos pesos estão disponíveis no repositório preparado para este trabalho, em xxx, e ocupam aproximadamente 250kb.
+
+A principal limitação é que todos os parametros a serem manipulados no modelo final devem, antes, ter sido incorporados ao processo de treinamento. Os dois paradigmas de modelagem física utilizados para comparação, tanto o método das diferenças finitas quanto os digital waveguides, permitem alguma manipulação em tempo real, a posteriori, de seus parametros: nos exemplos apresentados, o ponto de excitação pode ser mudado de onda para onda e, a qualquer tempo, o ponto de captação pode ser alterado, até mesmo durante a simulação, refletindo no timbre do som gerado. 
+
+Além disso, esses modelos prestam-se à incorporação razoavelmente trivial de uma fonte, contínua ou periódica, de excitação, e podem ser utilizados para a simulação de instrumentos de som continuo, como violinos acionados pelo arco (ao contrario do acionamento pizzicato aqui apresentado) e metais, por exemplo; esse não é o caso do modelo aqui proposto, e constitui uma possibilidade de desenvolvimento futuro interessante.
+
+Uma outra barreira é que o modelo aprende características sonoras a partir de exemplos e não presta-se de forma prática à exploração sonora direta; esta deve ser efetuada a partir de outra ferramenta, e então incorporada ao modelo, à época de seu treinamento.
+
 # Conclusão
+
+O presente trabalho, ao construir uma nova técnica de modelagem sonora, demonstra o potencial do uso de redes neurais à síntese de áudio, provando sobretudo a possibilidade desse uso em tempo real.
+
+Fica evidente ainda o potencial sinergético entre os desenvolvimentos na pesquisa acústica e a utilização de redes neurais para basear modelos destinados à emulação de instrumentos, ou famílias de instrumentos, específicas. 
+
+As possibilidas desenvolvimentos futuros nesta área de intersecção são inúmeras, haja vista a escassez de investigações semelhantes: Seria interessante, por exemplo, utilizar as saídas de um modelo elaborado a partir do método das diferenças finitas, que pode ser formulado de forma a simular características como rigidez, ressonância e vários termos de perda de um dado sistema acústico, ao custo de uma alta demanda de recursos computacionais, para treinar um modelo baseado em digital waveguides que tenha uma rede neural no ponto onde as perdas e demais cálculos são efetuados. 
+
+Devido ao alto grau de recursividade do algoritmo digital waveguides, o treinamento à partir do resultado final esperado para o modelo é bastante complexo de ser implementado; os outputs de uma simulação baseada em diferenças finitas, no entanto, são plenamente compatíveis para este treinamento, e a inserção de uma rede neural pode levar a um modelo que retenha ao menos parte da acurácia da simulação pelo método de diferenças finitas, com eficiência computacional próxima, ou até superior, à apresentada pelo algoritmo de digital waveguides.
 
 # Referências

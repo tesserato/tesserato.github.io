@@ -1058,8 +1058,102 @@ Podemos sanar o problema da falta de informação parcial sobre decay e amplitud
 <figure>
 <img src="im/finalnet.png" alt="Previsões - Modelo Misto" /><figcaption>Previsões - Modelo Misto</figcaption>
 </figure>
+<p>Podemos, assim, definir uma nova metodologia voltada à modelagem sonora de instrumentos harmonicos, batizada de Neuro-spectral Synthesis, resumida de maneira esquemática na figura a seguir.</p>
 <h1 id="resultados">Resultados</h1>
+<p>O modelo final apresenta resultados mais realistas do que as implementações baseadas no modelo de Digital Waveguides e no método das diferenças finitas, e é ao menos uma ordem de grandeza mais eficiente, nas implementações aqui apresentadas. Para efeito de comparação, levando em conta a geração de 5 ondas de 1 segundo, a 44100 FPS, o método proposto foi, em média, 17 vezes mais rápido que o método bateado em Digital Waveguides e 26 vezes mais rápido do que o método das diferenças finitas. A tabela abaixo apresenta os resultados.</p>
+<table>
+<caption>Comparação Tempo de Geração(s)</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Finite Differences</th>
+<th style="text-align: center;">Digital Waveguides</th>
+<th style="text-align: center;">Neuro-Spectral Synthesis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td style="text-align: center;">16.95213819</td>
+<td style="text-align: center;">13.81114888</td>
+<td style="text-align: center;">0.5896253586</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td style="text-align: center;">19.62042928</td>
+<td style="text-align: center;">13.02065825</td>
+<td style="text-align: center;">0.8354649544</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td style="text-align: center;">24.25646234</td>
+<td style="text-align: center;">11.33273816</td>
+<td style="text-align: center;">0.7555158138</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td style="text-align: center;">17.89053726</td>
+<td style="text-align: center;">12.3500874</td>
+<td style="text-align: center;">0.7475204468</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td style="text-align: center;">18.00246739</td>
+<td style="text-align: center;">12.12223339</td>
+<td style="text-align: center;">0.7735056877</td>
+</tr>
+<tr class="even">
+<td><strong>Média</strong></td>
+<td style="text-align: center;"><strong>19.34440689</strong></td>
+<td style="text-align: center;"><strong>12.52737322</strong></td>
+<td style="text-align: center;"><strong>0.7403264523</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Desvio Padrão</strong></td>
+<td style="text-align: center;"><strong>2.908692366</strong></td>
+<td style="text-align: center;"><strong>0.937300851</strong></td>
+<td style="text-align: center;"><strong>0.09102950916</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Treinadas as redes, uma implementação final do modelo é bastante simples, e é apresentada abaixo.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1">key <span class="op">=</span> <span class="dv">66</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">partials <span class="op">=</span> <span class="dv">100</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">n <span class="op">=</span> <span class="dv">44100</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">fps <span class="op">=</span> <span class="dv">44100</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">P <span class="op">=</span> np.arange(<span class="dv">1</span>, partials <span class="op">+</span> <span class="dv">1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">[ma, Ma] <span class="op">=</span> np.genfromtxt(<span class="st">&#39;a_m_M.csv&#39;</span>, delimiter<span class="op">=</span><span class="st">&#39;,&#39;</span>)</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">[md, Md] <span class="op">=</span> np.genfromtxt(<span class="st">&#39;d_m_M.csv&#39;</span>, delimiter<span class="op">=</span><span class="st">&#39;,&#39;</span>)</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">[mf, Mf] <span class="op">=</span> np.genfromtxt(<span class="st">&#39;f_m_M.csv&#39;</span>, delimiter<span class="op">=</span><span class="st">&#39;,&#39;</span>)</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">a_net <span class="op">=</span> K.models.load_model(<span class="st">&#39;a_model.H5&#39;</span>, {<span class="st">&#39;scaled_tanh&#39;</span>: scaled_tanh})</a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">d_net <span class="op">=</span> K.models.load_model(<span class="st">&#39;d_model.H5&#39;</span>, {<span class="st">&#39;scaled_tanh&#39;</span>: scaled_tanh})</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">f_net <span class="op">=</span> K.models.load_model(<span class="st">&#39;f_model.H5&#39;</span>, {<span class="st">&#39;scaled_tanh&#39;</span>: scaled_tanh})</a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16">f0 <span class="op">=</span> np.power(<span class="dv">2</span>, (key <span class="op">-</span> <span class="dv">49</span>) <span class="op">/</span> <span class="dv">12</span>) <span class="op">*</span> <span class="dv">440</span></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17">norm_key <span class="op">=</span> (key <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">87</span></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18">ipt <span class="op">=</span> np.array([[norm_key, p] <span class="cf">for</span> p <span class="kw">in</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, partials)])</a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20">A <span class="op">=</span> np.ndarray.flatten(a_net.predict(ipt)) <span class="op">*</span> ((Ma <span class="op">-</span> ma) <span class="op">+</span> ma) <span class="op">*</span> <span class="dv">5000</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21">D <span class="op">=</span> np.ndarray.flatten(d_net.predict(ipt)) <span class="op">*</span> ((Md <span class="op">-</span> md) <span class="op">+</span> md) <span class="op">*</span> <span class="fl">0.000113026536390889</span> <span class="co">#average decay</span></a>
+<a class="sourceLine" id="cb4-22" data-line-number="22">F <span class="op">=</span> (np.ndarray.flatten(f_net.predict(ipt)) <span class="op">*</span> (Mf <span class="op">-</span> mf) <span class="op">+</span> mf) <span class="op">*</span> P <span class="op">*</span> f0</a>
+<a class="sourceLine" id="cb4-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb4-24" data-line-number="24">w <span class="op">=</span> np.zeros(n)</a>
+<a class="sourceLine" id="cb4-25" data-line-number="25"><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(partials):</a>
+<a class="sourceLine" id="cb4-26" data-line-number="26">  <span class="bu">print</span>(<span class="st">&#39;partial:&#39;</span>, i)</a>
+<a class="sourceLine" id="cb4-27" data-line-number="27">  ph <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi)</a>
+<a class="sourceLine" id="cb4-28" data-line-number="28">  w <span class="op">+=</span> create_signal(n, fps, F[i], ph, A[i], D[i])</a></code></pre></div>
+<p>Uma implementação como essa, funcional, mais os arquivos de definição da arquitetura das redes e seus respectivos pesos estão disponíveis no repositório preparado para este trabalho, em xxx, e ocupam aproximadamente 250kb.</p>
+<p>A principal limitação é que todos os parametros a serem manipulados no modelo final devem, antes, ter sido incorporados ao processo de treinamento. Os dois paradigmas de modelagem física utilizados para comparação, tanto o método das diferenças finitas quanto os digital waveguides, permitem alguma manipulação em tempo real, a posteriori, de seus parametros: nos exemplos apresentados, o ponto de excitação pode ser mudado de onda para onda e, a qualquer tempo, o ponto de captação pode ser alterado, até mesmo durante a simulação, refletindo no timbre do som gerado.</p>
+<p>Além disso, esses modelos prestam-se à incorporação razoavelmente trivial de uma fonte, contínua ou periódica, de excitação, e podem ser utilizados para a simulação de instrumentos de som continuo, como violinos acionados pelo arco (ao contrario do acionamento pizzicato aqui apresentado) e metais, por exemplo; esse não é o caso do modelo aqui proposto, e constitui uma possibilidade de desenvolvimento futuro interessante.</p>
+<p>Uma outra barreira é que o modelo aprende características sonoras a partir de exemplos e não presta-se de forma prática à exploração sonora direta; esta deve ser efetuada a partir de outra ferramenta, e então incorporada ao modelo, à época de seu treinamento.</p>
 <h1 id="conclusão">Conclusão</h1>
+<p>O presente trabalho, ao construir uma nova técnica de modelagem sonora, demonstra o potencial do uso de redes neurais à síntese de áudio, provando sobretudo a possibilidade desse uso em tempo real.</p>
+<p>Fica evidente ainda o potencial sinergético entre os desenvolvimentos na pesquisa acústica e a utilização de redes neurais para basear modelos destinados à emulação de instrumentos, ou famílias de instrumentos, específicas.</p>
+<p>As possibilidas desenvolvimentos futuros nesta área de intersecção são inúmeras, haja vista a escassez de investigações semelhantes: Seria interessante, por exemplo, utilizar as saídas de um modelo elaborado a partir do método das diferenças finitas, que pode ser formulado de forma a simular características como rigidez, ressonância e vários termos de perda de um dado sistema acústico, ao custo de uma alta demanda de recursos computacionais, para treinar um modelo baseado em digital waveguides que tenha uma rede neural no ponto onde as perdas e demais cálculos são efetuados.</p>
+<p>Devido ao alto grau de recursividade do algoritmo digital waveguides, o treinamento à partir do resultado final esperado para o modelo é bastante complexo de ser implementado; os outputs de uma simulação baseada em diferenças finitas, no entanto, são plenamente compatíveis para este treinamento, e a inserção de uma rede neural pode levar a um modelo que retenha ao menos parte da acurácia da simulação pelo método de diferenças finitas, com eficiência computacional próxima, ou até superior, à apresentada pelo algoritmo de digital waveguides.</p>
 <h1 id="referências" class="unnumbered">Referências</h1>
 <div id="refs" class="references">
 <div id="ref-balle2016end">
