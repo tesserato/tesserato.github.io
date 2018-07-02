@@ -93,7 +93,7 @@ dd p {
   max-width: 5%;
   height: 100%;
   font-size: 0%;
-  /* transition: max-width 4s; */
+  transition: max-width 4s;
 }
 
 #TOC:hover {
