@@ -136,7 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li><a href="#resultados">Resultados</a></li>
-<li><a href="#conclusão">Conclusão</a></li>
+<li><a href="#conclusão">Conclusão</a><ul>
+<li><a href="#desenvolvimentos-futuros">Desenvolvimentos Futuros</a></li>
+</ul></li>
 <li><a href="#referências">Referências</a></li>
 </ul>
 </nav>
@@ -901,7 +903,7 @@ E^b =&amp; HW^t= (E \odot f&#39;(A)) W^t
 </table>
 <p>Uma rede feedforward com 3 camadas de 75 neurons parece oferecer a arquitetura ideal, com ambos os otimizadores. Esses hisperparametros serviram da base para arquiteturas futuras abordadas neste trabalho.</p>
 <h4 id="ativações-e-otimizadores">Ativações e Otimizadores</h4>
-<p>A performance dos dois, para 2000 steps, é comparada abaixo; também é comparado o impacto da função de ativação softsign, em relação à tanh utilizada até agora.</p>
+<p>A performance dos dois, para 2000 <em>steps</em>, é comparada abaixo; também é comparado o impacto da função de ativação softsign, em relação à tanh utilizada até agora.</p>
 <figure>
 <img src="im/softsign%20tanh%20adagrad%20nadam.png" alt="Comparação: Ativações e Otimizadores" /><figcaption>Comparação: Ativações e Otimizadores</figcaption>
 </figure>
@@ -1157,16 +1159,21 @@ Podemos sanar o problema da falta de informação parcial sobre decay e amplitud
 <a class="sourceLine" id="cb4-28" data-line-number="28">  w <span class="op">+=</span> create_signal(n, fps, F[i], ph, A[i], D[i])</a></code></pre></div>
 <p>Uma implementação como essa, funcional, mais os arquivos de definição da arquitetura das redes e seus respectivos pesos estão disponíveis no repositório preparado para este trabalho, em <a href="https://github.com/tesserato/tesserato.github.io/tree/master/resources/06%20Tempo%20Real">resources/06 Tempo Real/</a>, e ocupam aproximadamente 250kb. No repositório podem ser encontradas alguns áudios gerados pelo modelo.</p>
 <p>Sua principal limitação é que todos os parametros a serem manipulados no modelo final devem, antes, ter sido incorporados ao processo de treinamento. Os dois paradigmas de modelagem física utilizados para comparação, tanto o método das diferenças finitas quanto os digital waveguides, permitem alguma manipulação em tempo real, a posteriori, de seus parametros: nos exemplos apresentados, o ponto de excitação pode ser mudado de onda para onda e, a qualquer tempo, o ponto de captação pode ser alterado, até mesmo durante a simulação, refletindo no timbre do som gerado.</p>
-<p>Além disso, esses modelos prestam-se à incorporação razoavelmente trivial de uma fonte, contínua ou periódica, de excitação, e podem ser utilizados para a simulação de instrumentos de som continuo, como violinos acionados pelo arco (ao contrario do acionamento pizzicato aqui apresentado) e metais, por exemplo; esse não é o caso do modelo aqui proposto, e constitui uma possibilidade de desenvolvimento futuro interessante.</p>
+<p>Além disso, esses modelos prestam-se à incorporação razoavelmente trivial de uma fonte, contínua ou periódica, de excitação, e podem ser utilizados para a simulação de instrumentos de som continuo, como violinos acionados pelo arco (ao contrario do acionamento <em>pizzicato</em> aqui apresentado) e metais, por exemplo; esse não é o caso do modelo aqui proposto, e constitui uma possibilidade de desenvolvimento futuro interessante.</p>
 <p>Uma outra barreira é que o modelo aprende características sonoras a partir de exemplos e não presta-se de forma prática à exploração sonora direta; esta deve ser efetuada a partir de outra ferramenta, e então incorporada ao modelo, à época de seu treinamento.</p>
 <p>Para ilustração, algumas músicas criadas com os sons gerados pelos modelos propostos, treinados para emular um kit regular de bateria, um piano e um híbrido entre baixo acústico, cello e violino podem ser ouvidos em <a href="https://soundcloud.com/carlos-tarjano/sets/spectral-neural-synthesis">soundcloud.com/carlos-tarjano/sets/spectral-neural-synthesis</a></p>
 <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/540745641&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true">
 </iframe>
 <h1 id="conclusão">Conclusão</h1>
-<p>O presente trabalho, ao desenvolver uma nova técnica de modelagem sonora, demonstra o potencial do uso de redes neurais à síntese de áudio, provando sobretudo a possibilidade desse uso em tempo real.</p>
+<p>O presente trabalho, ao desenvolver uma nova técnica de modelagem sonora, demonstra o potencial do uso de redes neurais à síntese de áudio, provando sobretudo a possibilidade desse uso em tempo real. O segundo modelo introduzido apresenta resultados mais verossímeis do que o algoritmo de modelagem acústica em tempo real mais utilizado e eficiente encontrado na literatura, à um custo computacional bastante inferior.</p>
+<p>O modelo apresentado, ao ser treinado para a simulação de um piano, demonstra também uma gama de aplicações maior do que o algoritmo digital waveguides, mais aplicável à simulação de instrumentos de corda e sopro TODO:.</p>
 <p>Fica evidente ainda o potencial sinergético entre os desenvolvimentos na pesquisa sobre a acústica de intrumentos musicais e a utilização de redes neurais para basear modelos destinados à emulação desses instrumentos, ou famílias de instrumentos, específicos.</p>
+<h2 id="desenvolvimentos-futuros">Desenvolvimentos Futuros</h2>
 <p>As possibilidas desenvolvimentos futuros nesta área de intersecção são inúmeras, haja vista a escassez de investigações semelhantes: Seria interessante, por exemplo, utilizar as saídas de um modelo elaborado a partir do método das diferenças finitas, que pode ser formulado de forma a simular características como rigidez, ressonância e vários termos de perda de um dado sistema acústico, ao custo de uma alta demanda de recursos computacionais, para treinar um modelo baseado em digital waveguides que tenha uma rede neural no ponto onde as perdas e demais cálculos são efetuados.</p>
 <p>Devido ao alto grau de recursividade do algoritmo digital waveguides, o treinamento à partir do resultado final esperado para o modelo é bastante complexo de ser implementado; os outputs de uma simulação baseada em diferenças finitas, no entanto, são plenamente compatíveis para este treinamento, e a inserção de uma rede neural pode levar a um modelo que retenha ao menos parte da acurácia da simulação pelo método de diferenças finitas, com eficiência computacional próxima, ou até superior, à apresentada pelo algoritmo de digital waveguides.</p>
+<p>Relaxar a simplificação adotada durante o trabalho em relação à decaimentos exponenciais é um outro desenvolvimento futuro com potencial interessante: para algumas categorias de som, como a voz humana por exemplo, o envelope do som apresenta importância maior do que as próprias frequências contidas em relação à características como inteligibilidade TODO:.</p>
+<p>Estimar os envelopes com a técnica utilizada no segundo modelo, para mais de dois pontos da onda e utilizar uma rede, possivelmente recorrente, para aprender as características desse envelope para um conjunto de sons de determinado instrumento (possivelmente de excitação continuada), ou mesmo a voz humana, constitui uma interessante direção a ser investigada.</p>
+<p>Além disso, uma implementação em uma linguagem de programação mais eficiente, como C ou C++, somada à uma interface visual e compatibilidade com controladores MIDI pode gerar uma linha de produtos comercialmente viável, a ser comercializado em formato standalone e/ou em formato de <em>plugin</em> VST (Virtual Studio Technology), em que um módulo inicial pode ser oferecido e bancos adicionais, consistindo de novas arquiteturas e pesos, podem ser criados e comercializdos mediante a demanda dos usuários ou o desenvolvimento da técnica.</p>
 <h1 id="referências" class="unnumbered">Referências</h1>
 <div id="refs" class="references">
 <div id="ref-balle2016end">

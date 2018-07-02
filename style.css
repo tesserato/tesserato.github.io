@@ -16,7 +16,7 @@ body {
     /* border-left: 10px solid rgba(0, 0, 0, 0.11); */
     /* border-right: 10px solid rgba(0, 0, 0, 0.11); */
     color: black;
-    font-family: Verdana, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 100%;
     line-height: 140%;
     color: #333; 
@@ -35,9 +35,9 @@ h1 a, h2 a, h3 a, h4 a, h5 a {
     text-decoration: none;
     color: #7a5ada; 
 }
-h1, h2, h3, h4, h5 { font-family: verdana;
+h1, h2, h3, h4, h5 { font-family: "Arial Black", Helvetica, sans-serif;
                      font-weight: bold;
-                     border-bottom: 2px solid rgba(0, 0, 0, 0.11);
+                     border-bottom: 10px solid rgba(0, 0, 0, 0.11);
                      color: #4e4e4e; }
 h1 {
         font-size: 130%;
