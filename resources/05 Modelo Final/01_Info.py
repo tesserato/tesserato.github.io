@@ -48,7 +48,7 @@ for name in names:
   n = s.shape[0]
   F = rfft(s) * 2 / n
   P = np.abs(F)
-  max_amp = np.max(P)                                     #<| <| <| <| <|
+  max_amp = np.max(P)                                              #<| <| <| <| <|
   f0 = np.power(2, (int(name) - 49) / 12) * 440
 
   local_f0 = int(round(f0 / fps * n))
@@ -69,7 +69,7 @@ for name in names:
     a2 = np.abs(np.sum(Z[middle : ])) / middle
     ds_x_partials[i] = 2 * np.log(a1 / a2) / n                     #<| <| <| <| <|
 
-  max_decay = np.max(np.abs(ds_x_partials))                                #<| <| <| <| <|
+  max_decay = np.max(np.abs(ds_x_partials))                        #<| <| <| <| <|
   max_amps.append(max_amp)
   max_decays.append(max_decay)
   fractions_of_max_amps.append(pad(as_x_partials / max_amp, partials))
@@ -77,8 +77,6 @@ for name in names:
   inharms = fs_x_partials / (f0 * np.arange(1, fs_x_partials.shape[0] + 1))
   Mfreqs_over_Tfreqs.append(pad(inharms, partials))
   phases.append(pad(ps_x_partials, partials))
-
-
 
   higher_local_freq = np.max(idxs)
   X = np.arange(higher_local_freq) * fps / n
@@ -107,7 +105,6 @@ for name in names:
   plt.plot(Mfreqs_over_Tfreqs[-1], 'k.-')
   plt.savefig(save_path + 'graphs/04_Mfreqs_over_Tfreqs_' + name + '.png')
   plt.close()
-
 
 Mfreqs_over_Tfreqs = np.array(Mfreqs_over_Tfreqs)
 fractions_of_max_amps = np.array(fractions_of_max_amps)

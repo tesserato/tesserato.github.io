@@ -6,17 +6,12 @@ import time
 def scaled_tanh(x):
   return K.activations.tanh(6 * x - 3) / 2 + 1 / 2
 
-
-
 key = 66
 partials = 100
 n = 44100
 fps = 44100
 
-
 P = np.arange(1, partials + 1, 1)
-
-
 
 [ma, Ma] = np.genfromtxt('a_m_M.csv', delimiter=',')
 [md, Md] = np.genfromtxt('d_m_M.csv', delimiter=',')
