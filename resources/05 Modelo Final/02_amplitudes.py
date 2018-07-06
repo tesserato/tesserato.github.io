@@ -56,7 +56,6 @@ for name in range(1, 88 + 1, 1):
     complete_ipt.append([key, p])
 complete_ipt = np.array(complete_ipt)
 
-
 print(ipt.shape, tgt.shape)
 
 act = scaled_tanh
