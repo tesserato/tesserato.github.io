@@ -1121,7 +1121,7 @@ TODO:
 
 Podemos tirar proveito do caráter periódico dos samples e representá-las diretamente no domínio da frequência. Utilizando a transformada de Fourier, como visto, temos à disposição uma forma de representar perfeitamente a onda utilizando um vetor de números complexos com metade da dimensão da onda original, explorando o fato de que estamos nos restringindo a representações temporais no domínio dos números reais.
 
-A princípio, tal transformação de domínio não introduziria maior eficiência á previsão, do ponto de vista computacional, haja vista que números complexos são representados por pares de números reais. Levando em conta, contudo, que o ouvido humano não é capaz de perceber frequências fora da faixa entre 20hz e 20 khz, identificamos uma das vantagens de trabalharmos no domínio das frequências: podemos truncar o resultado da FFT à este intervalo (tomando o cuidado de traduzi-lo em termos das frequências locais da transformada). 
+A princípio, tal transformação de domínio não introduziria uma forma mais compacta de representação das ondas, do ponto de vista computacional, haja vista que números complexos são representados por pares de números reais. Levando em conta, contudo, que o ouvido humano não é capaz de perceber frequências fora da faixa entre 20 Hz e 20 KHz [@howard2017acoustics], identificamos uma das vantagens de trabalharmos no domínio das frequências: podemos truncar o resultado da FFT à este intervalo (tomando o cuidado de traduzi-lo em termos das frequências locais da transformada).
 
 Além disso, trata-se de uma representação independente do tempo de duração da onda representada, o que no permite trabalhar com uma arquitetura densa prevendo ondas de tamanhos variados. Mais a frente, serão ilustradas outras vantagens dessa abordagem, levando em conta características físicas do instrumento a ser emulado e propriedades da transformada.
 
@@ -1132,20 +1132,68 @@ A imagem a seguir compara a distribuição de frequências do som gerado por um 
 [Fonte: Elaboração própria]{custom-style="fonte"}
 
 
-Para a emulação de um kit completo de bateria 4 redes foram treinadas; os smaples foram divididos de acordo com as afinidades de diferentes conjuntos de peças e levando em conta também o grau de expressividade demandado. Por exemplo, somente para a caixa e tons foram utilizados *round-robins*, devido à alta propensão ao efeito *machine-gun* quando as peças são utilizadas em rápida sucessão, o que é comum em vários estilos musicais. A arquitetura utilizada é como apresentada na figura abaixo e é uniforme para todas as peças; variações no número de parâmetros ocorrem em função da diferença de duração das ondas no caso dos pratos. Para o caso da caixa, contratempo e dos tambores, incluído o bumbo, cada uma das redes é compostapor 120 008 parâmetros, com um tamanho em disco de aproximadamente 1,4 Mb. Os pratos, por possuírem um som com maior tempo de sustentação, demandaram uma rede com saídas maiores, totalizando 360 008 parametros e quase o triplo do tamanho em disco. Temos assim que todo o sistema possui em torno de 9 Mb de tamanho. Não foram utilizadas funções de ativação, tanto para evitar overfitting quanto para permitir uma implementação menos intensiva, do ponto de vista computacional.
+Para a emulação de um _kit_ completo de bateria 4 redes foram treinadas; as amostras sonoras foram divididas de acordo com as afinidades de diferentes conjuntos de peças e levando em conta também o grau de expressividade demandado. As amostras utilizadas no treinamento, divididas em suas respectivas pastas, podem ser acessadas no repositório do trabalho [@tesserato_2018] no caminho ["resources/samples/"](https://github.com/tesserato/tesserato.github.io/tree/master/resources/samples). De maneira semelhante, a implementação da rede está disponível no endereço ["resources/02_RNN.py"](https://github.com/tesserato/tesserato.github.io/blob/master/resources/02_RNN.py).
+
+Somente para a caixa e tons foram utilizados *round-robins*, devido à alta propensão ao efeito *machine-gun* quando as peças são utilizadas em rápida sucessão, articulação comum em vários estilos musicais.
+
+A arquitetura utilizada é como apresentada na figura FIXME: e é uniforme para todas as peças; variações no número de parâmetros ocorrem em função da diferença de duração das ondas no caso dos pratos. Para o caso da caixa, contratempo e dos tambores, incluído o bumbo, cada uma das redes é compostapor 120 008 parâmetros treináveis, incluindo pesos das conexões e biases, com um tamanho em disco de aproximadamente 1,4 Mb.
+
+Os pratos, por possuírem um som com maior tempo de sustentação, demandaram uma rede com saídas maiores, totalizando 360 008 parametros treináveis e quase o triplo do tamanho em disco. Temos assim que todo o sistema possui em torno de 9 Mb de tamanho em disco. Foram utilizadas funções de ativação lineares, tanto para evitar _overfitting_ quanto para permitir uma implementação menos intensiva, do ponto de vista computacional.
 
 ![Arquitetura para a emulação da Caixa de uma Bateria](im/Modelo-Bateria-Caixa.png){width=400px}
 
 [Fonte: Elaboração própria]{custom-style="fonte"}
 
 
-Os resultados são bastante satisfatórios, tanto em termos de acurácia quanto de generalização. A rede  não decora nenhuma das distribuições, mas aprende a generaliza-las no espaço bidimensional que tem como eixos o tipo da peça, que reflete a grosso modo uma variação entre agudo e grave e a intensidade da batida. No casa das redes treinadas com o uso de round-robins pode-se pensar em um terceiro eixo no qual a rede generaliza variações percebidas nos samples utilizados para o treinamento. A rigor, o efeito é determinístico, totalmente dependente dos inputs da rede. Pode-se pensar nele, contudo, como um termo que adiciona certa aleatoriedade aos sons gerados, na medida em que pode-se alimentar a rede com um número aleatório entre -1 e 1 para para cada sample gerado. Um efeito colateral desse comportamento geral da rede é que ela não reproduz exatamente nenhum dos samples utilizados no treinamento, e não há garantias do grau de semelhança entre os timbres gerados e os dados originais. Empiricamente, no entanto, observou-se que as características do espectro de frequências aprendidas e generalizadas pela rede imprimem ao resultado um timbre totalmente verossímil; em outras palavras, os tons soam como tons, mas não exatamente com o mesmo timbre que cada uma das peças utilizadas no treinamento, mas como uma amalgama entre elas, assim é com os pratos, e sucessivamente para todas as peças. Quando o esforço é o de emular duas dinâmicas diferentes de uma mesma peça, como é o caso da caixa, em que uma das variáveis é, como para todas as outras peças, a intensidade, e a outra é a centralidade da batida (mais próxima ou afastada do centro da caixa), observa-se resultados ainda mais orgânicos.
+Os resultados são bastante satisfatórios, tanto em termos de acurácia quanto de generalização. A rede não decora nenhuma das distribuições, como é esperado, mas aprende a generaliza-las no espaço bidimensional que tem como eixos o tipo da peça, que reflete a grosso modo uma variação entre agudo e grave e a intensidade da batida. A figura FIXME: ilustra uma onda onde foram concatenadas as saídas da rede para o contratempo aberto, golpeado com intensidade crescente. A onda concatenada pode ser ouvida no caminho ["resources/04_freq_domain/Exemplos das Predições - Bateria/contratempo_piano_para_forte.wav"]() do repositório do trabalho, enquanto as amostras originais encontram-se em ["resources/04_freq_domain/Exemplos das Predições - Bateria/Intensidade - Contratempo Aberto]()
 
-Para sons com características harmonicas, de frequências definidas, esse método não oferece bons resultados, na medida em que incorpora as características gerais de cada um dos sons utilizados no treinamento. É curioso observar que, por exemplo, treinando a rede para aprender a interjeição 'ah' cantada em diferentes notas, o resultado tem uma qualidade parecida com um coral. As transformadas são exibidas abaixo, tanto dos sons originais quanto das previsões, para a nota mais baixa e mais alta. É possível reparar que a previsão encaminha-se para os picos em ambos os casos, mas incorporando uma grande quantidade de dados indesejáveis.
+<div>
+<audio controls preload> 
+<source src="resources/04_freq_domain/Exemplos das Predições - Bateria/contratempo_piano_para_forte.wav"></source>
+</audio>
+</div>
+
+![Dinâmicas geradas para Contratempo Aberto - Pianíssimo até Molto Forte](resources/04_freq_domain/Exemplos das Predições - Bateria/contratempo_piano_para_forte.png)
+
+[Fonte: Elaboração própria]{custom-style="fonte"}
+
+No casa das redes treinadas com o uso de _round-robins_ pode-se imaginar um terceiro eixo no qual a rede generaliza variações percebidas nas amostras utilizados para o treinamento. A rigor, o efeito é determinístico, totalmente dependente dos inputs da rede. Pode-se pensar nele, contudo, como um termo que adiciona certa aleatoriedade aos sons gerados, na medida em que pode-se alimentar a rede com um número arbitrário entre -1 e 1 para para cada amostra gerada, introduzindo variações que emulam a aleatoriedade natural do instrumento. Essas variações são ilustradas na fig FIXME:, para o caso do tom mais agudo. As ondas geradas pela rede podem ser encontradas em ["resources/04_freq_domain/Exemplos das Predições - Bateria/Round-Robins - Tom 01"]() e a versão concatenada, exibida em FIXME:, para maior comodidade, encontra-se em ["resources/04_freq_domain/Exemplos das Predições - Bateria/tom_roundrobins.wav"]()
+
+<div>
+<audio controls preload> 
+<source src="resources/04_freq_domain/Exemplos das Predições - Bateria/tom_roundrobins.wav"></source>
+</audio>
+</div>
+
+![7 _Round-Robins_ gerados para o Tom 1](resources/04_freq_domain/Exemplos das Predições - Bateria/tom_roundrobins.png)
+
+[Fonte: Elaboração própria]{custom-style="fonte"}
+
+Um efeito colateral desse comportamento geral da rede é que ela não reproduz exatamente nenhuma das amostras utilizados no treinamento, e não há garantias do grau de semelhança entre os timbres gerados e os exemplos utilizados. Empiricamente, no entanto, observou-se que as características do espectro de frequências aprendidas e generalizadas pela rede imprimem ao resultado um timbre totalmente verossímil; em outras palavras, os tons soam como tons, não exatamente com o mesmo timbre que cada uma das peças utilizadas no treinamento, mas como uma amalgama entre elas. Assim é com os pratos, e sucessivamente para todas as peças.
+
+Quando o esforço é o de emular duas dinâmicas diferentes de uma mesma peça, como é o caso da caixa, em que uma das variáveis é, como para todas as outras peças, a intensidade, e a outra é a centralidade da batida (mais próxima ou afastada do centro da caixa), observa-se resultados ainda mais orgânicos, como pode ser visto em FIXME:. As ondas geradas podem ser ouvidas em ["resources/04_freq_domain/Exemplos das Predições - Bateria/Centralidade - Caixa/"](), enquanto que a versão concatenada, como paresentada na figura FIXME: está disponível em ["resources/04_freq_domain/Exemplos das Predições - Bateria/caixa_centro_para_bordas.wav"]().
+
+<div>
+<audio controls preload> 
+<source src="resources/04_freq_domain/Exemplos das Predições - Bateria/caixa_centro_para_bordas.wav"></source>
+</audio>
+</div>
+
+![Dinâmica posição do golpe para caixa](resources/04_freq_domain/Exemplos das Predições - Bateria/caixa_centro_para_bordas.png)
+
+[Fonte: Elaboração própria]{custom-style="fonte"}
+
+
+Para sons com características harmonicas, de frequências definidas, esse método não oferece bons resultados, na medida em que incorpora as características gerais de cada um dos sons utilizados no treinamento. É curioso observar que, por exemplo, treinando a rede para aprender a interjeição 'ah' cantada em diferentes notas, o resultado tem uma qualidade parecida com um coral. 
+
+As transformadas são exibidas abaixo, tanto dos sons originais quanto das previsões, para a nota mais baixa e mais alta. É possível reparar que a previsão encaminha-se para os picos em ambos os casos, mas incorporando uma grande quantidade de dados indesejáveis.
 
 ![Experimento Emulação da Voz Cantada](im/voice.png)
 
-Dessa forma, para a simulação de intrumentos de caráter harmonico, o método apresentado na seção seguinte foi desenvolvido.
+[Fonte: Elaboração própria]{custom-style="fonte"}
+
+
+Dessa forma, para a simulação de intrumentos de caráter harmonico, o método apresentado na seção FIXME: foi desenvolvido.
 
 ## Modelo Misto
 

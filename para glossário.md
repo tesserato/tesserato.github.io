@@ -30,6 +30,8 @@ steps
 _sampling rate_
 _smoothstep_
 transiente
+efeito *machine-gun*
+_overfitting_
 
 $\mathcal{F}$
 
@@ -39,7 +41,11 @@ $\mathcal{F}$
 [Fonte: Elaboração própria]{custom-style="fonte"}
 
 
-
+<div>
+<audio controls preload> 
+    <source src="resources\Demo Digital Waveguide\DW_440_Pluck_0-1_Pick_0-5.wav"></source>
+</audio>
+</div>
 
 
 
