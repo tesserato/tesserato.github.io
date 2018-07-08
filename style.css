@@ -6,6 +6,10 @@ video{
   max-width: 60em;
 }
 
+audio { 
+  max-width: 14em;
+}
+
 
 
 body {

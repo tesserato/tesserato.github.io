@@ -9,7 +9,7 @@ What are the main findings?
 short description of the interpretation/conclusion in the last sentence.
 # keywords
 ---
-# BODY
+# BODY {#teste}
 ## introduction --> broad to specific
 - What did you do?
 ### literature review
@@ -20,7 +20,7 @@ short description of the interpretation/conclusion in the last sentence.
 - What do you hope to achieve?
 - **Hypothesis and objectives**
 ## methods
-- How did you do it?
+- How did you do it? [teste](#teste)
 ## results
 - What did you find?
 ## discussion
