@@ -27,25 +27,64 @@ Tensorboard
 lms
 neurons
 steps
+biases
 _sampling rate_
 _smoothstep_
 transiente
 efeito *machine-gun*
 _overfitting_
+pizzicato
 
 $\mathcal{F}$
 
 
 ------------------
+{.python .numberLines}
+
+[]{custom-style="quadro"}
 
 [Fonte: Elaboração própria]{custom-style="fonte"}
 
+{#fig:id}
++@fig:id
+
+$$ y = mx + b $$ {#eq:id}
++@eq:id
+
+{#tbl:id}
++@tbl:id
+
+
+::: {custom-style="Fonte"}
+Fonte: Elaboração própria
+:::
+
+
+------------------
 
 <div>
 <audio controls preload> 
     <source src="resources\Demo Digital Waveguide\DW_440_Pluck_0-1_Pick_0-5.wav"></source>
 </audio>
 </div>
+
+O objetivo geral deste trabalho é desenvolver um modelo de simulação em tempo real de instrumentos acústicos que tire proveito do estado da arte relacionado à redes neurais artificias para exibir maior eficiência, quando comparado aos algoritmos tradicionais, dando origem a simulações mais realistas, principalmente do ponto de vista da percepção humana, e menos intensivas computacionalmente.
+A lista abaixo enumera os objetivos específicos necessários à essa finalidade:
+
+- Identificar formas compactas de representação das ondas sonoras mais adequadas à predição/generalização via redes neurais;
+
+- Identificar arquiteturas neurais que possam ser utilizadas na modelagem acústica;
+
+- Identificar na literatura sobre modelos acústicos de instrumentos musicais ferramentas que possam ser utilizadas para simplificação e aumento de eficiência, tanto do modelo quanto das representações.
+
+- Tendo em vista o foco na síntese em tempo real, identificar as arquiteturas e hiperparametros neurais e técnicas em geral mais eficientes,
+
+- Delinear a capacidade de generalização do modelo criado.
+
+
+<!-- O estado da arte da síntese sonora ainda não foi estabelecido por abordagens totalmente baseadas em redes neurais, embora pesquisas nesse sentido sejam abundantes, e estejam rapidamente aproximando-se da qualidade necessária para a implementação em produtos finais. O trabalho de [@zen2015unidirectional] aborda a tarefa a partir de uma rede recorrente com camadas FIXME:LSTM (long short-term memory), enquanto [@wu2016investigating] investiga a influência de aspectos específicos dessa topologia em sua eficiência na tarefa de síntese da voz falada. -->
+
+<!-- Além disso, alguns dos algoritmos e técnicas convencionais, ainda que de forma muitas vezes ineficiente, prestam-se de maneira razoável à simulação *off-line* de instrumentos acústicos, razão pela qual o foco deste trabalho é a síntese em tempo real.  -->
 
 
 
