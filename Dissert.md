@@ -8,7 +8,6 @@ tablenos-plus-name: "tabela"
 eqnos-caption-name: "Equação"
 eqnos-plus-name: "equação"
 csl: abnt.csl
-bibliography: bib.bib
 ---
 
 # Introdução
@@ -49,7 +48,7 @@ Tendo em vista o foco na síntese em tempo real, identificar as arquiteturas e h
 Delinear a capacidade de generalização do modelo criado.
 
 ## Escopo
-O trabalho limita-se à emulação de instrumentos musicais acústicos convencionais e não aborda, senão tangencialmente, a área mais subjetiva de desenho de novos instrumentos, através de um exemplo em que um instrumento híbrido é apresentado; um tratamento razoavelmente completo do tema, pelo grande número de possibilidades que oferece (@dalgleish2014blurring), está além do objetivo deste trabalho.
+O trabalho limita-se à emulação de instrumentos musicais acústicos convencionais e não aborda, senão tangencialmente, a área mais subjetiva de desenho de novos instrumentos, através de um exemplo em que um instrumento híbrido é apresentado; um tratamento razoavelmente completo do tema, pelo grande número de possibilidades que oferece [@dalgleish2014blurring], está além do objetivo deste trabalho.
 
 Adicionalmente, limitar o escopo do trabalho à investigação de instrumentos que possam ser aproximados por um modelo de excitação impulsivo, como aqui é feito, possibilita excluir da observação uma subárea significativa do processamento de sinais que lida com a evolução das frequências de uma onda sonora no domínio do tempo, trazendo o volume de pesquisa a níveis práticos, sem uma perda substancial em termos conceituais.
 
@@ -71,13 +70,13 @@ Em seguida é apresentado um referencial teórico, onde são formalizadas alguma
 A seguir, no capítulo dedicado à metodologia, são apresentadas as etapas executadas, desde o processo de obtenção das amostras de som utilizadas na etapa de treinamento das redes, passando pelas investigações no domínio do tempo e da frequência, até a apresentação em mais detalhes do modelo final proposto, que tem seus resultados comentados na seção seguinte. Na conclusão algumas limitações e possibilidades de encaminhamentos futuros são apresentados.
 
 ## Relevância socio-econômica
-Os computadores introduziram a produção musical em uma nova era, permitindo, por um lado, experimentações com novos timbres e formas de interação homem máquina para a criação musical e, por outro, a emulação de instrumentos tradicionais, através de técnicas promissoras, como a modelagem acústica (@bovermann2016musical).
+Os computadores introduziram a produção musical em uma nova era, permitindo, por um lado, experimentações com novos timbres e formas de interação homem máquina para a criação musical e, por outro, a emulação de instrumentos tradicionais, através de técnicas promissoras, como a modelagem acústica [@bovermann2016musical].
 
 Avançar essas pesquisas significa, na medida em que, por exemplo, diminui custos de *software* e *hardware* dedicados, oferecer a um maior número de pessoas acesso à educação musical e, por conseguinte, uma formação intelectual mais rica.
 
 Algumas vantagens do acesso precoce à educação musical são delineadas no estudo de @forgeard2008practicing, que sugere uma maior habilidade verbal e uma maior capacidade de raciocínio não verbal em crianças que praticaram instrumentos em sua infância. Na mesma linha, o trabalho de @vaughn2000music aponta para uma relação entre o estudo voluntário de música e uma melhoria do desempenho matemático, a partir de uma meta análise de 20 estudos.
 
-Uma outra motivação é estimular a descentralização do capital intelectual relacionado ao campo de instrumentos virtuais, desde a década de 70 fortemente concentrado em algumas empresas japonesas, situadas em sua maioria na cidade de Hamamatsu, como Yamaha e Roland (@reiffenstein2006codification). Essas empresas detém, exclusivamente ou parcialmente, as patentes para alguns dos mais importantes algoritmos de síntese sonora, como os *digital waveguides*.
+Uma outra motivação é estimular a descentralização do capital intelectual relacionado ao campo de instrumentos virtuais, desde a década de 70 fortemente concentrado em algumas empresas japonesas, situadas em sua maioria na cidade de Hamamatsu, como Yamaha e Roland [@reiffenstein2006codification]. Essas empresas detém, exclusivamente ou parcialmente, as patentes para alguns dos mais importantes algoritmos de síntese sonora, como os *digital waveguides*.
 
 
 
@@ -154,7 +153,7 @@ informações codificadas no encadeamento temporal de séries de dados, e é bas
 Fonte: Elaboração própria
 :::
 
-A +fig:recur representa 6 passos iniciais de uma rede recorrente. Observa-se que em cada passo, a partir do primeiro, a rede recebe, além do vetor de entrada externo, as próprias saídas que gerou no passo anterior. É oportuno notar que, em algumas aplicações, a rede recebe apenas um vetor de entradas, no primeiro passo, e opera em todos os passos seguintes processando suas entradas anteriores, em uma configuração que recebe o nome de um para muitos (*one-to-many*) na literatura.
+A +@fig:recur representa 6 passos iniciais de uma rede recorrente. Observa-se que em cada passo, a partir do primeiro, a rede recebe, além do vetor de entrada externo, as próprias saídas que gerou no passo anterior. É oportuno notar que, em algumas aplicações, a rede recebe apenas um vetor de entradas, no primeiro passo, e opera em todos os passos seguintes processando suas entradas anteriores, em uma configuração que recebe o nome de um para muitos (*one-to-many*) na literatura.
 
 ### Redes Convolucionais
 Trata-se de um tipo de arquitetura, geralmente profunda, que é amplamente utilizado em problemas relacionados a imagens, atingindo resultados de ponta em várias áreas relacionadas à visão de computadores, como reconhecimento de objetos e rostos em imagens [@pang2017convolution].
@@ -169,7 +168,7 @@ Esse procedimento permite a geração, nessas camadas convolucionais da rede, de
 Fonte: Elaboração própria
 :::
 
-Na +@fig:arqconv é possível acompanhar as 3 primeiras entradas de uma rede convolucional unidimensional: o vetor de entrada é "varrido" pela rede, geralmente andando um passo à cada leitura, em um processo análogo à definição matemática de convolução. O trabalho de @dumoulin2016guide apresenta uma exposição de vários tipos de convolução, dentre as quais a convolução básica em duas dimensões, apresentada na +fig:conv
+Na +@fig:arqconv é possível acompanhar as 3 primeiras entradas de uma rede convolucional unidimensional: o vetor de entrada é "varrido" pela rede, geralmente andando um passo à cada leitura, em um processo análogo à definição matemática de convolução. O trabalho de @dumoulin2016guide apresenta uma exposição de vários tipos de convolução, dentre as quais a convolução básica em duas dimensões, apresentada na +@fig:conv
 
 ![Convolução Bidimensional](im/conv.gif){#fig:conv}
 
@@ -183,7 +182,7 @@ A maioria dos trabalhos que investigam a aplicação de redes neurais à música
 
 O trabalho desenvolvido em conjunto pelas equipes do Google Brain team e do DeepMind é um exemplo de esforço nesse sentido [@engel2017neural]. Nele, uma arquitetura desenvolvida a partir da Wavenet (aprofundada no tópico sobre discurso falado) é utilizada para a geração de ondas sonoras a partir do treinamento direto com amostras de áudio de vários instrumentos musicais. Os resultados mostram que a arquitetura baseada em várias camadas convolucionais utilizada é capaz de aprender representações no domínio do tempo para vários tipos de instrumentos diferentes.
 
-Uma extensão experimental desse trabalho, denominada de Magenta (@magenta), investiga representações latentes para sequências musicais no domínio do tempo, a partir de uma abordagem probabilística (@roberts2018learning @roberts2018hierarchical).
+Uma extensão experimental desse trabalho, denominada de Magenta [@magenta], investiga representações latentes para sequências musicais no domínio do tempo, a partir de uma abordagem probabilística [@roberts2018learning; @roberts2018hierarchical].
 
 Uma plataforma física para a manipulação e reprodução dos sons gerados pela rede, na forma de um *hardware* código aberto denominado *Nsynth Super* [@google; @eck_2018] é introduzida pela equipe do projeto. Embora não fique claro se a etapa de síntese ocorre diretamente na plataforma, os esforços corroboram o interesse aplicação de redes neurais para a síntese sonora em tempo real.
 
