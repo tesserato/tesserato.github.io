@@ -1,4 +1,3 @@
-<!-- spellcheck-language "en" -->
 # research paper structure 
 
 # title
