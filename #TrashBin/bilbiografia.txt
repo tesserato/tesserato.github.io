@@ -1,0 +1,151 @@
+Nguyen, A., Yosinski, J., & Clune, J. (2015). Deep neural networks are easily fooled: High confidence predictions for unrecognizable images. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (pp. 427-436).
+Patterson, Josh, and Adam Gibson. Deep Learning: A Practitioner's Approach. " O'Reilly Media, Inc.", 2017.
+ALJUMAH, A.; AHAMAD, T. A novel approach for detecting DDoS using artificial neural networks. International Journal of Computer Science and Network Security, v. 16, n. 12, p. 132–138, 2016. 
+BAHRAMPOUR, S. et al. Comparative study of deep learning software frameworks. arXiv preprint arXiv:1511.06435, 2015. 
+___.. Comparative study of caffe, neon, theano, and torch for deep learning. 2016. 
+BENSA, J. et al. Computational modeling of stiff piano strings using digital waveguides and finite differences. Acta Acustica united with Acustica, v. 91, n. 2, p. 289–298, 2005. 
+___.. The simulation of piano string vibration: From physical models to finite difference schemes and digital waveguides. The Journal of the Acoustical Society of America, v. 114, n. 2, p. 1095–1107, 2003. 
+Berkeley Artificial Intelligence Research Lab. The Berkeley Artificial Intelligence Research Blog, 2018. Disponível em: <http://bair.berkeley.edu/>
+BILBAO, S. Numerical sound synthesis: finite difference schemes and simulation in musical acoustics. Traducao. [s.l.] John Wiley & Sons, 2009. 
+BISHOP, C. M. Pattern recognition and machine learning. Traducao. [s.l.] springer, 2006. 
+BOULANGER-LEWANDOWSKI, N.; BENGIO, Y.; VINCENT, P. High-dimensional sequence transductionAcoustics, Speech and Signal Processing (ICASSP), 2013 IEEE International Conference on. Anais…IEEE, 2013
+BOULANGER-LEWANDOWSKI, N. et al. Phone sequence modeling with recurrent neural networksAcoustics, Speech and Signal Processing (ICASSP), 2014 IEEE International Conference on. Anais…IEEE, 2014
+BOVERMANN, T. et al. Musical Instruments in the 21st Century. Traducao. [s.l.] Springer, 2016. 
+BÖCK, S.; SCHEDL, M. Polyphonic piano note transcription with recurrent neural networksAcoustics, speech and signal processing (ICASSP), 2012 ieee international conference on. Anais…IEEE, 2012
+BRUNETTE, E. S.; FLEMMER, R. C.; FLEMMER, C. L. A review of artificial intelligenceAutonomous Robots and Agents, 2009. ICARA 2009. 4th International Conference on. Anais…IEEE, 2009
+Caffe. Caffe | Model Zoo, 2018. Disponível em: <http://caffe.berkeleyvision.org/>
+CHAIGNE, A.; KERGOMARD, J. Acoustics of musical instruments. Traducao. [s.l.] Springer, 2016. 
+CHOI, K.; FAZEKAS, G.; SANDLER, M. Automatic tagging using deep convolutional neural networks. arXiv preprint arXiv:1606.00298, 2016. 
+CHOI, K. et al. Convolutional recurrent neural networks for music classificationAcoustics, Speech and Signal Processing (ICASSP), 2017 IEEE International Conference on. Anais…IEEE, 2017
+COPPIN, B. Artificial intelligence illuminated. Traducao. [s.l.] Jones; Bartlett Publishers, 2004. 
+COSTA, Y. M.; OLIVEIRA, L. S.; SILLA, C. N. An evaluation of Convolutional Neural Networks for music classification using spectrograms. Applied Soft Computing, v. 52, p. 28–38, 2017. 
+CRABACUS. crabacus/the-open-source-drumkitGitHub, ago. 2015. Disponível em: <https://github.com/crabacus/the-open-source-drumkit>
+DALGLEISH, M.; SPENCER, S.; FOSTER, C. BLURRING THE LINES: AN INTEGRATED COMPOSITIONAL MODEL FOR DIGITAL MUSICAL INSTRUMENT DESIGNAnais…Proceedings of the 9th Conference on Interdisciplinary Musicology. CIM14. Berlin, Germany, 2014
+DONAHUE, C.; MCAULEY, J.; PUCKETTE, M. Synthesizing Audio with Generative Adversarial Networks. arXiv preprint arXiv:1802.04208, 2018. 
+DOZAT, T. Incorporating nesterov momentum into adam. 2016. 
+DrumGizmo Wiki. DrumGizmo Wiki, 2018. Disponível em: <https://www.drumgizmo.org/wiki/doku.php>
+DUCHI, J.; HAZAN, E.; SINGER, Y. Adaptive subgradient methods for online learning and stochastic optimization. Journal of Machine Learning Research, v. 12, n. Jul, p. 2121–2159, 2011. 
+DUMOULIN, V.; VISIN, F. A guide to convolution arithmetic for deep learning. ArXiv e-prints, mar. 2016. 
+ECK, D. Making music using new sounds generated with machine learningGoogleGoogle,, mar. 2018. Disponível em: <https://www.blog.google/technology/ai/making-music-using-new-sounds-generated-machine-learning/>
+ELMAN, J. L. Finding structure in time. Cognitive science, v. 14, n. 2, p. 179–211, 1990. 
+ENGEL, J. et al. Neural audio synthesis of musical notes with wavenet autoencoders. arXiv preprint arXiv:1704.01279, 2017. 
+ERICKSON, B. J. et al. Toolkits and libraries for deep learning. Journal of digital imaging, v. 30, n. 4, p. 400–405, 2017. 
+ESTEVA, A. et al. Dermatologist-level classification of skin cancer with deep neural networks. Nature, v. 542, n. 7639, p. 115–118, 2017. 
+FONTANA, F.; ROCCHESSO, D.; APOLLONIO, E. Using the waveguide mesh in modelling 3D resonatorsProc. Conf. on Digital Audio Effects (DAFX-00). Anais…2000
+FORGEARD, M. et al. Practicing a musical instrument in childhood is associated with enhanced verbal ability and nonverbal reasoning. PloS one, v. 3, n. 10, p. e3566, 2008. 
+FRANS, K. Outline Colorization through Tandem Adversarial Networks. arXiv preprint arXiv:1704.08834, 2017. 
+GATYS, L. A.; ECKER, A. S.; BETHGE, M. Image style transfer using convolutional neural networksProceedings of the IEEE Conference on Computer Vision and Pattern Recognition. Anais…2016
+GAZI, O. Understanding digital signal processing. Traducao. [s.l.] Springer, 2018. 
+GOLDBERG, Y. A Primer on Neural Network Models for Natural Language Processing. J. Artif. Intell. Res.(JAIR), v. 57, p. 345–420, 2016. 
+GOODFELLOW, I. et al. Deep learning. Traducao. [s.l.] MIT press Cambridge, 2016. v. 1
+GRACIA, X.; SANZ-PERELA, T. The wave equation for stiff strings and piano tuning. arXiv preprint arXiv:1603.05516, 2016. 
+GRAVES, A.; MOHAMED, A.-R.; HINTON, G. Speech recognition with deep recurrent neural networksAcoustics, speech and signal processing (icassp), 2013 ieee international conference on. Anais…IEEE, 2013
+GRINSTEIN, E. et al. Audio style transfer. arXiv preprint arXiv:1710.11385, 2017. 
+GULLY, A. J. et al. Articulatory Text-to-Speech Synthesis using the Digital Waveguide Mesh driven by a Deep Neural Network. Proc. Interspeech 2017, p. 234–238, 2017. 
+HAGAN, M. T. et al. Neural network design. Traducao. [s.l.] Pws Pub. Boston, 1996. v. 20
+HE, L. et al. Multimodal affective dimension prediction using deep bidirectional long short-term memory recurrent neural networksProceedings of the 5th International Workshop on Audio/Visual Emotion Challenge. Anais…ACM, 2015
+HINTON, G. et al. Deep neural networks for acoustic modeling in speech recognition: The shared views of four research groups. IEEE Signal Processing Magazine, v. 29, n. 6, p. 82–97, 2012. 
+HINTON, G. E.; SABOUR, S.; FROSST, N. Matrix capsules with EM routing. 2018. 
+HORNIK, K. Approximation capabilities of multilayer feedforward networks. Neural networks, v. 4, n. 2, p. 251–257, 1991. 
+HORNIK, K.; STINCHCOMBE, M.; WHITE, H. Multilayer feedforward networks are universal approximators. Neural networks, v. 2, n. 5, p. 359–366, 1989. 
+HOROWITZ, M. C., ALLEN, G. C., KANIA, E. B.; SCHARRE, P. Strategic Competition in an Era of Artificial Intelligence. 2018.
+HOWARD, D. M.; ANGUS, J. Acoustics and psychoacoustics. Traducao. [s.l.] Focal press, 2017. 
+HUTCHINGS, P. Talking Drums: Generating drum grooves with neural networks. arXiv preprint arXiv:1706.09558, 2017. 
+HWANG, J.; ZHOU, Y. Image Colorization with Deep Convolutional Neural Networks. 2016. 
+IIZUKA, S.; SIMO-SERRA, E.; ISHIKAWA, H. Let there be color!: joint end-to-end learning of global and local image priors for automatic image colorization with simultaneous classification. ACM Transactions on Graphics (TOG), v. 35, n. 4, p. 110, 2016. 
+ISOLA, P. et al. Image-to-image translation with conditional adversarial networks. arXiv preprint arXiv:1611.07004, 2016. 
+Ivy Audio. Ivy Audio, 2018. Disponível em: <http://www.ivyaudio.com/>
+KARJALAINEN, M.; ERKUT, C. Digital waveguides versus finite difference structures: Equivalence and mixed modeling. EURASIP Journal on Applied Signal Processing, v. 2004, p. 978–989, 2004. 
+KARPATHY, A. et al. Large-scale video classification with convolutional neural networksProceedings of the IEEE conference on Computer Vision and Pattern Recognition. Anais…2014
+Keras: The Python Deep Learning library. Keras Documentation, [s.d.]. Disponível em: <https://keras.io/>
+KHORRAMI, P. et al. How deep neural networks can improve emotion recognition on video dataImage Processing (ICIP), 2016 IEEE International Conference on. Anais…IEEE, 2016
+KINGMA, D. P.; BA, J. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014. 
+KLAMBAUER, G. et al. Self-normalizing neural networksAdvances in Neural Information Processing Systems. Anais…2017
+KULKARNI, T. D. et al. Deep convolutional inverse graphics networkAdvances in Neural Information Processing Systems. Anais…2015
+LAIRD, J. A. The physical modelling of drums using digital waveguides. [s.l.] University of Bristol, 2001.
+LARSSON, G.; MAIRE, M.; SHAKHNAROVICH, G. Learning representations for automatic colorizationEuropean Conference on Computer Vision. Anais…Springer, 2016
+LECUN, Y. A. et al. Efficient backprop. In: Neural networks: Tricks of the trade. Traducao. [s.l.] Springer, 2012. p. 9–48. 
+LECUN, Y. et al. Gradient-based learning applied to document recognition. Proceedings of the IEEE, v. 86, n. 11, p. 2278–2324, 1998. 
+LESHNO, M. et al. Multilayer feedforward networks with a nonpolynomial activation function can approximate any function. Neural networks, v. 6, n. 6, p. 861–867, 1993. 
+LYONS, R. G. Understanding Digital Signal Processing, 3/E. Traducao. [s.l.] Pearson Education India, 2011. 
+MAAS, A. L.; HANNUN, A. Y.; NG, A. Y. Rectifier nonlinearities improve neural network acoustic modelsProc. ICML. Anais…2013
+Magenta. Magenta, 2018. Disponível em: <https://magenta.tensorflow.org/>
+MCCULLOCH, W. S.; PITTS, W. A logical calculus of the ideas immanent in nervous activity. The bulletin of mathematical biophysics, v. 5, n. 4, p. 115–133, 1943. 
+MINSKI, M. L.; PAPERT, S. A. Perceptrons: an introduction to computational geometry. MA: MIT Press, Cambridge, 1969. 
+MITAL, P. K. Time Domain Neural Audio Style Transfer. arXiv preprint arXiv:1711.11160, 2017. 
+MIZUTANI, E.; DREYFUS, S. E.; NISHIO, K. On derivation of MLP backpropagation from the Kelley-Bryson optimal-control gradient formula and its applicationNeural Networks, 2000. IJCNN 2000, Proceedings of the IEEE-INNS-ENNS International Joint Conference on. Anais…IEEE, 2000
+MULLEN, J. Physical modelling of the vocal tract with the 2D digital waveguide mesh. [s.l.] University of York, 2006.
+Musical Instrument Samples. University of Iowa Electronic Music Studios, 2018. Disponível em: <http://theremin.music.uiowa.edu/MIS.html>
+Neon. Intel AI, 2018. Disponível em: <https://ai.intel.com/neon/>
+NSynthSuper. GoogleGoogle,, 2018. Disponível em: <https://nsynthsuper.withgoogle.com/>
+OLSON, T.; LEVITT. Applied Fourier Analysis. Traducao. [s.l.] Springer, 2017. 
+OMAR, N.; JOHARI, Z. ‘.; SMITH, M. Predicting fraudulent financial reporting using artificial neural network. Journal of Financial Crime, v. 24, n. 2, p. 362–387, 2017. 
+OORD, A. VAN DEN; KALCHBRENNER, N.; KAVUKCUOGLU, K. Pixel recurrent neural networks. arXiv preprint arXiv:1601.06759, 2016. 
+OORD, A. VAN DEN et al. Conditional image generation with pixelcnn decodersAdvances in Neural Information Processing Systems. Anais…2016
+PANG, Y. et al. Convolution in convolution for network in network. IEEE Transactions on Neural Networks and Learning Systems, 2017. 
+PARKER, D. B. Learning logic. 1985. 
+PARVAT, A. et al. A survey of deep-learning frameworksInventive Systems and Control (ICISC), 2017 International Conference on. Anais…IEEE, 2017
+PEREYRA, M. C.; WARD, L. A. Harmonic analysis: from Fourier to wavelets. Traducao. [s.l.] American Mathematical Soc., 2012. v. 63
+PFALZ, A. Generating Audio Using Recurrent Neural Networks. 2018. 
+RASCHKA, S. Python machine learning. Traducao. [s.l.] Packt Publishing Ltd, 2015. 
+REDDI, S. J.; KALE, S.; KUMAR, S. On the convergence of adam and beyond. 2018. 
+REIFFENSTEIN, T. Codification, patents and the geography of knowledge transfer in the electronic musical instrument industry. The Canadian Geographer/Le Géographe canadien, v. 50, n. 3, p. 298–318, 2006. 
+RIGAUD, F.; DAVID, B.; DAUDET, L. A parametric model and estimation techniques for the inharmonicity and tuning of the piano. The Journal of the Acoustical Society of America, v. 133, n. 5, p. 3107–3118, 2013. 
+RISI, S.; TOGELIUS, J. Neuroevolution in games: State of the art and open challenges. IEEE Transactions on Computational Intelligence and AI in Games, v. 9, n. 1, p. 25–41, 2017. 
+ROBERTS, A. et al. Learning Latent Representations of Music to Generate Interactive Musical Palettes. 2018. 
+___.. A Hierarchical Latent Vector Model for Learning Long-Term Structure in Music. arXiv preprint arXiv:1803.05428, 2018. 
+ROSENBLATT, F. The perceptron, a perceiving and recognizing automaton Project Para. Traducao. [s.l.] Cornell Aeronautical Laboratory, 1957. 
+___. The perceptron: a probabilistic model for information storage and organization in the brain. Psychological review, v. 65, n. 6, p. 386, 1958. 
+RUDER, S. An overview of gradient descent optimization algorithms. arXiv preprint arXiv:1609.04747, 2016. 
+RUMELHART, D. E.; HINTON, G. E.; WILLIAMS, R. J. Learning internal representations by error propagation. [s.l.] California Univ San Diego La Jolla Inst for Cognitive Science, 1985. 
+RUSSELL, S. J.; NORVIG, P. Artificial intelligence: a modern approach. Traducao. [s.l.] Malaysia; Pearson Education Limited, 2016. 
+SABOUR, S.; FROSST, N.; HINTON, G. E. Dynamic routing between capsulesAdvances in Neural Information Processing Systems. Anais…2017
+SAINATH, T. N. et al. Deep convolutional neural networks for large-scale speech tasks. Neural Networks, v. 64, p. 39–48, 2015. 
+SAK, H. et al. Fast and accurate recurrent neural network acoustic models for speech recognition. arXiv preprint arXiv:1507.06947, 2015. 
+SALSA, S. Partial differential equations in action: from modelling to theory. Traducao. [s.l.] Springer, 2016. v. 99
+SANGKLOY, P. et al. Scribbler: Controlling deep image synthesis with sketch and color. arXiv preprint arXiv:1612.00835, 2016. 
+SARROFF, A. M.; CASEY, M. A. Musical audio synthesis using autoencoding neural netsICMC. Anais…2014
+SCHMIDHUBER, J. Deep learning in neural networks: An overview. Neural networks, v. 61, p. 85–117, 2015. 
+Scientific computing for LuaJIT. Torch, 2018. Disponível em: <http://torch.ch/>
+SERAFIN, S.; HUANG, P.; SMITH, J. The banded digital waveguide meshProc. Workshop on Future Directions of Computer Music (Mosart-01), Barcelona, Spain. Anais…Citeseer, 2001
+SERRA, X. State of the art and future directions in musical sound synthesisMultimedia Signal Processing, 2007. MMSP 2007. IEEE 9th Workshop on. Anais…IEEE, 2007
+SHI, S. et al. Benchmarking state-of-the-art deep learning software toolsCloud Computing and Big Data (CCBD), 2016 7th International Conference on. Anais…IEEE, 2016
+SIGTIA, S.; BENETOS, E.; DIXON, S. An end-to-end neural network for polyphonic piano music transcription. IEEE/ACM Transactions on Audio, Speech and Language Processing (TASLP), v. 24, n. 5, p. 927–939, 2016. 
+SMITH, J. A basic introduction to digital waveguide synthesis (for the technically inclined). Center for Computer Research in Music and Acoustics (CCRMA), Stanford University. http://ccrma. stanford. edu/~ jos/swgt, 2006. 
+SMITH, J. O. Physical modeling using digital waveguides. Computer music journal, v. 16, n. 4, p. 74–91, 1992. 
+___. Digital waveguide architectures for virtual musical instruments. In: Handbook of Signal Processing in Acoustics. Traducao. [s.l.] Springer, 2008. p. 399–417. 
+SMITH, S. W.; OTHERS. The scientist and engineer’s guide to digital signal processing. 1997. 
+SOCHER, R. Recursive deep learning for natural language processing and computer vision. 2014. 
+SORENSEN, H. V. et al. Real-valued fast Fourier transform algorithms. IEEE Transactions on Acoustics, Speech, and Signal Processing, v. 35, n. 6, p. 849–863, 1987. 
+Sound Samples. Philharmonia Orchestra, 2018. Disponível em: <http://www.philharmonia.co.uk/explore/sound_samples>
+SOUTHALL, C.; STABLES, R.; HOCKMAN, J. Automatic Drum Transcription Using Bi-Directional Recurrent Neural Networks.ISMIR. Anais…2016
+STANLEY, K. O. Compositional pattern producing networks: A novel abstraction of development. Genetic programming and evolvable machines, v. 8, n. 2, p. 131–162, 2007. 
+STAUDT, P. Development of a Digital Musical Instrument with Embedded Sound Synthesis. 2016. 
+STEIN, E. M.; SHAKARCHI, R. Princeton lectures in analysis. Traducao. [s.l.] Princeton University Press, 2003. 
+SUTSKEVER, I. et al. On the importance of initialization and momentum in deep learningInternational conference on machine learning. Anais…2013
+TensorFlow. TensorFlow, 2018. Disponível em: <https://www.tensorflow.org/>
+TESSERATO. tesserato/tesserato.github.ioGitHubCarlos Tarjano,, jul. 2018. Disponível em: <https://github.com/tesserato/tesserato.github.io>
+Theano. Multilayer Perceptron - DeepLearning 0.1 documentation, 2018. Disponível em: <http://deeplearning.net/software/theano/>
+THEIS, L.; BETHGE, M. Generative image modeling using spatial LSTMsAdvances in Neural Information Processing Systems. Anais…2015
+TIELEMAN, T.; HINTON, G. Lecture 6.5-rmsprop: Divide the gradient by a running average of its recent magnitude. COURSERA: Neural networks for machine learning, v. 4, n. 2, p. 26–31, 2012. 
+TUOHY, D. R.; POTTER, W. D.; CENTER, A. I. An Evolved Neural Network/HC Hybrid for Tablature Creation in GA-based Guitar Arranging.ICMC. Anais…2006
+VAN DEN OORD, A. et al. Wavenet: A generative model for raw audio. arXiv preprint arXiv:1609.03499, 2016. 
+VAN DUYNE, S. A.; SMITH, J. O. Physical modeling with the 2-D digital waveguide meshProceedings of the International Computer Music Conference. Anais…INTERNATIONAL COMPUTER MUSIC ACCOCIATION, 1993
+___. The tetrahedral digital waveguide meshApplications of Signal Processing to Audio and Acoustics, 1995., IEEE ASSP Workshop on. Anais…IEEE, 1995
+VAUGHN, K. Music and mathematics: Modest support for the oft-claimed relationship. Journal of aesthetic education, v. 34, n. 3/4, p. 149–166, 2000. 
+VEEN, F. VAN. The Neural Network ZooThe Asimov InstituteThe Asimov Institute,, maio 2018. Disponível em: <http://www.asimovinstitute.org/neural-network-zoo/>
+VEIT, A.; WILBER, M. J.; BELONGIE, S. Residual networks behave like ensembles of relatively shallow networksAdvances in Neural Information Processing Systems. Anais…2016
+WaveNet: A Generative Model for Raw Audio. DeepMind, 2018. Disponível em: <https://deepmind.com/blog/wavenet-generative-model-raw-audio/>
+WERBOS, P. Beyond Regression:" New Tools for Prediction and Analysis in the Behavioral Sciences. Ph. D. dissertation, Harvard University, 1974. 
+WIDROW, B.; HOFF, M. E. Adaptive switching circuits. [s.l.] STANFORD UNIV CA STANFORD ELECTRONICS LABS, 1960. 
+WIDROW, B.; LEHR, M. A. 30 years of adaptive neural networks: perceptron, madaline, and backpropagation. Proceedings of the IEEE, v. 78, n. 9, p. 1415–1442, 1990. 
+XU, W.; AULI, M.; CLARK, S. CCG Supertagging with a Recurrent Neural Network.ACL (2). Anais…2015
+YADAV, N.; YADAV, A.; KUMAR, M. An introduction to neural network methods for differential equations. Traducao. [s.l.] Springer, 2015. 
+YANG, Y.; KROMPASS, D.; TRESP, V. Tensor-Train Recurrent Neural Networks for Video Classification. 2017. 
+ZEILER, M. D. ADADELTA: an adaptive learning rate method. arXiv preprint arXiv:1212.5701, 2012. 
+ZHANG, R.; ISOLA, P.; EFROS, A. A. Colorful image colorizationEuropean Conference on Computer Vision. Anais…Springer, 2016
+ZHANG, Y.; CHAN, W.; JAITLY, N. Very deep convolutional networks for end-to-end speech recognitionAcoustics, Speech and Signal Processing (ICASSP), 2017 IEEE International Conference on. Anais…IEEE, 2017
+ZHANG, Y. et al. Towards end-to-end speech recognition with deep convolutional neural networks. arXiv preprint arXiv:1701.02720, 2017. 
+ZHU, J.-Y. et al. Generative visual manipulation on the natural image manifoldEuropean Conference on Computer Vision. Anais…Springer, 2016
+ZWEIG, G. et al. Advances in all-neural speech recognitionAcoustics, Speech and Signal Processing (ICASSP), 2017 IEEE International Conference on. Anais…IEEE, 2017
+ZWICKER, E.; FASTL, H. Psychoacoustics: Facts and models. Traducao. [s.l.] Springer Science & Business Media, 2013. v. 22
