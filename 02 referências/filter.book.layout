@@ -1,3 +1,0 @@
-\begin{author}
-\format[Authors(LastFirst,sep=; ,LastSep= and ,EtAl= et al.,3,1),ToUpperCase,Replace("ET AL,et al"),Replace("AND,e"),HTMLChars]{\author},
-\end{author}<b>\begin{title} \format[HTMLChars]{\title}, \end{title}</b>\begin{publisher}\format[HTMLChars]{\publisher}, \end{publisher}\begin{volume}v. \format[HTMLChars]{\volume}, \end{volume}\begin{number}n. \format[HTMLChars]{\number}, \end{number}\begin{pages}p. \format[HTMLChars,FormatPagesForHTML]{\pages}, \end{pages}\begin{year}\format[HTMLChars]{\year}.\end{year}<br>
