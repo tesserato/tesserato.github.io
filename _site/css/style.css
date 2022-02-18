@@ -1,0 +1,14 @@
+/* @import "https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css"; */
+
+
+nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+
+body{
+  display: flex;
+  flex-direction: column
+}
