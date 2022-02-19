@@ -1,0 +1,24 @@
+---
+title: The Tesserato!
+layout: layouts/base.njk
+---
+
+<section>
+  {% for post in collections.post | reverse %}
+    {# {% if loop.index0 < 3 %} #}
+    <article>
+      <div class="postPreview">
+          <h3> {{ post.data.title }} </h3>
+          <time>{{ post.date | cDate}}</time>
+      </div>
+          <p> {{ post.data.description }} </p>
+          <a href="{{ post.url }}">Read More</a>
+      
+      {# {% endif %} #}
+    </article>
+  {% endfor %}
+</section>
+
+<section>
+{% include "layouts/nav.njk" %}
+</section>

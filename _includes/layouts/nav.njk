@@ -1,0 +1,8 @@
+<nav>
+  <a href="/"> Home </a>
+  {% for page in collections.page %}
+    <a href="{{ page.url }}">
+      {{ page.data.title }}
+    </a>
+  {% endfor %}
+</nav>

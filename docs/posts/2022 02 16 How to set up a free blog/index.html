@@ -8,22 +8,14 @@
   </head>
   
   <body>
-    <nav>
-  <a href="/"> Home </a>
-  
-    <a href="/pages/about/">
-      About Me
-    </a>
-  
-</nav>
     <header>
-      <h1 class="title">Tesserato&#39;s Crawling Circus</h1>
-      <p class="subtitle">Sssssssmoking!</p>
+      <a href="/"><h1 class="title">Tesserato&#39;s Crawling Circus</h1></a>
+      <a href="/pages/about/"><p class="subtitle">Sssssssmoking!</p></a>
     </header>
 
     <main>
       
-<article class="content mt-5">
+
   <h1>How to set up a free blog, the hard way</h1>
   <p class="date">
     <time>February 15, 2022</time>
@@ -72,18 +64,15 @@
 <a href="https://blog.bartekr.net/2021/01/17/testing-utterances-comments/">TESTING UTTERANCES COMMENTS</a>
 <a href="https://donw.io/post/github-comments/">Replacing Disqus with Github Comments</a></p>
 
-</article>
 
-<form method="POST" action="https://api.staticman.net/v3/entry/github/tesserato/staticman/thetesserato/comments">
-  
-  <!-- e.g. "2016-01-02-this-is-a-post" -->
-  <input name="options[slug]" type="hidden" value="">
-  <label><input name="fields[name]" type="text">Name</label>
-  <label><input name="fields[email]" type="email">E-mail</label>
-  <label><textarea name="fields[message]"></textarea>Message</label>
-  
-  <button type="submit">Go!</button>
-</form>
+
+<script src="https://utteranc.es/client.js"
+        repo="tesserato/tesserato.github.io"
+        issue-term="url"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
     </main>
   </body>
 </html>
