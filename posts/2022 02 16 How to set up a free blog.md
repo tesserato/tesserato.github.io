@@ -42,15 +42,17 @@ Reading about content management systems (CMS) on the internet, some alternative
 - [Staticman](https://staticman.net/)
 - [Talkyard](https://www.talkyard.io/)
 - [Flarum](https://flarum.org/)
+- [utterances](https://utteranc.es/)
 
 # Conclusion
 
 
 # Useful links
-[A Deep Dive Into Eleventy Static Site Generator](https://www.smashingmagazine.com/2021/03/eleventy-static-site-generator/)
-[Setup a Free Self-hosted Blog in Under 15 Minutes!](http://www.theappliedarchitect.com/setup-a-free-self-hosted-blog-in-under-15-minutes/)
-[Building A Static Blog With Eleventy And Staticman](https://kabardinovd.com/posts/eleventy-staticman/)
-[How to Create and Deploy Your First Eleventy Website](https://www.digitalocean.com/community/tutorials/how-to-create-and-deploy-your-first-eleventy-website)
-[I Finally Understand Eleventy's Data Cascade.](https://benmyers.dev/blog/eleventy-data-cascade/)
-[TESTING UTTERANCES COMMENTS](https://blog.bartekr.net/2021/01/17/testing-utterances-comments/)
-[Replacing Disqus with Github Comments](https://donw.io/post/github-comments/)
+- [A Deep Dive Into Eleventy Static Site Generator](https://www.smashingmagazine.com/2021/03/eleventy-static-site-generator/)
+- [Setup a Free Self-hosted Blog in Under 15 Minutes!](http://www.theappliedarchitect.com/setup-a-free-self-hosted-blog-in-under-15-minutes/)
+- [Building A Static Blog With Eleventy And Staticman](https://kabardinovd.com/posts/eleventy-staticman/)
+- [How to Create and Deploy Your First Eleventy Website](https://www.digitalocean.com/community/tutorials/-how-to-create-and-deploy-your-first-eleventy-website)
+- [I Finally Understand Eleventy's Data Cascade.](https://benmyers.dev/blog/eleventy-data-cascade/)
+- [TESTING UTTERANCES COMMENTS](https://blog.bartekr.net/2021/01/17/testing-utterances-comments/)
+- [Replacing Disqus with Github Comments](https://donw.io/post/github-comments/)
+- [A List of Static Site Generators for Jamstack Sites](https://jamstack.org/generators/)

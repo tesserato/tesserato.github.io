@@ -1,12 +1,19 @@
-/* @import "https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css"; */
+@font-face {
+  font-family: "HeaderFont";
+  src: url("/css/Shizuru-Regular.ttf");
+  }
 
+@font-face {
+  font-family: "BodyFont";
+  src: url("/css/Karla-Regular.ttf");
+}
 
 html{
 
   font-family: 'Courier New', monospace;
   --background-color:rgb(27,29,33);
   --font_color_dark:white;
-  --font_color_light:rgb(192, 192, 192);
+  --font_color_light:rgba(255, 255, 255, 0.315);
   --font_color_link: rgb(16, 164, 249);
   --shadow: rgb(0, 0, 0);
 }
@@ -15,8 +22,8 @@ body{
   background-color: var(--background-color);
   margin-left: 9%;
   margin-right: 9%;
-  font-family: 'Catamaran', sans-serif;
-  font-size: 1em;
+  font-family: 'BodyFont', sans-serif;
+  font-size: 1.1em;
   color: var(--font_color_dark);
   transition: all .5s ease-in-out;
 }
@@ -33,12 +40,13 @@ body{
 h1::before, h2::before, h3::before {
   padding-right: .5em;
   content: "❯";
-  color: var(--font_color_link);
+  color: var(--font_color_light);
   font-weight: 500;
+  font-family: "HeaderFont";
 }
 
 time{
-  color: rgba(255, 255, 255, 0.315);
+  color: var(--font_color_light);
 }
 
 article{
@@ -47,7 +55,7 @@ article{
   border-radius: 1em;
   padding-left: 1em;
   padding: .7em;
-  margin:.2em;
+  margin:.4em;
 }
 
 nav{
@@ -82,6 +90,20 @@ a:hover {
   justify-content: space-between;
 }
 
-.utterances-frame{
-  color: black;
+.title{
+  font-family: "HeaderFont", cursive;
+  /* color: var(--font_color_link); */
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: -0.1em 0.1em 0.2em #000000;
+}
+
+.subtitle{
+  /* font-family: "HeaderFont", cursive; */
+  /* color: var(--font_color_link); */
+  text-align: right;
+}
+
+.title::before{
+  content: "";
 }
