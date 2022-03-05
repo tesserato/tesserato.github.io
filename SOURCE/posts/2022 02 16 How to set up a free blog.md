@@ -1,21 +1,20 @@
 ---
-layout: layouts/post.njk
 title: How to set up a free blog, the hard way
+author: Carlos Tarjano
+created: 16/02/2022
+keywords: post, web
 description: In this post I explore how a veritable nerd goes about setting a blog. Wix? no thanks. Medium? Too easy. Assembly? a bit too much, if you ask me. What, then? Come along and find out.
-date: 2022-02-16
-tags:
-  - post
-  - web
 ---
 
 I guess it makes sense that my first blog post would be about how to set up a blog. But first, let's take a look at my background and motivation to know why I decided to start a blog, and what would be the best approach to do so, considering technologies I'm already familiar with.
 
 You see, recently I started to use Obsidian to store thoughts and incomplete ideas, and to record pieces of information that might be useful in the future. The problem is that, as it is meant to be consumed by myself only, it is hard to find the motivation to really polish those notes. I see no point in dating them, too, so, you eventually are in a situation when you don't know if that preliminary research in how to embed 3D animations in HTML is reasonably up to date, or if it is worth redoing it in face of new tech that might have emerged.
 
-The motivation to set up a blog is twofold, then: maybe gather a small community about general nerdy topics and put in place a live knowledge system, that can be referred back by em and this community, with opinions about relevant technologies.
+The motivation to set up a blog is twofold, then: maybe gather a small community about general nerdy topics and put in place a live knowledge system, that can be referred back by me and this community, with opinions about relevant technologies.
 
 
-To sum it up
+To sum it up:
+
 - Git, git everywhere!
 - **Markdown too, please, but that is kind of standard nowadays** I remember when I started to dabble with HTML, back in the day, and my first thought was "who the hell came up with this bloated syntax?"
 - Free, and preferably open-source
@@ -28,6 +27,7 @@ To sum it up
 
 # Possible setups
 Reading about content management systems (CMS) on the internet, some alternatives catched my eye:
+
 - Ghost
 - Grav
 - Jekyll
@@ -38,6 +38,7 @@ Reading about content management systems (CMS) on the internet, some alternative
 - 
 
 # Comment systems
+
 - disqus
 - [Staticman](https://staticman.net/)
 - [Talkyard](https://www.talkyard.io/)
@@ -46,8 +47,11 @@ Reading about content management systems (CMS) on the internet, some alternative
 
 # Conclusion
 
+Pandoc + Python's beautiful soup
+
 
 # Useful links
+
 - [A Deep Dive Into Eleventy Static Site Generator](https://www.smashingmagazine.com/2021/03/eleventy-static-site-generator/)
 - [Setup a Free Self-hosted Blog in Under 15 Minutes!](http://www.theappliedarchitect.com/setup-a-free-self-hosted-blog-in-under-15-minutes/)
 - [Building A Static Blog With Eleventy And Staticman](https://kabardinovd.com/posts/eleventy-staticman/)
@@ -56,3 +60,4 @@ Reading about content management systems (CMS) on the internet, some alternative
 - [TESTING UTTERANCES COMMENTS](https://blog.bartekr.net/2021/01/17/testing-utterances-comments/)
 - [Replacing Disqus with Github Comments](https://donw.io/post/github-comments/)
 - [A List of Static Site Generators for Jamstack Sites](https://jamstack.org/generators/)
+- [Convert Markdown to HTML with Pandoc](https://www.arthurkoziel.com/convert-md-to-html-pandoc/)
