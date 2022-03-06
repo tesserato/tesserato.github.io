@@ -13,7 +13,9 @@ soup = BeautifulSoup("", "html5lib")
 main = soup.new_tag('main')
 all_keywords = []
 
-for file in glob.glob(path_to_pages):
+pages = glob.glob(path_to_pages)
+pages.reverse()
+for file in pages:
   
   with open(file, encoding="utf-8") as inf:
     txt = inf.read()
@@ -38,7 +40,7 @@ for file in glob.glob(path_to_pages):
   h3 = soup.new_tag('h3')
   h3.string = title
   p = soup.new_tag('p')
-  p["class"] = "postInfo"
+  p["class"] = "postDates"
   p.string = f"Created: {created}, Last edited: {edited}, {author}"
 
   div.append(h3)

@@ -44,8 +44,9 @@ h1::before, h2::before, h3::before {
   font-family: "HeaderFont";
 }
 
-time{
+.postDates{
   color: var(--font_color_light);
+  font-size: .7em;
 }
 
 article{
@@ -87,6 +88,8 @@ a:hover {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
+  align-items: flex-start;
+  /* color: var(--font_color_light); */
 }
 
 .title{
