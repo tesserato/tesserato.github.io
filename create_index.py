@@ -21,7 +21,7 @@ for file in pages:
     txt = inf.read()
     soup = BeautifulSoup(txt, "html5lib")
 
-  url = file.split("\\")[-1]
+  url = file.split("\\")[-1]#.replace(" ", "_").strip().lower()
   print(f"\nAdding {url} to index.html")
 
   title = soup.find_all("title")[0].string.replace("\n", "")
