@@ -6,7 +6,7 @@ import json
 path_to_template_html = "./templatePages.html"
 path_to_info_json = "./Info.json"
 path_to_output_html = "./docs/index.html"
-path_to_pages = "./docs/_20**.html"
+path_to_pages = "./docs/20**.html"
 
 soup = BeautifulSoup("", "html5lib")
 
