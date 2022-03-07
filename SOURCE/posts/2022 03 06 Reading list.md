@@ -48,3 +48,10 @@ I was keeping my reading list in a folder of markdown files that I manage with t
 - [ ] Good Omens: The Nice and Accurate Prophecies of Agnes Nutter, Witch
 - [ ] Frankenstein
 - [ ] Babel-17 by Samuel R. Delany
+- [ ] [Neuromancer - Wikipedia](https://en.wikipedia.org/wiki/Neuromancer)
+- [ ] [The Left Hand of Darkness - Wikipedia](https://en.wikipedia.org/wiki/The_Left_Hand_of_Darkness)
+- [ ] [Lord of the Flies - Wikipedia](https://en.wikipedia.org/wiki/Lord_of_the_Flies)
+- [ ] [The Trial - Wikipedia](https://en.wikipedia.org/wiki/The_Trial)
+
+
+
